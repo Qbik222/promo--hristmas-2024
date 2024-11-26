@@ -123,7 +123,7 @@ body
   &::before
     content: ""
     display: block
-    width: 100%
+    width: 200%
     height: 405px
     background: url("../img/banner/infinite-bg.png") repeat 0 0/cover
     background-size: auto 100%
@@ -220,12 +220,14 @@ body
     justify-content: space-between
     gap: 50px
     margin-top: 25px
+    position: relative
   &__item
     display: flex
     align-items: center
     flex-direction: column
     width: 265px
     position: relative
+    z-index: 2
     &::before
       content: ""
       display: block
@@ -264,6 +266,7 @@ body
       flex-direction: column
       justify-content: flex-start
       align-items: center
+      position: relative
       padding: 16px 10px
       height: 116px
       background: rgba($white, .1)
@@ -271,6 +274,8 @@ body
       border-right: 1px solid rgba($white, .2)
       border-left: 1px solid rgba($white, .2)
       border-radius: 16px
+      z-index: 1
+      backdrop-filter: blur(4px)
       &-title
         color: $white
         text-transform: uppercase
@@ -290,6 +295,16 @@ body
         bottom: 0
         left: 50%
         transform: translate(-50%, 50%)
+    //&-snow
+    //  width: 100%
+    //  height: 100%
+    //  //background: black
+    //  position: absolute
+    //  top: 0
+    //  left: 0
+    //  z-index: -2
+    //  canvas
+    //    z-index: -1
 
 .ball
   display: flex
@@ -351,6 +366,46 @@ body
   &__progress
     position: relative
     bottom: 50px
+  &._lock
+    .progress
+      &__shake
+        border: 1px solid #5A5A5A
+        pointer-events: none
+        user-select: none
+        box-shadow: 0px 3px 0px 0px #363636
+        background: linear-gradient(180deg, #8D8D8D 0%, #8A8A8A 20.5%, #838383 48%, #818181 70.5%, #7E7E7E 100%)
+        span
+          opacity: .2
+      &__title
+        &-lock
+          display: block
+          position: absolute
+          top: -5px
+          left: 50%
+          transform: translate(-50%, -100%)
+          width: 155px
+          min-height: 70px
+          padding: 10px 10px 15px 10px
+          color: $white
+          font-size: 12px
+          font-family: $font-suisse-intl-reg
+          text-align: center
+          z-index: 2
+          background: url("../img/ball/progress/title-lock.png") no-repeat 0 0/cover
+          background-size: 100% 100%
+          animation: verticalFloat 1.4s linear infinite
+    .sphere
+      background: none
+      &::before
+        top: 225px
+        left: 170px
+      &__box
+        display: none
+        background: none
+      &__ground
+        background: url("../img/ball/sphere/ground-lock.png") no-repeat 0 0/contain
+        width: 290px
+        height: 172px
 .sphere
   width: 480px
   height: 410px
@@ -372,12 +427,12 @@ body
     height: 575px
     background: url("../img/ball/sphere/circle-bg.png") no-repeat 0 0/contain
     position: absolute
-    top: 50%
+    top: 55%
     left: 50%
     opacity: .4
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%) rotate(0deg)
     z-index: 0
-
+    animation: rotate360center 20s linear infinite
   &__body
     background: url("../img/ball/sphere/body.png") no-repeat 0 0/contain
     width: 333px
@@ -386,6 +441,11 @@ body
     top: 79px
     left: 73px
     z-index: 4
+    canvas
+      mask-image: url("../img/ball/sphere/body.png")
+      mask-size: 90% 95%
+      mask-repeat: no-repeat
+      mask-position: center
   &__leg
     background: url("../img/ball/sphere/leg.png") no-repeat 0 0/contain
     width: 235px
@@ -495,6 +555,8 @@ body
     padding: 8px 16px 7px
     border-radius: 15px
     border-top: 1px solid rgba($white, .2)
+    &-lock
+      display: none
     &-item
       color: $white
       font-family: $font-suisse-intl-reg
@@ -557,15 +619,6 @@ body
       cursor: pointer
       box-shadow: 0px 1px 0px 0px #920032, 0px 0px 40px 0px #FF3AC2
       background: linear-gradient(180deg, #FF8EDC 0%, #FF6CC5 20.5%, #FF62A2 48%, #FF3C82 70.5%, #FF405E 100%)
-  &._lock
-    .progress__shake
-      border: 1px solid #5A5A5A
-      pointer-events: none
-      user-select: none
-      box-shadow: 0px 3px 0px 0px #363636
-      background: linear-gradient(180deg, #8D8D8D 0%, #8A8A8A 20.5%, #838383 48%, #818181 70.5%, #7E7E7E 100%)
-      span
-        opacity: .2
 .prize
   display: flex
   align-items: center
@@ -575,7 +628,10 @@ body
     max-width: 600px
   &__list
     width: 950px
-    overflow-x: auto
+    //width: 550px
+    //width: 700px
+    //width: 100vw
+    overflow: hidden
     padding: 10px
     &-scroll
       display: flex
@@ -583,6 +639,7 @@ body
       gap: 50px
       height: 260px
       width: fit-content
+      transition: transform .7s ease-in-out
     &-item
       width: 195px
       height: 241px
@@ -656,6 +713,65 @@ body
       &-img
         z-index: 2
         position: relative
+      &-btn
+        position: absolute
+        right: -6px
+        top: -6px
+        width: 24px
+        height: 26px
+        background: url("../img/info-icon.png") no-repeat 0 0/contain
+        transition: all .5s ease-in-out
+        z-index: 3
+        &:hover
+          cursor: pointer
+          background: url("../img/info-icon-hover.png") no-repeat 0 0/contain
+
+  &__slider
+    position: relative
+    &-move
+      width: 100%
+      height: 50px
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%, -50%)
+      pointer-events: none
+      z-index: 2
+      &-left, &-right
+        position: absolute
+        pointer-events: initial
+        width: 50px
+        height: 50px
+        background: url("../img/prize/slider-btn.png") no-repeat 0 0/contain
+        transition: background .5s ease-in-out
+        &:hover
+          cursor: pointer
+          background: url("../img/prize/slider-btn-hover.png") no-repeat 0 0/contain
+
+      &-right
+        right: 0
+        transform: translate(200%, 0)
+      &-left
+        left: 0
+        transform: scale(-1, 1) translate(200%, 0)
+  &__tabs
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 5px
+    z-index: 3
+    &-item
+      width: 45px
+      height: 5px
+      background: rgba($white, .1)
+      border-radius: 12px
+      &:hover
+        cursor: pointer
+      &._active
+        background: $magenta
+
+
+
 
 
 .table
@@ -936,4 +1052,16 @@ body
   0%
     background-position: 0 0
   100%
-    background-position: 2025px, 0
+    background-position: 100%, 0
+
+@keyframes verticalFloat
+  0%, 100%
+    top: -5px
+  50%
+    top: 4px
+
+@keyframes rotate360center
+  0%
+    transform: translate(-50%, -50%) rotate(0deg)
+  100%
+    transform: translate(-50%, -50%) rotate(360deg)
