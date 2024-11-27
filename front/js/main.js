@@ -227,6 +227,9 @@
         cardsContainer.addEventListener('touchstart', handleTouchStart);
         cardsContainer.addEventListener('touchmove', handleTouchMove);
         cardsContainer.addEventListener('touchend', handleTouchEnd);
+        window.addEventListener("orientationchange", () =>{
+            location.reload()
+        })
     }
 
     handleResize()
