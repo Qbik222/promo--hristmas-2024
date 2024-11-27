@@ -6,19 +6,31 @@
           moveRightButton = document.querySelector('.prize__slider-move-right'),
           moveLeftButton = document.querySelector('.prize__slider-move-left'),
           tabsContainer = document.querySelector('.prize__tabs'),
+          isMobile = window.innerWidth < 600,
           totalCards = cards.length,
           cardWidth = cards[0].clientWidth,
           cardsMargin = (cardsWrap.clientWidth - cardWidth * totalCards) / (totalCards - 1),
-          visibleSlides = Math.floor(cardsContainer.clientWidth / (cardWidth + cardsMargin)),
+          visibleSlides = isMobile ? 1 : Math.floor(cardsContainer.clientWidth / (cardWidth + cardsMargin)),
           totalTabs = Math.ceil(totalCards / visibleSlides)
 
     let currentSlide = 1;
-    let cardsPosition = 0;
-    for (let i = 1; i < totalTabs; i++) {
-        const tab = document.createElement('div');
-        tab.classList.add('prize__tabs-item');
-        tabsContainer.appendChild(tab);
+    let cardsPosition = 0
+        for (let i = 1; i <= totalTabs; i++) {
+            if(!isMobile && i === totalTabs ){
+                break
+            }
+            const tab = document.createElement('div');
+            tab.classList.add('prize__tabs-item');
+            tabsContainer.appendChild(tab);
+        }
+
+    const updateActiveCard = (cards, activeIndex) => {
+        cards.forEach((card, i) =>{
+            activeIndex - 1 === i ? card.classList.add("_active") : card.classList.remove("_active")
+        })
     }
+    updateActiveCard(cards, currentSlide)
+
     const updateTabs = () => {
         const activeTab = Math.ceil(currentSlide / visibleSlides);
         tabsContainer.childNodes.forEach((tab, index) => {
@@ -26,14 +38,17 @@
         });
     };
     updateTabs();
-    const setCardsPosition = (position) => {
+    function setCardsPosition (position) {
         cardsWrap.style.transform = `translateX(-${position}px)`;
     };
     const moveRight = () => {
-        if (currentSlide >= totalCards - visibleSlides) {
+        if (currentSlide >= totalCards - visibleSlides && isMobile === false) {
             currentSlide = 1;
             cardsPosition = 0;
-        } else {
+        }else if(currentSlide === totalCards) {
+            currentSlide = 1;
+            cardsPosition = 0;
+        }else {
             const maxPosition = (totalCards - visibleSlides) * (cardWidth + cardsMargin);
             if (cardsPosition + cardWidth + cardsMargin > maxPosition) {
                 cardsPosition = maxPosition;
@@ -45,22 +60,36 @@
         }
         setCardsPosition(cardsPosition);
         updateTabs();
+        updateActiveCard(cards, currentSlide)
     };
     const moveLeft = () => {
-        if(currentSlide === 1){
+        if(currentSlide === 1 && isMobile === false){
             currentSlide = totalCards - visibleSlides;
             cardsPosition = ((totalCards - visibleSlides) * (cardWidth + cardsMargin)) -(cardWidth + cardsMargin);
         }else if (currentSlide === 2) {
             cardsPosition = 0
             currentSlide = 1
+        }else if(currentSlide === 1 && isMobile === true){
+            currentSlide = totalCards
+            cardsPosition = totalCards  * (cardWidth + cardsMargin) - (cardWidth + cardsMargin)
         }else {
             cardsPosition -= cardWidth + cardsMargin;
             currentSlide--
         }
         setCardsPosition(cardsPosition);
         updateTabs();
-        console.log(currentSlide)
+        updateActiveCard(cards, currentSlide)
     };
+
+    // function centerStartPosition() {
+    //         const startOffset = (window.innerWidth / 2) - ((cardWidth + cardsMargin) / 2);
+    //         cardsPosition = startOffset > 0 ? startOffset : 0;
+    //         setCardsPosition(cardsPosition);
+    // };
+
+
+
+
 
     // snowfall animations
     (function () {
@@ -147,8 +176,8 @@
         Snowstorm.prototype.Snowflake.prototype.reset = function () {
             this.x = Math.random() * this.snowstorm.width;
             this.y = Math.random() * -this.snowstorm.height;
-            this.vy = 1 + Math.random() * 0.00001;
-            this.vx = 0.5 - Math.random();
+            this.vy = 0.3 + Math.random() * 0.00001;
+            this.vx = 0.6 - Math.random();
             this.r = 1 + Math.random() * 2;
             this.o = 1;
         };
