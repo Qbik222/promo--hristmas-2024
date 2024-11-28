@@ -600,20 +600,22 @@
                 const streakBonus = res.streakBonus || debug;
                 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
                 if(prize === "iphone"){
-                    ( async function (){
-                        btn.classList.add("_disabled")
-                        ball.classList.add("_shake")
-                        box.classList.add("_shake-reverse")
-                        await delay(2000)
-                        ball.classList.remove("_shake")
-                        ball.classList.add("_before-hide")
-                        box.classList.remove("_shake-reverse")
-                        box.classList.add("_box-opacity")
-                        await delay(100)
-                        ball.classList.add(`_${prize}`)
+                    box.addEventListener("animationiteration", () => {
+                        box.classList.remove("_boxFloat");
+                        ( async function (){
+                            btn.classList.add("_disabled");
+                            ball.classList.add("_shake");
+                            box.classList.add("_shake-reverse");
+                            await delay(2000);
+                            ball.classList.remove("_shake");
+                            ball.classList.add("_before-hide");
+                            box.classList.remove("_shake-reverse");
+                            box.classList.add("_box-opacity");
+                            await delay(200);
+                            ball.classList.add(`_${prize}`);
 
-                    })();
-
+                        })();
+                    })
                 }
                 // if(prize === "respin"){
                 //     sections.addEventListener("animationend", () => showPopup(sections, wheel, "_bonus", streakBonus, spinBg, popupCloseBtn, popupContainer, popup, "respin"), {once: true})

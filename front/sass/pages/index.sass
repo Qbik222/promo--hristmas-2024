@@ -135,7 +135,7 @@ body
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
-    animation: bannerBg 25s linear infinite
+    animation: bannerBg 150s linear infinite
   &::after
     content: ""
     display: block
@@ -542,6 +542,7 @@ body
     bottom: 70px
     left: 125px
     z-index: 4
+
   &__win
     opacity: 0
     transition: opacity .7s ease-in-out
@@ -1344,6 +1345,12 @@ body
   50%
     opacity: .6
 
+@keyframes boxFloat
+  0%, 100%
+    transform: translate(0, -2px)
+  50%
+    transform: translate(0, 2px)
+
 ._shake
   animation: horizontal-shaking .6s linear infinite
 
@@ -1358,3 +1365,6 @@ body
   &::before
     opacity: 0
     transition: .7s ease
+
+._boxFloat
+  animation: boxFloat 1.4s ease-in-out infinite
