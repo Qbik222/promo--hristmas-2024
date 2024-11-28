@@ -15,120 +15,38 @@
 
 
     // Cards slider
-    // const cardsContainer = document.querySelector('.prize__list'),
-    //       cards = document.querySelectorAll('.prize__list-item'),
-    //       cardsWrap = document.querySelector('.prize__list-scroll'),
-    //       moveRightButton = document.querySelector('.prize__slider-move-right'),
-    //       moveLeftButton = document.querySelector('.prize__slider-move-left'),
-    //       tabsContainer = document.querySelector('.prize__tabs'),
-    //       isMobile = window.innerWidth < 600,
-    //       totalCards = cards.length,
-    //       cardWidth = cards[0].clientWidth,
-    //       cardsMargin = (cardsWrap.clientWidth - cardWidth * totalCards) / (totalCards - 1),
-    //       visibleSlides = isMobile ? 1 : Math.ceil(cardsContainer.clientWidth / (cardWidth + cardsMargin)),
-    //       totalTabs = Math.ceil(totalCards / visibleSlides),
-    //       tabWidth= visibleSlides * (cardWidth + cardsMargin)
-    //
-    // console.log(tabWidth)
-    //
-    // let currentSlide = 1;
-    // let cardsPosition = 0
-    //     for (let i = 1; i <= totalTabs; i++) {
-    //         const tab = document.createElement('div');
-    //         tab.classList.add('prize__tabs-item');
-    //         tabsContainer.appendChild(tab);
-    //     }
-    //
-    // const updateActiveCard = (cards, activeIndex) => {
-    //     cards.forEach((card, i) =>{
-    //         activeIndex - 1 === i ? card.classList.add("_active") : card.classList.remove("_active")
-    //     })
-    // }
-    // updateActiveCard(cards, currentSlide)
-    //
-    // const updateTabs = () => {
-    //     const activeTab = Math.ceil(currentSlide / visibleSlides);
-    //     tabsContainer.childNodes.forEach((tab, index) => {
-    //         tab.classList.toggle('_active', index + 1 === activeTab);
-    //     });
-    // };
-    // updateTabs();
-    // function setCardsPosition (position) {
-    //     cardsWrap.style.transform = `translateX(-${position}px)`;
-    // };
-    // const moveRight = () => {
-    //     if (currentSlide >= totalCards - visibleSlides && isMobile === false) {
-    //         currentSlide = 1;
-    //         cardsPosition = 0;
-    //     }else if(currentSlide === totalCards) {
-    //         currentSlide = 1;
-    //         cardsPosition = 0;
-    //     }else {
-    //         const maxPosition = (totalCards - visibleSlides) * (cardWidth + cardsMargin);
-    //         if (cardsPosition + cardWidth + cardsMargin > maxPosition) {
-    //             cardsPosition = maxPosition;
-    //             currentSlide = totalCards - visibleSlides + 1;
-    //         } else {
-    //             cardsPosition += cardWidth + cardsMargin;
-    //             currentSlide++;
-    //         }
-    //     }
-    //     setCardsPosition(cardsPosition);
-    //     updateTabs();
-    //     updateActiveCard(cards, currentSlide)
-    // };
-    // const moveLeft = () => {
-    //     if(currentSlide === 1 && isMobile === false){
-    //         currentSlide = totalCards - visibleSlides;
-    //         cardsPosition = ((totalCards - visibleSlides) * (cardWidth + cardsMargin)) -(cardWidth + cardsMargin);
-    //     }else if (currentSlide === 2) {
-    //         cardsPosition = 0
-    //         currentSlide = 1
-    //     }else if(currentSlide === 1 && isMobile === true){
-    //         currentSlide = totalCards
-    //         cardsPosition = totalCards  * (cardWidth + cardsMargin) - (cardWidth + cardsMargin)
-    //     }else {
-    //         cardsPosition -= cardWidth + cardsMargin;
-    //         currentSlide--
-    //     }
-    //     setCardsPosition(cardsPosition);
-    //     updateTabs();
-    //     updateActiveCard(cards, currentSlide)
-    // };
-
     const cardsContainer = document.querySelector('.prize__list'),
-        cards = document.querySelectorAll('.prize__list-item'),
-        cardsWrap = document.querySelector('.prize__list-scroll'),
-        moveRightButton = document.querySelector('.prize__slider-move-right'),
-        moveLeftButton = document.querySelector('.prize__slider-move-left'),
-        tabsContainer = document.querySelector('.prize__tabs'),
-        isMobile = window.innerWidth < 600,
-        totalCards = cards.length,
-        cardWidth = cards[0].clientWidth,
-        cardsMargin = (cardsWrap.clientWidth - cardWidth * totalCards) / (totalCards - 1),
-        visibleSlides = isMobile ? 1 : Math.ceil(cardsContainer.clientWidth / (cardWidth + cardsMargin)),
-        totalTabs = Math.ceil(totalCards / visibleSlides),
-        tabWidth= visibleSlides * (cardWidth + cardsMargin)
+          cards = document.querySelectorAll('.prize__list-item'),
+          cardsWrap = document.querySelector('.prize__list-scroll'),
+          moveRightButton = document.querySelector('.prize__slider-move-right'),
+          moveLeftButton = document.querySelector('.prize__slider-move-left'),
+          tabsContainer = document.querySelector('.prize__tabs'),
+          isMobile = window.innerWidth < 600,
+          totalCards = cards.length,
+          cardWidth = cards[0].clientWidth,
+          cardsMargin = (cardsWrap.clientWidth - cardWidth * totalCards) / (totalCards - 1),
+          visibleSlides = isMobile ? 1 : Math.ceil(cardsContainer.clientWidth / (cardWidth + cardsMargin)),
+          totalTabs = Math.ceil(totalCards / visibleSlides),
+          tabWidth= visibleSlides * (cardWidth + cardsMargin)
+
 
     let currentSlide = 1;
-    let currentTab = 1;
     let cardsPosition = 0;
     let leftSlide;
     let rightSlide;
-    console.log(totalTabs)
 
-// Створення табів
-    for (let i = 1; i <= totalTabs; i++) {
-        const tab = document.createElement('div');
-        tab.classList.add('prize__tabs-item');
-        tabsContainer.appendChild(tab);
+    const updateActiveCard = (cards, activeIndex) => {
+        cards.forEach((card, i) =>{
+            activeIndex - 1 === i ? card.classList.add("_active") : card.classList.remove("_active")
+        })
     }
+    updateActiveCard(cards, currentSlide)
 
     function leftSlideTab(){
-        leftSlide = currentTab * visibleSlides - (visibleSlides - 1)
+        leftSlide = currentSlide
     }
     function rightSlideTab(){
-        rightSlide = currentTab * visibleSlides
+        rightSlide = currentSlide + (visibleSlides - 1)
     }
 
     function firstLastSlides(){
@@ -142,101 +60,198 @@
     }
     firstLastSlides()
 
-    const updateActiveCard = (cards, activeIndex) => {
-        cards.forEach((card, i) => {
-            activeIndex - 1 === i ? card.classList.add("_active") : card.classList.remove("_active");
-        });
-    };
-    updateActiveCard(cards, currentSlide);
-
-    const updateTabs = () => {
-        if(isMobile){
-            const activeTab = Math.ceil(currentSlide / visibleSlides);
-            tabsContainer.childNodes.forEach((tab, index) => {
-                tab.classList.toggle('_active', index + 1 === activeTab);
-            });
-        }else{
-            tabsContainer.childNodes.forEach((tab, index) => {
-                tab.classList.remove("_active")
-                console.log(currentTab, index)
-                index + 1 === currentTab ? tab.classList.add("_active") : null
-            });
-        }
-
-
-    };
-    updateTabs();
-
-    function setCardsPosition(position) {
+    function setCardsPosition (position) {
         cardsWrap.style.transform = `translateX(-${position}px)`;
     };
-
     const moveRight = () => {
-        if (isMobile) {
-            // Мобільна логіка
-            if (currentSlide >= totalCards) {
-                currentSlide = 1;
-                cardsPosition = 0;
+
+        if (currentSlide >= totalCards - (visibleSlides - 1) && isMobile === false) {
+            firstLastSlides()
+            currentSlide = 1;
+            cardsPosition = 0;
+            rightSlide++
+            leftSlide++
+        }else if(currentSlide === totalCards) {
+            currentSlide = 1;
+            cardsPosition = 0;
+        }else {
+            const maxPosition = (totalCards - visibleSlides) * (cardWidth + cardsMargin);
+            if (cardsPosition + cardWidth + cardsMargin > maxPosition) {
+                cardsPosition = maxPosition;
+                currentSlide = totalCards - visibleSlides + 1;
             } else {
                 cardsPosition += cardWidth + cardsMargin;
                 currentSlide++;
             }
         }
-        else {
-            if(currentTab === totalTabs){
-                cardsPosition = 0
-                currentTab = 1
-            }else{
-                cardsPosition += tabWidth
-                ++currentTab
-            }
-        }
-        firstLastSlides()
         setCardsPosition(cardsPosition);
-        updateTabs();
-        updateActiveCard(cards, currentSlide);
+        updateActiveCard(cards, currentSlide)
+        firstLastSlides()
         hidePopups(cards)
-
     };
-
-
-
     const moveLeft = () => {
-        if (isMobile) {
-            // Мобільна логіка
-            if (currentSlide === 1) {
-                currentSlide = totalCards;
-                cardsPosition = (totalCards - 1) * (cardWidth + cardsMargin);
-            }else if(currentSlide === 2){
-                currentSlide = 1;
-                cardsPosition = 0
-            }
-            else {
-                cardsPosition -= cardWidth + cardsMargin;
-                currentSlide--;
-            }
-        } else {
-
-            if(currentTab === 1){
-                currentTab = totalTabs
-                cardsPosition = (currentTab * tabWidth) - tabWidth
-            }else if(currentTab === 2){
-                cardsPosition = 0
-                currentTab = 1
-            }
-            else {
-                cardsPosition -= tabWidth
-                --currentTab
-
-            }
-
+        if(currentSlide === 1 && isMobile === false){
+            currentSlide = totalCards - (visibleSlides - 1);
+            cardsPosition = ((totalCards - (visibleSlides - 1)) * (cardWidth + cardsMargin)) -(cardWidth + cardsMargin);
+        }else if (currentSlide === 2) {
+            cardsPosition = 0
+            currentSlide = 1
+        }else if(currentSlide === 1 && isMobile === true){
+            currentSlide = totalCards
+            cardsPosition = totalCards  * (cardWidth + cardsMargin) - (cardWidth + cardsMargin)
+        }else {
+            cardsPosition -= cardWidth + cardsMargin;
+            currentSlide--
         }
         setCardsPosition(cardsPosition);
-        updateTabs();
+        updateActiveCard(cards, currentSlide)
         firstLastSlides()
-        updateActiveCard(cards, currentSlide);
         hidePopups(cards)
     };
+
+//     const cardsContainer = document.querySelector('.prize__list'),
+//         cards = document.querySelectorAll('.prize__list-item'),
+//         cardsWrap = document.querySelector('.prize__list-scroll'),
+//         moveRightButton = document.querySelector('.prize__slider-move-right'),
+//         moveLeftButton = document.querySelector('.prize__slider-move-left'),
+//         tabsContainer = document.querySelector('.prize__tabs'),
+//         isMobile = window.innerWidth < 600,
+//         totalCards = cards.length,
+//         cardWidth = cards[0].clientWidth,
+//         cardsMargin = (cardsWrap.clientWidth - cardWidth * totalCards) / (totalCards - 1),
+//         visibleSlides = isMobile ? 1 : Math.ceil(cardsContainer.clientWidth / (cardWidth + cardsMargin)),
+//         totalTabs = Math.ceil(totalCards / visibleSlides),
+//         tabWidth= visibleSlides * (cardWidth + cardsMargin)
+//
+//     let currentSlide = 1;
+//     let currentTab = 1;
+//     let cardsPosition = 0;
+//     let leftSlide;
+//     let rightSlide;
+//     console.log(totalTabs)
+//
+// // Створення табів
+//     for (let i = 1; i <= totalTabs; i++) {
+//         const tab = document.createElement('div');
+//         tab.classList.add('prize__tabs-item');
+//         tabsContainer.appendChild(tab);
+//     }
+//
+//     function leftSlideTab(){
+//         leftSlide = currentTab * visibleSlides - (visibleSlides - 1)
+//     }
+//     function rightSlideTab(){
+//         rightSlide = currentTab * visibleSlides
+//     }
+//
+//     function firstLastSlides(){
+//         if(isMobile) return
+//         leftSlideTab()
+//         rightSlideTab()
+//         cards.forEach((card , i) =>{
+//             i + 1 === leftSlide ? card.classList.add("_left") : card.classList.remove("_left")
+//             i + 1 === rightSlide ? card.classList.add("_right") : card.classList.remove("_right")
+//         })
+//     }
+//     firstLastSlides()
+//
+//     const updateActiveCard = (cards, activeIndex) => {
+//         cards.forEach((card, i) => {
+//             activeIndex - 1 === i ? card.classList.add("_active") : card.classList.remove("_active");
+//         });
+//     };
+//     updateActiveCard(cards, currentSlide);
+//
+//     const updateTabs = () => {
+//         if(isMobile){
+//             const activeTab = Math.ceil(currentSlide / visibleSlides);
+//             tabsContainer.childNodes.forEach((tab, index) => {
+//                 tab.classList.toggle('_active', index + 1 === activeTab);
+//             });
+//         }else{
+//             tabsContainer.childNodes.forEach((tab, index) => {
+//                 tab.classList.remove("_active")
+//                 console.log(currentTab, index)
+//                 index + 1 === currentTab ? tab.classList.add("_active") : null
+//             });
+//         }
+//
+//
+//     };
+//     updateTabs();
+//
+//     function setCardsPosition(position) {
+//         cardsWrap.style.transform = `translateX(-${position}px)`;
+//     };
+//
+//     const moveRight = () => {
+//         if (isMobile) {
+//             // Мобільна логіка
+//             if (currentSlide >= totalCards) {
+//                 currentSlide = 1;
+//                 cardsPosition = 0;
+//             } else {
+//                 cardsPosition += cardWidth + cardsMargin;
+//                 currentSlide++;
+//             }
+//         }
+//         else {
+//             if(currentTab === totalTabs){
+//                 cardsPosition = 0
+//                 currentTab = 1
+//             }else{
+//                 cardsPosition += tabWidth
+//                 ++currentTab
+//             }
+//         }
+//
+//         setCardsPosition(cardsPosition);
+//         updateTabs();
+//         updateActiveCard(cards, currentSlide);
+//             firstLastSlides()
+//         hidePopups(cards)
+
+//
+//     };
+//
+
+
+    // const moveLeft = () => {
+    //     if (isMobile) {
+    //         // Мобільна логіка
+    //         if (currentSlide === 1) {
+    //             currentSlide = totalCards;
+    //             cardsPosition = (totalCards - 1) * (cardWidth + cardsMargin);
+    //         }else if(currentSlide === 2){
+    //             currentSlide = 1;
+    //             cardsPosition = 0
+    //         }
+    //         else {
+    //             cardsPosition -= cardWidth + cardsMargin;
+    //             currentSlide--;
+    //         }
+    //     } else {
+    //
+    //         if(currentTab === 1){
+    //             currentTab = totalTabs
+    //             cardsPosition = (currentTab * tabWidth) - tabWidth
+    //         }else if(currentTab === 2){
+    //             cardsPosition = 0
+    //             currentTab = 1
+    //         }
+    //         else {
+    //             cardsPosition -= tabWidth
+    //             --currentTab
+    //
+    //         }
+    //
+    //     }
+    //     setCardsPosition(cardsPosition);
+    //     updateTabs();
+    //     firstLastSlides()
+    //     updateActiveCard(cards, currentSlide);
+    //     hidePopups(cards)
+    // };
 
     // popups logic
 
@@ -290,7 +305,7 @@
         document.body.style.overflow = "auto"
     });
 
-// snowfall animation
+window.addEventListener("DOMContentLoaded", () =>{
     (function () {
         var COUNT = 400;
 
@@ -560,6 +575,10 @@
         animate();
 
     })();
+})
+
+// snowfall animation
+
 
     let i = 1;
     function sendShakeRequest() {
@@ -586,6 +605,44 @@
     const ball = document.querySelector(".sphere")
     const ballBox = document.querySelector(".sphere__box")
 
+    async function animateShake(ball, box, btn, prize) {
+        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+
+        btn.classList.add("_disabled");
+        ball.classList.add("_shake");
+        box.classList.add("_shake-reverse");
+
+        await delay(2000);
+
+        ball.classList.remove("_shake");
+        ball.classList.add("_before-hide");
+        box.classList.remove("_shake-reverse");
+        box.classList.add("_box-opacity");
+
+        await delay(200);
+
+        ball.classList.add(`${prize}`);
+    }
+
+    // Кожен клас відповідає виграному призу:
+    // "_iphone" - виграно iPhone
+    // "_tv" - виграно телевізор
+    // "_jbl" - виграно JBL-колонку
+    // "_megogo" - виграно підписку Megogo
+    // "_respin" - додаткове обертання
+    // "_nothing" - нічого не виграно
+    // "_points50" - виграно 50 бонусних балів
+    // "_fs10" - виграно 10 фріспінів
+    // "_fs25" - виграно 25 фріспінів
+    // "_fs50" - виграно 50 фріспінів
+    // "_saveBet100" - виграно страховку на 100 ставок
+    // "_saveBet150" - виграно страховку на 150 ставок
+    // "_saveBet200" - виграно страховку на 200 ставок
+    // функція initShake прокидує класи відповідні призам на блок .sphere для відображення призу
+    const winClasses = [
+        "_iphone", "_tv", "_jbl", "_megogo", "_respin", "_nothing",
+        "_points50", "_fs10", "_fs25", "_fs50", "_saveBet100", "_saveBet150", "_saveBet200"
+    ];
     function initShake(ball, btn, box) {
         btn.addEventListener("click", () =>{
             sendShakeRequest().then(res => {
@@ -596,28 +653,9 @@
                     return;
                 }
                 // const prize = res.number;
-                const prize = "iphone";
+                const prize = winClasses[12];
                 const streakBonus = res.streakBonus || debug;
-                const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-                if(prize === "iphone"){
-                    ( async function (){
-                        btn.classList.add("_disabled");
-                        ball.classList.add("_shake");
-                        box.classList.add("_shake-reverse");
-                        await delay(2000);
-                        ball.classList.remove("_shake");
-                        ball.classList.add("_before-hide");
-                        box.classList.remove("_shake-reverse");
-                        box.classList.add("_box-opacity");
-                        await delay(200);
-                        ball.classList.add(`_${prize}`);
-
-                    })();
-                }
-                // if(prize === "respin"){
-                //     sections.addEventListener("animationend", () => showPopup(sections, wheel, "_bonus", streakBonus, spinBg, popupCloseBtn, popupContainer, popup, "respin"), {once: true})
-                //     spinWheel(72.5, "respinAnim", sections, btn, wheel, arrow, prize, spinBg, salut)
-                // }
+                animateShake(ball, box, btn, prize).catch(err => console.error("anim error:", err));
             });
         })
     }

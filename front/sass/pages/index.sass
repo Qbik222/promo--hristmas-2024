@@ -553,11 +553,11 @@ body
     height: 100%
     z-index: 5
     &-desc > *
-      opacity: 0
+      display: none
     &-img > *
-      opacity: 0
+      display: none
     &-img
-      max-width: 225px
+      max-width: 195px
       position: absolute
       top: 165px
       left: 50%
@@ -581,14 +581,14 @@ body
       line-height: 16px
       font-size: 12px
       text-align: center
-      padding: 1px 5px 2px
+      padding: 1px 15px 2px
       position: absolute
       top: 150px
       left: 50%
       transform: translate(-50%, 0)
       z-index: 5
 
-  &._iphone
+  &._iphone, &._tv, &._jbl, &._megogo, &._respin, &._nothing, &._points50, &._fs10, &._fs25, &._fs50, &._saveBet100, &._saveBet150, &._saveBet200
     .sphere
       &__win
         opacity: 1
@@ -599,11 +599,118 @@ body
       &__win
         &-desc
           &-iphone
-            opacity: 1
+            display: block
         &-img
           &-iphone
-            opacity: 1
-
+            display: block
+  &._tv
+    .sphere
+      &__win
+        &-desc
+          &-tv
+            display: block
+        &-img
+          &-tv
+            display: block
+  &._jbl
+    .sphere
+      &__win
+        &-desc
+          &-jbl
+            display: block
+        &-img
+          &-jbl
+            display: block
+  &._megogo
+    .sphere
+      &__win
+        &-desc
+          &-megogo
+            display: block
+        &-img
+          &-megogo
+            display: block
+  &._respin
+    .sphere
+      &__win
+        &-desc
+          &-respin
+            display: block
+        &-img
+          &-respin
+            display: block
+  &._nothing
+    .sphere
+      &__win
+        &-desc
+          &-nothing
+            display: block
+        &-img
+          &-nothing
+            display: block
+  &._points50
+    .sphere
+      &__win
+        &-desc
+          &-points50
+            display: block
+        &-img
+          &-points50
+            display: block
+  &._fs10
+    .sphere
+      &__win
+        &-desc
+          &-fs10
+            display: block
+        &-img
+          &-fs10
+            display: block
+  &._fs25
+    .sphere
+      &__win
+        &-desc
+          &-fs25
+            display: block
+        &-img
+          &-fs25
+            display: block
+  &._fs50
+    .sphere
+      &__win
+        &-desc
+          &-fs50
+            display: block
+        &-img
+          &-fs50
+            display: block
+  &._saveBet100
+    .sphere
+      &__win
+        &-desc
+          &-saveBet100
+            display: block
+        &-img
+          &-saveBet100
+            display: block
+  &._saveBet150
+    .sphere
+      &__win
+        &-desc
+          &-saveBet150
+            display: block
+        &-img
+          &-saveBet150
+            display: block
+  &._saveBet200
+    .sphere
+      &__win
+        &-desc
+          &-saveBet200
+            display: block
+        &-img
+          &-saveBet200
+            display: block
 .progress
   display: flex
   position: relative
