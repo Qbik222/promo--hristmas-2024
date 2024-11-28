@@ -17,6 +17,9 @@ $font-riffic-bold: Riffic-Bold, sans-serif
 body.light
   background: $dark-blue-bg
 
+.hide
+  display: none !important
+
 body
   overscroll-behavior: none
   -webkit-tap-highlight-color: transparent
@@ -72,8 +75,9 @@ body
   background: rgba(0, 0, 0, 0.50)
   border-radius: 16px
   border: 1px solid rgba($white, .4)
-  width: 108px
+  width: fit-content
   height: 32px
+  padding: 0 8px
   backdrop-filter: blur(5px)
   display: flex
   align-items: center
@@ -168,6 +172,7 @@ body
     max-width: 350px
     min-width: 350px
     z-index: 3
+    left: 51%
     &-img
       position: relative
       z-index: 1
@@ -200,6 +205,24 @@ body
   align-items: center
   padding: 35px 0 0 0
   z-index: 1
+  position: relative
+  &:before, &::after
+    content: ""
+    display: block
+    position: absolute
+    background: url("../img/guide/gift-decor.png") no-repeat 0 0/contain
+  &::before
+    top: 0
+    left: 0
+    width: 174px
+    height: 200px
+    transform: translate(-100%, 25%)
+  &::after
+    right: 0
+    bottom: 0
+    width: 210px
+    height: 200px
+    transform: translate(90%, 25%)
   &__wrap
     margin-top: 40px
     display: flex
@@ -207,6 +230,24 @@ body
     gap: 15px
   &__title
     max-width: 660px
+    &:before, &::after
+      content: ""
+      display: block
+      position: absolute
+    &::before
+      background: url("../img/guide/star-decor.png") no-repeat 0 0/contain
+      width: 86px
+      height: 92px
+      left: -90px
+      bottom: 0
+    &::after
+      background: url("../img/guide/star-decor2.png") no-repeat 0 0/contain
+      width: 47px
+      height: 47px
+      right: 0
+      top: 70px
+
+
   &__subtitle
     color: $white
     font-size: 16px
@@ -295,16 +336,33 @@ body
         bottom: 0
         left: 50%
         transform: translate(-50%, 50%)
-    //&-snow
-    //  width: 100%
-    //  height: 100%
-    //  //background: black
-    //  position: absolute
-    //  top: 0
-    //  left: 0
-    //  z-index: -2
-    //  canvas
-    //    z-index: -1
+    &-popup
+      display: none
+      width: 340px
+      height: 135px
+      background: rgba($dark-blue, .5)
+      border: 1px solid rgba($white, .5)
+      border-radius: 16px
+      position: absolute
+      bottom: -15px
+      left: 50%
+      transform: translate(-50%, 0)
+      z-index: 3
+      backdrop-filter: blur(5px)
+      &-text
+        color: $white
+        font-size: 12px
+        line-height: 20px
+        font-family: $font-suisse-intl-reg
+        padding: 16px
+      &-close
+        position: absolute
+        top: 0
+        right: 0
+        transform: translate(0, -50%)
+    &._popup
+      .guide__item-popup
+        display: block
 
 .ball
   display: flex
@@ -396,6 +454,12 @@ body
           animation: verticalFloat 1.4s linear infinite
     .sphere
       background: none
+      .snowCanvas
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
       &::before
         top: 225px
         left: 170px
@@ -409,7 +473,6 @@ body
 .sphere
   width: 480px
   height: 410px
-  background: url("../img/ball/sphere/body-light.png") no-repeat 0 0/contain
   &::before
     content: ""
     display: block
@@ -454,6 +517,15 @@ body
     bottom: -3px
     left: 120px
     z-index: 2
+  &__light
+    width: 100%
+    height: 100%
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 0
+    background: url("../img/ball/sphere/body-light.png") no-repeat 0 0/contain
+    animation: opacity-ball-light 2.5s ease-in-out infinite
   &__ground
     background: url("../img/ball/sphere/ground.png") no-repeat 0 0/contain
     width: 284px
@@ -470,6 +542,67 @@ body
     bottom: 70px
     left: 125px
     z-index: 4
+  &__win
+    opacity: 0
+    transition: opacity .7s ease-in-out
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    z-index: 5
+    &-desc > *
+      opacity: 0
+    &-img > *
+      opacity: 0
+    &-img
+      max-width: 225px
+      position: absolute
+      top: 165px
+      left: 50%
+      transform: translate(-50%, 0)
+      z-index: 4
+    &-title
+      max-width: 180px
+      position: absolute
+      top: 95px
+      left: 50%
+      transform: translate(-50%, 0)
+      z-index: 5
+    &-desc
+      max-width: 230px
+      background: rgba($black, .5)
+      border: 1px solid rgba($white, .5)
+      border-bottom: none
+      border-radius: 16px
+      font-family: $font-suisse-intl-reg
+      color: $white
+      line-height: 16px
+      font-size: 12px
+      text-align: center
+      padding: 1px 5px 2px
+      position: absolute
+      top: 150px
+      left: 50%
+      transform: translate(-50%, 0)
+      z-index: 5
+
+  &._iphone
+    .sphere
+      &__win
+        opacity: 1
+      &__box
+        display: none
+  &._iphone
+    .sphere
+      &__win
+        &-desc
+          &-iphone
+            opacity: 1
+        &-img
+          &-iphone
+            opacity: 1
+
 .progress
   display: flex
   position: relative
@@ -599,6 +732,14 @@ body
         background: url("../img/ball/progress/btn-decor.png") no-repeat 0 0/contain
         width: 33px
         height: 22px
+    &._disabled
+      border: 1px solid #5A5A5A
+      pointer-events: none
+      user-select: none
+      box-shadow: 0px 3px 0px 0px #363636
+      background: linear-gradient(180deg, #8D8D8D 0%, #8A8A8A 20.5%, #838383 48%, #818181 70.5%, #7E7E7E 100%)
+      span
+        opacity: .2
     &::before, &::after
       content: ""
       display: block
@@ -659,7 +800,7 @@ body
         color: $white
         font-family: $font-suisse-intl-reg
         font-size: 12px
-        line-height: 19px
+        line-height: 20px
       &-close
         position: absolute
         top: 0
@@ -675,9 +816,14 @@ body
       position: relative
       padding-top: 30px
       z-index: 1
-      &._active
+      &._left
         .prize__list-popup
           left: 0
+          transform: translate(0, -50%)
+      &._right
+        .prize__list-popup
+          left: auto
+          right: 0
           transform: translate(0, -50%)
       &:last-child
         .prize__list-popup
@@ -929,6 +1075,63 @@ body
       color: $magenta
   &__user
     margin-top: 25px
+  &__popup
+    width: 100%
+    height: 100%
+    position: fixed
+    z-index: 10
+    top: 0
+    left: 0
+    display: flex
+    align-items: center
+    justify-content: center
+    background: rgba(#00001F, .9)
+    &-wrap
+      position: relative
+      border-radius: 16px
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: flex-start
+      padding: 16px
+      border: 1px solid rgba($white, .5)
+      background: rgba($white, .1)
+      backdrop-filter: blur(6px)
+      width: 340px
+      height: 450px
+    &-close
+      position: absolute
+      top: 0
+      right: 0
+      transform: translate(0, -50%)
+    &-title
+      font-family: $font-suisse-intl-bold
+      font-size: 16px
+      line-height: 24px
+      letter-spacing: .04em
+      text-transform: uppercase
+      color: $white
+    &-body
+      overflow-y: auto
+      height: 375px
+      width: 100%
+      margin-top: 16px
+    &-scroll
+      display: flex
+    &-place, &-prize
+      width: 50%
+      display: flex
+      align-items: center
+      justify-content: flex-start
+      flex-direction: column
+      &-item
+        color: $white
+        font-size: 16px
+        line-height: 24px
+        font-family: $font-suisse-intl-reg
+        text-align: center
+        &:nth-child(1)
+          opacity: .3
 
 
 .drop
@@ -1104,3 +1307,54 @@ body
     transform: translate(-50%, -50%) rotate(0deg)
   100%
     transform: translate(-50%, -50%) rotate(360deg)
+    
+@keyframes horizontal-shaking 
+  0%
+    transform: translateX(0)
+  25%
+    transform: translateX(10px)
+  50%
+    transform: translateX(-10px)
+  75%
+    transform: translateX(10px)
+  100%
+    transform: translateX(0)
+
+@keyframes horizontal-shaking-reverse
+  0%
+    transform: translateX(0)
+  25%
+    transform: translateX(10px)
+  50%
+    transform: translateX(-10px)
+  75%
+    transform: translateX(10px)
+  100%
+    transform: translateX(0)
+
+@keyframes opacity
+  0%
+    opacity: 1
+  100%
+    opacity: 0
+
+@keyframes opacity-ball-light
+  0%, 100%
+    opacity: 1
+  50%
+    opacity: .6
+
+._shake
+  animation: horizontal-shaking .6s linear infinite
+
+._shake-reverse
+  animation: horizontal-shaking-reverse .6s linear infinite
+
+._box-opacity
+  animation: opacity 1s ease
+  opacity: 0
+
+._before-hide
+  &::before
+    opacity: 0
+    transition: .7s ease

@@ -64,22 +64,40 @@
                    .guide__item-info-subtitle Натисни кнопку <br> «Взяти участь»
                    .guide__item-info-btn.info-btn Детальніше
                .guide__item-snow.sky
+               .guide__item-popup
+                    .guide__item-popup-close.info-btn закрити
+                    .guide__item-popup-text.
+                        Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
+                        Роби ставки в акційних іграх в розділі «Казино»,
+                        став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
             .guide__item
                .guide__item-num
                .guide__item-info
                    .guide__item-info-title Набирай бали
                    .guide__item-info-subtitle Заробляй бали та просувайся в турнірній таблиці
                    .guide__item-info-btn.info-btn Детальніше
+               .guide__item-popup
+                    .guide__item-popup-close.info-btn закрити
+                    .guide__item-popup-text.
+                        Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
+                        Роби ставки в акційних іграх в розділі «Казино»,
+                        став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
             .guide__item
                .guide__item-num
                .guide__item-info
                    .guide__item-info-title Вигравай призи
                    .guide__item-info-subtitle Змагайся за додаткові <br> призи та ігрові бали в <br> турнірну таблицю.
                    .guide__item-info-btn.info-btn Детальніше
+               .guide__item-popup
+                    .guide__item-popup-close.info-btn закрити
+                    .guide__item-popup-text.
+                        Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
+                        Роби ставки в акційних іграх в розділі «Казино»,
+                        став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
         .guide__wrap.btn-wrap
             a(href="#").guide__btn.btn #[span Грати в казино]
             a(href="#").guide__btn.btn #[span Ставити на спорт]
-    .ball._lock
+    .ball
         .ball__title
             picture
                 source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/ball/title-mob.png")
@@ -97,14 +115,19 @@
                     img(src="img/ball/pers-desc.png" alt="Favbet")
             .sphere.ball__sphere
                 .sphere__box
-                .sphere__body.sky
+                .sphere__body
+                    canvas.snowCanvas
                 .sphere__ground
                 .sphere__leg
-                .sphere__prizes.hide
-                    .sphere__prize
-                        .sphere__prize-title
-                        .sphere__prize-subtitle
-                        .sphere__prize-img
+                .sphere__light
+                .sphere__win
+                    .sphere__win-title
+                        img(src="./img/ball/sphere/win-title.png" alt="favbet")
+                    .sphere__win-desc
+                        .sphere__win-desc-iphone Смартфон «IPhone 16 PRO MAX (512)»
+                    .sphere__win-img
+                        .sphere__win-img-iphone
+                            img(src="./img/ball/sphere/iphone.png" alt="favbet")
             .ball__list
                 .ball__list-item 1 день - #[span 1 протрус]
                 .ball__list-item 1 протрус - #[span 50 балів] у шкалу прогресу
@@ -123,7 +146,7 @@
                     .progress__bar-point._active 20
                     .progress__bar-point._active 30
                     .progress__bar-point 40
-            a(href="#").progress__shake #[span трусити]
+            button(type="button").progress__shake #[span трусити]
     .prize
         .prize__title
             picture
@@ -146,8 +169,8 @@
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
                         .prize__list-popup
-                            .prize__list-popup-close.info-btn закрити
-                            .prize__list-popup-text.
+                            .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
+                            .prize__list-popup-text(data-translate="prizePopup1").
                                 Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
                                 6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
@@ -162,6 +185,16 @@
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
+                        .prize__list-popup
+                            .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
+                            .prize__list-popup-text(data-translate="prizePopup2").
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                 Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -169,6 +202,16 @@
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
+                        .prize__list-popup
+                            .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
+                            .prize__list-popup-text(data-translate="prizePopup3").
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                 Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -176,6 +219,16 @@
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
+                        .prize__list-popup
+                            .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
+                            .prize__list-popup-text(data-translate="prizePopup4").
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                 Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -183,6 +236,16 @@
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
+                        .prize__list-popup
+                            .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
+                            .prize__list-popup-text(data-translate="prizePopup5").
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                 Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -190,6 +253,16 @@
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
+                        .prize__list-popup
+                            .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
+                            .prize__list-popup-text(data-translate="prizePopup6").
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                 Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -197,6 +270,16 @@
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
+                        .prize__list-popup
+                            .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
+                            .prize__list-popup-text(data-translate="prizePopup7").
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                 Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -204,6 +287,16 @@
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
+                        .prize__list-popup
+                            .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
+                            .prize__list-popup-text(data-translate="prizePopup8").
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                 Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -211,6 +304,16 @@
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
+                        .prize__list-popup
+                            .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
+                            .prize__list-popup-text(data-translate="prizePopup9").
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                 Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -218,6 +321,16 @@
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
+                        .prize__list-popup
+                            .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
+                            .prize__list-popup-text(data-translate="prizePopup10").
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                 Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -225,6 +338,16 @@
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
+                        .prize__list-popup
+                            .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
+                            .prize__list-popup-text(data-translate="prizePopup11").
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                 Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -232,6 +355,16 @@
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
+                        .prize__list-popup
+                            .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
+                            .prize__list-popup-text(data-translate="prizePopup12").
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                 Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
 
             .prize__tabs
     .table
@@ -410,6 +543,37 @@
                              та заробляй по 1 балу за кожні розраховані 200 ₴. Ставки повинні бути розраховані
                              з результатом «Виграш» та з коефіцієнтом від 1.5 (ординар) або від 3.5 (експрес від 3 подій),
                               без здійснення ставок з Бонусного балансу,
+        .table__popup.hide
+            .table__popup-wrap
+                .table__popup-close.info-btn Закрити
+                .table__popup-title Таблиця розподілу призів
+                .table__popup-body
+                    .table__popup-scroll
+                        .table__popup-place
+                            .table__popup-place-item Місце
+                            .table__popup-place-item
+                            .table__popup-place-item
+                            .table__popup-place-item
+                            .table__popup-place-item
+                            .table__popup-place-item
+                            .table__popup-place-item
+                            .table__popup-place-item
+                            .table__popup-place-item
+                            .table__popup-place-item
+                            .table__popup-place-item
+                            .table__popup-place-item
+                        .table__popup-prize
+                            .table__popup-prize-item Приз
+                            .table__popup-prize-item
+                            .table__popup-prize-item
+                            .table__popup-prize-item
+                            .table__popup-prize-item
+                            .table__popup-prize-item
+                            .table__popup-prize-item
+                            .table__popup-prize-item
+                            .table__popup-prize-item
+                            .table__popup-prize-item
+                            .table__popup-prize-item
     .games
         .games__title
             picture
