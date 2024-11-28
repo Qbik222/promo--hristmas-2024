@@ -37,9 +37,9 @@
                     img(src="img/banner/gift-desc.png" alt="Favbet")
 
 
-        a(href="#").banner__btn.btn #[span Взяти участь ]
-        .banner__date Період проведення акції - з 11.12.2024 до 25.12.2024.
-        .banner__bottom.
+        a(href="#").banner__btn.btn #[span(data-translate="mainBtn") Взяти участь ]
+        .banner__date(data-translate="bannerDate") Період проведення акції - з 11.12.2024 до 25.12.2024.
+        .banner__bottom(data-translate="bannerBottom").
             *Загальний призовий фонд Акції «Розтруси Сема на Різдво» складає 5 000 000 ₴
              електронних грошових замінників, 22 025  фріспінів та інших визначених
               Організатором фізичних призів. Період дії Акції з 11.12.2024 по 25.12.2024 року.
@@ -52,7 +52,7 @@
                 source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/guide/title-desc.png")
                 source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/guide/title-desc.png")
                 img(src="img/guide/title-desc.png" alt="Favbet")
-        .guide__subtitle.
+        .guide__subtitle(data-translate="guideSubtitle").
             Протягом 2 тижнів бери участь в акції «Новорічне промо» від FAVBET та
             отримуй можливість виграти частину з призового фонду в 5 000 000 гривень,
             22 025 фріспінів та інших крутих фізичних призів.
@@ -60,43 +60,43 @@
             .guide__item
                .guide__item-num
                .guide__item-info
-                   .guide__item-info-title Тицяй кнопку
-                   .guide__item-info-subtitle Натисни кнопку <br> «Взяти участь»
-                   .guide__item-info-btn.info-btn Детальніше
+                   .guide__item-info-title(data-translate="guideItemTitle1") Тицяй кнопку
+                   .guide__item-info-subtitle(data-translate="guideItemSubitle1") Натисни кнопку <br> «Взяти участь»
+                   .guide__item-info-btn.info-btn(data-translate="popupBtn") Детальніше
                .guide__item-snow.sky
                .guide__item-popup
-                    .guide__item-popup-close.info-btn закрити
-                    .guide__item-popup-text.
+                    .guide__item-popup-close.info-btn(data-translate="popupBtnCLose") закрити
+                    .guide__item-popup-text(data-translate="guidePopup1").
                         Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
                         Роби ставки в акційних іграх в розділі «Казино»,
                         став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
             .guide__item
                .guide__item-num
                .guide__item-info
-                   .guide__item-info-title Набирай бали
-                   .guide__item-info-subtitle Заробляй бали та просувайся в турнірній таблиці
-                   .guide__item-info-btn.info-btn Детальніше
+                   .guide__item-info-title(data-translate="guideItemTitle2") Набирай бали
+                   .guide__item-info-subtitle(data-translate="guideItemSubitle2") Заробляй бали та просувайся в турнірній таблиці
+                   .guide__item-info-btn.info-btn(data-translate="popupBtn") Детальніше
                .guide__item-popup
-                    .guide__item-popup-close.info-btn закрити
-                    .guide__item-popup-text.
+                    .guide__item-popup-close.info-btn(data-translate="popupBtnCLose") закрити
+                    .guide__item-popup-text(data-translate="guidePopup2").
                         Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
                         Роби ставки в акційних іграх в розділі «Казино»,
                         став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
             .guide__item
                .guide__item-num
                .guide__item-info
-                   .guide__item-info-title Вигравай призи
-                   .guide__item-info-subtitle Змагайся за додаткові <br> призи та ігрові бали в <br> турнірну таблицю.
-                   .guide__item-info-btn.info-btn Детальніше
+                   .guide__item-info-title(data-translate="guideItemTitle3") Вигравай призи
+                   .guide__item-info-subtitle(data-translate="guideItemSubitle3") Змагайся за додаткові <br> призи та ігрові бали в <br> турнірну таблицю.
+                   .guide__item-info-btn.info-btn(data-translate="popupBtn")  Детальніше
                .guide__item-popup
-                    .guide__item-popup-close.info-btn закрити
-                    .guide__item-popup-text.
+                    .guide__item-popup-close.info-btn(data-translate="popupBtnCLose")  закрити
+                    .guide__item-popup-text(data-translate="guidePopup3").
                         Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
                         Роби ставки в акційних іграх в розділі «Казино»,
                         став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
         .guide__wrap.btn-wrap
-            a(href="#").guide__btn.btn #[span Грати в казино]
-            a(href="#").guide__btn.btn #[span Ставити на спорт]
+            a(href="#").guide__btn.btn #[span(data-translate="casinoBtn") Грати в казино]
+            a(href="#").guide__btn.btn #[span(data-translate="sportBtn") Ставити на спорт]
     .ball
         .ball__title
             picture
@@ -105,7 +105,7 @@
                 source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/ball/title-desc.png")
                 source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/ball/title-desc.png")
                 img(src="img/ball/title-desc.png" alt="Favbet")
-        .ball__subtitle Щодня отримуй можливість потрусити Кулю Сема та виграти приз.
+        .ball__subtitle(data-translate='ballSubtitle') Щодня отримуй можливість потрусити Кулю Сема та виграти приз.
         .ball__wrap
             .ball__pers
                 picture
@@ -114,7 +114,7 @@
                     source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/ball/pers-desc.png")
                     img(src="img/ball/pers-desc.png" alt="Favbet")
             .sphere.ball__sphere
-                .sphere__box._boxFloat
+                .sphere__box
                 .sphere__body
                     canvas.snowCanvas
                 .sphere__ground
@@ -124,20 +124,35 @@
                     .sphere__win-title
                         img(src="./img/ball/sphere/win-title.png" alt="favbet")
                     .sphere__win-desc
-                        .sphere__win-desc-iphone Смартфон «IPhone 16 PRO MAX (512)»
+                        .sphere__win-desc-iphone(data-translate="winIphone") Смартфон «IPhone 16 PRO MAX (512)»
+                        .sphere__win-desc-tv(data-translate="winTv") Телевізор «Samsung 55»
+                        .sphere__win-desc-jbl(data-translate="winJbl") Акустична система «JBL Pulse 5 Black»
+                        .sphere__win-desc-megogo(data-translate="winMegogo") Підписка «MEGOGO» на рік
+                        .sphere__win-desc-nothing(data-translate="winNothing") Завтра пощастить
+                        .sphere__win-desc-respin(data-translate="winRespin") Додатковий протрус в кулі Сема
+                        .sphere__win-desc-points50(data-translate="winPoints50") Додаткові 50 ігрових балів в турнірну таблицю
+                        .sphere__win-desc-fs10(data-translate="winFs10") 10 FS 3 oaks у грі Sun of Egypt 3
+                        .sphere__win-desc-fs25(data-translate="winFs25") 25 FS Playson у грі Jingle Coins: Hold and Win
+                        .sphere__win-desc-fs50(data-translate="winFs50") 50 FS Pragmatic у гріSweet Bonanza Xmas
+                        .sphere__win-desc-saveBet100(data-translate="winSaveBet100") Персональний бонус «Страховка ставки» до 100 ₴
+                        .sphere__win-desc-saveBet150(data-translate="winSaveBet150") Персональний бонус «Страховка ставки» до 150 ₴
+                        .sphere__win-desc-saveBet200(data-translate="winSaveBet200") Персональний бонус «Страховка ставки» до 200 ₴
                     .sphere__win-img
                         .sphere__win-img-iphone
                             img(src="./img/ball/sphere/iphone.png" alt="favbet")
             .ball__list
-                .ball__list-item 1 день - #[span 1 протрус]
-                .ball__list-item 1 протрус - #[span 50 балів] у шкалу прогресу
+                .ball__list-item(data-translate='ballInfo1') 1 день - #[span 1 протрус]
+                .ball__list-item(data-translate='ballInfo2') 1 протрус - #[span 50 балів] у шкалу прогресу
         .progress.ball__progress
             .progress__left
                 .progress__title
-                    .progress__title-item Твій прогрес:
+                    .progress__title-item(data-translate="progressTitle") Твій прогрес:
                     .progress__title-item 50/50 балів
-                    .progress__title-lock Набери більше балів щоб трусити кулю.
-                .progress__popup-btn.info-btn Детальніше
+                    .progress__title-lock(data-translate="progressTitleLock") Набери більше балів щоб трусити кулю.
+                .progress__popup-btn.info-btn(data-translate="popupBtn") Детальніше
+                .progress__popup
+                    .progress__popup-close
+                    .progress__popup-text
             .progress__bar
                 .progress__bar-body
                     .progress__bar-thumb
@@ -146,7 +161,7 @@
                     .progress__bar-point._active 20
                     .progress__bar-point._active 30
                     .progress__bar-point 40
-            button(type="button").progress__shake #[span трусити]
+            .progress__shake #[span(data-translate="shakeBtn") трусити]
     .prize
         .prize__title
             picture
@@ -164,7 +179,7 @@
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
-                        .prize__list-item-title iPhone 16 PRO <br> MAX (512) 1
+                        .prize__list-item-title(data-translate="prizeIphone") iPhone 16 PRO <br> MAX (512)
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
@@ -181,7 +196,7 @@
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
-                        .prize__list-item-title iPhone 16 PRO <br> MAX (512) 2
+                        .prize__list-item-title(data-translate="prizeTv") Телевізор «Samsung 55»
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
@@ -198,7 +213,7 @@
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
-                        .prize__list-item-title iPhone 16 PRO <br> MAX (512) 3
+                        .prize__list-item-title(data-translate="prizeJbl") Акустична система «JBL Pulse 5 Black»
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
@@ -215,7 +230,7 @@
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
-                        .prize__list-item-title iPhone 16 PRO <br> MAX (512) 4
+                        .prize__list-item-title(data-translate="prizeMegogo") Підписка «MEGOGO» на рік
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
@@ -232,7 +247,7 @@
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
-                        .prize__list-item-title iPhone 16 PRO <br> MAX (512) 5
+                        .prize__list-item-title(data-translate="prizeRespin") Додатковий протрус в кулі Сема
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
@@ -249,7 +264,7 @@
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
-                        .prize__list-item-title iPhone 16 PRO <br> MAX (512) 6
+                        .prize__list-item-title(data-translate="prizePoints50") Додаткові 50 ігрових балів в турнірну таблицю
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
@@ -266,7 +281,7 @@
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
-                        .prize__list-item-title iPhone 16 PRO <br> MAX (512) 7
+                        .prize__list-item-title(data-translate="prizeFs10") 10 FS 3 oaks у грі Sun of Egypt 3
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
@@ -283,7 +298,7 @@
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
-                        .prize__list-item-title iPhone 16 PRO <br> MAX (512) 8
+                        .prize__list-item-title(data-translate="prizeFs25") 25 FS Playson у грі Jingle Coins: Hold and Win
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
@@ -300,7 +315,7 @@
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
-                        .prize__list-item-title iPhone 16 PRO <br> MAX (512) 9
+                        .prize__list-item-title(data-translate="prizeFs50") 50 FS Pragmatic у грі Sweet Bonanza Xmas
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
@@ -317,7 +332,7 @@
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
-                        .prize__list-item-title iPhone 16 PRO <br> MAX (512) 10
+                        .prize__list-item-title(data-translate="prizeSaveBet100") Персональний бонус «Страховка ставки» до 100 ₴
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
@@ -334,7 +349,7 @@
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
-                        .prize__list-item-title iPhone 16 PRO <br> MAX (512) 11
+                        .prize__list-item-title(data-translate="prizeSaveBet150") Персональний бонус «Страховка ставки» до 150 ₴
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
@@ -351,13 +366,31 @@
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
-                        .prize__list-item-title iPhone 16 PRO <br> MAX (512) 12
+                        .prize__list-item-title(data-translate="prizeSaveBet200") Персональний бонус «Страховка ставки» до 200 ₴
                         .prize__list-item-img
                             img(src="./img/prize/slide1.png" alt="favbet")
                         .prize__list-item-decor
                         .prize__list-popup
                             .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
                             .prize__list-popup-text(data-translate="prizePopup12").
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                 Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
+
+                    .prize__list-item
+                        .prize__list-item-snow
+                        .prize__list-item-btn
+                        .prize__list-item-title(data-translate="prizeNothing") Завтра пощастить
+                        .prize__list-item-img
+                            img(src="./img/prize/slide1.png" alt="favbet")
+                        .prize__list-item-decor
+                        .prize__list-popup
+                            .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
+                            .prize__list-popup-text(data-translate="prizePopup13").
                                 Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
                                 6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
@@ -379,15 +412,15 @@
         .table__wrap
             .table__btns
                 .table__toggle
-                    .table__toggle-item._active 1 тиждень
-                    .table__toggle-item 2 тиждень
-                .table__info Таблиця розподілу призів
+                    .table__toggle-item(data-translate="tableBtnFirst")._active 1 тиждень
+                    .table__toggle-item(data-translate="tableBtnSecond") 2 тиждень
+                .table__info(data-translate="tableBtnPopup") Таблиця розподілу призів
             .table__head
-                .table__head-item Місце
-                .table__head-item ID
-                .table__head-item Бали
-                .table__head-item Приз
-                .table__head-item Wager
+                .table__head-item(data-translate="tablePlace") Місце
+                .table__head-item(data-translate="tableId") ID
+                .table__head-item(data-translate="tablePoints") Бали
+                .table__head-item(data-translate="tablePrize") Приз
+                .table__head-item(data-translate="tableWager") Wager
             .table__body._active
                 .table__body-row
                     .table__body-row-item 1
@@ -531,9 +564,9 @@
                     .table__body-row-item 3x
         .drop
             details.dropdown
-                summary(data-translate="rulesTitle") Як набирати бали в турнірій таблиці
+                summary(data-translate="rulesTitleTable") Як набирати бали в турнірій таблиці
                 .drop-txt
-                    .drop-txt-list(data-translate="rulesTxt")
+                    .drop-txt-list(data-translate="rulesTxtTable")
                         p 1. Натисни кнопку «Взяти участь».
                         p Авторизуйся на акційній сторінці, натиснувши кнопку «Авторизуйся», або зареєструйся як користувач. Натисни кнопку «Взяти участь» на сторінці Акції.
                         p 2. Роби виграшні ставки на кіберспортивний турнір «Shanghai Major 2024» .
@@ -545,12 +578,12 @@
                               без здійснення ставок з Бонусного балансу,
         .table__popup.hide
             .table__popup-wrap
-                .table__popup-close.info-btn Закрити
-                .table__popup-title Таблиця розподілу призів
+                .table__popup-close.info-btn(data-translate="closeBtn") Закрити
+                .table__popup-title(data-translate="tablePopupTitle") Таблиця розподілу призів
                 .table__popup-body
                     .table__popup-scroll
                         .table__popup-place
-                            .table__popup-place-item Місце
+                            .table__popup-place-item(data-translate="tablePlace") Місце
                             .table__popup-place-item
                             .table__popup-place-item
                             .table__popup-place-item
@@ -563,7 +596,7 @@
                             .table__popup-place-item
                             .table__popup-place-item
                         .table__popup-prize
-                            .table__popup-prize-item Приз
+                            .table__popup-prize-item(data-translate="tablePrize") Приз
                             .table__popup-prize-item
                             .table__popup-prize-item
                             .table__popup-prize-item
@@ -605,8 +638,8 @@
             .games__list-item
                 img(src="./img/games/game1.png" alt="favbet")
         .games__wrap.btn-wrap
-            a(href="#").games__btn.btn #[span Грати в казино]
-            a(href="#").games__btn.btn #[span Ставити на спорт]
+            a(href="#").games__btn.btn #[span(data-translate="casinoBtn") Грати в казино]
+            a(href="#").games__btn.btn #[span(data-translate="sportBtn") Ставити на спорт]
     .drop
         details.dropdown
             summary(data-translate="rulesTitle") Як набирати бали в турнірій таблиці
