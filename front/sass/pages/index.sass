@@ -8,6 +8,7 @@ $green-light: #00FFB2
 $green-dark: #006B4B
 $black: #000000
 $grey: #E3E3E3
+$title-box-shadow: 0px 0px 20px 61px rgba(11, 100, 224, 0.1) inset, 0px 0px 70px 51px rgba(11, 100, 224, 0.1)
 
 $font-suisse-intl-reg: SuisseIntl-Regular, sans-serif
 $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
@@ -256,12 +257,16 @@ body
     gap: 15px
   &__title
     max-width: 660px
+    //background: rgba(#0B64E0, .05)
+    border-radius: 50%
+    box-shadow: 0px 0px 20px 61px rgba(11, 100, 224, 0.1) inset, 0px 0px 70px 51px rgba(11, 100, 224, 0.1)
+    //&::before
     &:before, &::after
       content: ""
       display: block
       position: absolute
     &::before
-      background: url("../img/guide/star-decor.png") no-repeat 0 0/contain
+      background:  url("../img/guide/star-decor.png") no-repeat 0 0/contain
       width: 86px
       height: 92px
       left: -90px
@@ -419,6 +424,8 @@ body
     max-width: 490px
   &__title
     max-width: 440px
+    border-radius: 50%
+    box-shadow:  0px 0px 20px 41px rgba(11, 100, 224, 0.05) inset, 0px 0px 19px 21px rgba(11, 100, 224, 0.05)
   &__subtitle
     color: $white
     font-size: 16px
@@ -450,6 +457,14 @@ body
   &__progress
     position: relative
     bottom: 50px
+  .btn-wrap
+    display: none
+  &._lock
+    .btn-wrap
+      display: flex
+  &._lock._sign
+    .btn-wrap
+      display: none
   &._lock, &._sign
     .progress
       &__shake
@@ -480,11 +495,6 @@ body
           animation: verticalFloat 1.4s linear infinite
       &__bar
         background: none
-  &._sign
-    .progress
-      &__title
-        &-lock
-          display: none
     .sphere
       background: none
       .snowCanvas
@@ -503,6 +513,12 @@ body
         background: url("../img/ball/sphere/ground-lock.png") no-repeat 0 0/contain
         width: 290px
         height: 172px
+  &._sign
+    .progress
+      &__title
+        &-lock
+          display: none
+
 .sphere
   width: 480px
   height: 410px
@@ -812,6 +828,7 @@ body
     &-thumb
       height: 100%
       width: 60%
+      min-width: 5%
       position: absolute
       left: 0
       top: 0
@@ -906,8 +923,11 @@ body
   align-items: center
   flex-direction: column
   width: 100%
+  padding-top: 30px
   &__title
     max-width: 600px
+    border-radius: 50%
+    box-shadow: 0px 0px 20px 41px rgba(11, 100, 224, 0.05) inset, 0px 0px 50px 70px rgba(11, 100, 224, 0.05)
   &__list
     width: 950px
     //width: 720px
@@ -1332,8 +1352,8 @@ body
       border-radius: 20px
       border: 1px solid rgba($white, .1)
       &-list
-        max-height: 500px
-        overflow-y: scroll
+        max-height: 340px
+        overflow-y: auto
         padding-right: 20px
         scrollbar-width: auto
         &::-webkit-scrollbar
@@ -1344,6 +1364,36 @@ body
           position: relative
           border-radius: 50px
           background: $green
+        &.my-spins
+          display: flex
+          .no-spins
+            display: block
+            color: $white
+            text-align: center
+            font-family: $font-suisse-intl-reg
+            font-size: 17px
+            line-height: 27px
+          .spins-row
+            display: flex
+            flex-direction: column
+            justify-content: space-between
+            width: 100%
+            gap: 2px
+            &-item
+              display: flex
+              justify-content: space-between
+              padding: 7px 20px
+              border-radius: 13px
+              background: rgba(0, 0, 0, 0.20)
+              &:nth-child(1)
+                background: transparent
+                opacity: .2
+            .content-date, .content-prize
+              color: $white
+              font-family: $font-suisse-intl-reg
+              font-size: 17px
+              line-height: 27px
+
       tr,td,th
         font-family: $font-suisse-intl-reg
         color: $grey

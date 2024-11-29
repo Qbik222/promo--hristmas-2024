@@ -21,7 +21,8 @@
     let i18nData = {};
     const debug = true;
     // let userId;
-    let userId = 100300268;
+    let userId = 101234861;
+    // let userId = 9999;
 
 
     function loadTranslations() {
@@ -70,6 +71,7 @@
 
 
     function init() {
+        console.log(window.g_user_id)
         if (window.store) {
             var state = window.store.getState();
             userId = state.auth.isAuthorized && state.auth.id || '';
@@ -148,10 +150,12 @@
                             res.pointsPerDay = 30;
                             res.spinAllowed = true;
                             res.spinsStreak = 3;
+                            // res.spins = [""];
                         }
                         // refreshUserInfo(res);
-                        // displayUserSpins(res.spins);
+                        displayUserSpins(res.spins);
                     } else {
+                        document.querySelector(".banner__btn").classList.add("hide")
                         participateBtns.forEach(item => item.classList.remove('hide'));
                     }
                 })
@@ -165,6 +169,48 @@
             }
         }
     }
+
+    function translateKey(key) {
+        if (!key) {
+            return;
+        }
+        return i18nData[key] || '*----NEED TO BE TRANSLATED----*   key:  ' + key;
+    }
+
+    function displayUserSpins(spins) {
+        console.log(spins)
+        const spinItem = document.querySelector('.spins-row');
+        const noSpinItem = document.querySelector('.no-spins');
+
+        if (!spins || spins.length === 0) {
+            spinItem.classList.add('hide');
+            noSpinItem.classList.remove('hide');
+            return;
+        }
+
+        const spinsContainer = document.querySelector('.spins-row');
+        spinsContainer.innerHTML = '';
+
+        spinItem.classList.remove('hide');
+        noSpinItem.classList.add('hide');
+
+        spins.forEach(spin => {
+            const spinDate = new Date(spin.date);
+            const formattedDate = spinDate.toLocaleDateString('hr-HR');
+            const spinName = translateKey(spin.name) || '';
+
+            const spinElement = document.createElement('div');
+            spinElement.classList.add('spins-row-item');
+
+            spinElement.innerHTML = `
+            <span class="content-date">${formattedDate}</span>
+            <span class="content-prize">${spinName}</span>
+        `;
+
+            spinsContainer.appendChild(spinElement);
+        });
+    }
+
 
     // Cards slider
     const cardsContainer = document.querySelector('.prize__list'),

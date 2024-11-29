@@ -101,7 +101,7 @@
         .guide__wrap.btn-wrap
             a(href="#").guide__btn.btn #[span(data-translate="casinoBtn") Грати в казино]
             a(href="#").guide__btn.btn #[span(data-translate="sportBtn") Ставити на спорт]
-    .ball._sign
+    .ball._sign._lock
         .ball__title
             picture
                 source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/ball/title-mob.png")
@@ -195,6 +195,53 @@
         .ball__btn-wrap.btn-wrap
             a(href="#").games__btn.btn #[span(data-translate="casinoBtn") Грати в казино]
             a(href="#").games__btn.btn #[span(data-translate="sportBtn") Ставити на спорт]
+        .drop
+            details.dropdown
+                summary(data-translate="mySpins") мої прокрути
+                .drop-txt
+                    .drop-txt-list.my-spins
+                        .spins-row
+                            .spins-row-item
+                                .content-date(data-translate="mySpinsDate") Дата
+                                .content-prize(data-translate="mySpinsPrize") Приз
+                            .spins-row-item
+                                .content-date 18.03
+                                .content-prize EcoFlow RIVER 2
+                            .spins-row-item
+                                .content-date 18.03
+                                .content-prize EcoFlow RIVER 2
+                            .spins-row-item
+                                .content-date 18.03
+                                .content-prize EcoFlow RIVER 2
+                            .spins-row-item
+                                .content-date 18.03
+                                .content-prize EcoFlow RIVER 2
+                            .spins-row-item
+                                .content-date 18.03
+                                .content-prize EcoFlow RIVER 2
+                            .spins-row-item
+                                .content-date 18.03
+                                .content-prize EcoFlow RIVER 2
+                            .spins-row-item
+                                .content-date 18.03
+                                .content-prize EcoFlow RIVER 2
+                            .spins-row-item
+                                .content-date 18.03
+                                .content-prize EcoFlow RIVER 2
+                            .spins-row-item
+                                .content-date 18.03
+                                .content-prize EcoFlow RIVER 2
+                            .spins-row-item
+                                .content-date 18.03
+                                .content-prize EcoFlow RIVER 2
+                        .no-spins(data-translate="noSpins") Немає прокрутів
+        //.drop
+        //    .accordion__header #[span.accordion__header-text(data-translate="accordionMySpins")]
+        //    .accordion__content
+        //        .accordion__content-item.head-drop.hide(data-translate='spinsHeadPrize') #[span.content-date]
+        //        .accordion__content-item(data-translate="spinsNoSpin").no-spins
+        //        .accordion__content-wrap
+        //            .accordion__list
     .prize
         .prize__title
             picture
@@ -432,28 +479,6 @@
                                   iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
                                  Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
 
-    //.drop
-    //    details.dropdown
-    //        summary(data-translate="rulesTitle") Як набирати бали в турнірій таблиці
-    //        .drop-txt
-    //            .drop-txt-list(data-translate="rulesTxt")
-    //                p 1. Натисни кнопку «Взяти участь».
-    //                p Авторизуйся на акційній сторінці, натиснувши кнопку «Авторизуйся», або зареєструйся як користувач. Натисни кнопку «Взяти участь» на сторінці Акції.
-    //                p 2. Роби виграшні ставки на кіберспортивний турнір «Shanghai Major 2024» .
-    //                p.
-    //                    З 22 листопада до 15 грудня 2024 року роби виграшні ставки від 200 ₴ на
-    //                     кіберспортивний турнір «Shanghai Major 2024» у розділі «Кіберспорт» або «Live»
-    //                     та заробляй по 1 балу за кожні розраховані 200 ₴. Ставки повинні бути розраховані
-    //                     з результатом «Виграш» та з коефіцієнтом від 1.5 (ординар) або від 3.5 (експрес від 3 подій),
-    //                      без здійснення ставок з Бонусного балансу,
-
-    //.drop
-    //    .accordion__header #[span.accordion__header-text(data-translate="accordionMySpins")]
-    //    .accordion__content
-    //        .accordion__content-item.head-drop.hide(data-translate='spinsHeadPrize') #[span.content-date]
-    //        .accordion__content-item(data-translate="spinsNoSpin").no-spins
-    //        .accordion__content-wrap
-    //            .accordion__list
     .table
         .table__title
             picture
