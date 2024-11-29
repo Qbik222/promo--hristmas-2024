@@ -68,6 +68,32 @@ body
     cursor: pointer
 
 
+.btn-wrap
+  display: flex
+  align-items: center
+  gap: 10px
+  .btn
+    border-top: none
+    &:nth-child(2), &:nth-child(1)
+      span
+        display: inline-flex
+        align-items: center
+        gap: 8px
+        &::before
+          content: ""
+          display: block
+    &:nth-child(1)
+      span::before
+        width: 20px
+        height: 18px
+        background: url("../img/casino-btn-icon.png") no-repeat 0 0/contain
+    &:nth-child(2)
+      span::before
+        background: url("../img/sport-btn-icon.png") no-repeat 0 0/contain
+        width: 16px
+        height: 16px
+
+
 .info-btn
   color: $white
   font-size: 12px
@@ -424,7 +450,7 @@ body
   &__progress
     position: relative
     bottom: 50px
-  &._lock
+  &._lock, &._sign
     .progress
       &__shake
         border: 1px solid #5A5A5A
@@ -452,6 +478,13 @@ body
           background: url("../img/ball/progress/title-lock.png") no-repeat 0 0/cover
           background-size: 100% 100%
           animation: verticalFloat 1.4s linear infinite
+      &__bar
+        background: none
+  &._sign
+    .progress
+      &__title
+        &-lock
+          display: none
     .sphere
       background: none
       .snowCanvas
@@ -495,7 +528,7 @@ body
     opacity: .4
     transform: translate(-50%, -50%) rotate(0deg)
     z-index: 0
-    animation: rotate360center 20s linear infinite
+    animation: rotate360center 100s linear infinite
   &__body
     background: url("../img/ball/sphere/body.png") no-repeat 0 0/contain
     width: 333px
@@ -1475,3 +1508,7 @@ body
 
 //._boxFloat
 //  animation: boxFloat 1.4s ease-in-out infinite
+
+._sign
+  .btn-wrap
+    display: none

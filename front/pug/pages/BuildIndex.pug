@@ -1,4 +1,4 @@
-.fav-page
+.fav-page#ball
     .banner
         .banner__light
             picture
@@ -38,13 +38,15 @@
 
 
         a(href="#").banner__btn.btn #[span(data-translate="mainBtn") Взяти участь ]
+        a(href="/login/" data-translate="signBtn").banner__btn.btn.unauth-msg авторизуйся
+        a(href="/login/" data-translate="partBtn").banner__btn.btn.btn-join реєстрація
         .banner__date(data-translate="bannerDate") Період проведення акції - з 11.12.2024 до 25.12.2024.
         .banner__bottom(data-translate="bannerBottom").
             *Загальний призовий фонд Акції «Розтруси Сема на Різдво» складає 5 000 000 ₴
              електронних грошових замінників, 22 025  фріспінів та інших визначених
               Організатором фізичних призів. Період дії Акції з 11.12.2024 по 25.12.2024 року.
                Деталі акції на сайті favbet.ua
-    .guide
+    .guide._sign
         .guide__title
             picture
                 source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/guide/title-mob.png")
@@ -94,10 +96,12 @@
                         Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
                         Роби ставки в акційних іграх в розділі «Казино»,
                         став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
+        a(href="/login/" data-translate="signBtn").guide__btn.btn.unauth-msg авторизуйся
+        a(href="/login/" data-translate="partBtn").guide__btn.btn.btn-join реєстрація
         .guide__wrap.btn-wrap
             a(href="#").guide__btn.btn #[span(data-translate="casinoBtn") Грати в казино]
             a(href="#").guide__btn.btn #[span(data-translate="sportBtn") Ставити на спорт]
-    .ball
+    .ball._sign
         .ball__title
             picture
                 source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/ball/title-mob.png")
@@ -186,6 +190,11 @@
                     .progress__bar-point._active 30
                     .progress__bar-point 40
             .progress__shake #[span(data-translate="shakeBtn") трусити]
+        a(href="/login/" data-translate="signBtn").ball__sign.btn.unauth-msg авторизуйся
+        a(href="/login/" data-translate="partBtn").ball__sign.btn.btn-join реєстрація
+        .ball__btn-wrap.btn-wrap
+            a(href="#").games__btn.btn #[span(data-translate="casinoBtn") Грати в казино]
+            a(href="#").games__btn.btn #[span(data-translate="sportBtn") Ставити на спорт]
     .prize
         .prize__title
             picture
@@ -423,6 +432,28 @@
                                   iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
                                  Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
 
+    //.drop
+    //    details.dropdown
+    //        summary(data-translate="rulesTitle") Як набирати бали в турнірій таблиці
+    //        .drop-txt
+    //            .drop-txt-list(data-translate="rulesTxt")
+    //                p 1. Натисни кнопку «Взяти участь».
+    //                p Авторизуйся на акційній сторінці, натиснувши кнопку «Авторизуйся», або зареєструйся як користувач. Натисни кнопку «Взяти участь» на сторінці Акції.
+    //                p 2. Роби виграшні ставки на кіберспортивний турнір «Shanghai Major 2024» .
+    //                p.
+    //                    З 22 листопада до 15 грудня 2024 року роби виграшні ставки від 200 ₴ на
+    //                     кіберспортивний турнір «Shanghai Major 2024» у розділі «Кіберспорт» або «Live»
+    //                     та заробляй по 1 балу за кожні розраховані 200 ₴. Ставки повинні бути розраховані
+    //                     з результатом «Виграш» та з коефіцієнтом від 1.5 (ординар) або від 3.5 (експрес від 3 подій),
+    //                      без здійснення ставок з Бонусного балансу,
+
+    //.drop
+    //    .accordion__header #[span.accordion__header-text(data-translate="accordionMySpins")]
+    //    .accordion__content
+    //        .accordion__content-item.head-drop.hide(data-translate='spinsHeadPrize') #[span.content-date]
+    //        .accordion__content-item(data-translate="spinsNoSpin").no-spins
+    //        .accordion__content-wrap
+    //            .accordion__list
     .table
         .table__title
             picture
@@ -630,7 +661,7 @@
                             .table__popup-prize-item
                             .table__popup-prize-item
                             .table__popup-prize-item
-    .games
+    .games._sign
         .games__title
             picture
                 source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/games/title-mob.png")
@@ -660,6 +691,8 @@
                 img(src="./img/games/game1.png" alt="favbet")
             .games__list-item
                 img(src="./img/games/game1.png" alt="favbet")
+        a(href="/login/" data-translate="signBtn").games__btn.btn.unauth-msg авторизуйся
+        a(href="/login/" data-translate="partBtn").games__btn.btn.btn-join реєстрація
         .games__wrap.btn-wrap
             a(href="#").games__btn.btn #[span(data-translate="casinoBtn") Грати в казино]
             a(href="#").games__btn.btn #[span(data-translate="sportBtn") Ставити на спорт]

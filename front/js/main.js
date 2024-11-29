@@ -1,18 +1,170 @@
 (function () {
-    const hrLeng = document.querySelector('#hrLeng');
+    const apiURL = 'https://fav-prom.com/api_csgo'
+
+    const
+        unauthMsgs = document.querySelectorAll('.unauth-msg'),
+        participateBtns = document.querySelectorAll('.btn-join'),
+        mainPage = document.querySelector('.fav-page'),
+        ballWrap = document.querySelector(".ball"),
+        guideWrap = document.querySelector(".guide"),
+        gameWrap = document.querySelector(".games");
+
+    const ukLeng = document.querySelector('#ukLeng');
     const enLeng = document.querySelector('#enLeng');
 
-    let locale = 'en';
+    let locale = 'uk';
 
-    if (hrLeng) locale = 'hr';
+    if (ukLeng) locale = 'uk';
     if (enLeng) locale = 'en';
 
 
     let i18nData = {};
     const debug = true;
     // let userId;
-    let userId = 99432;
+    let userId = 100300268;
 
+
+    function loadTranslations() {
+        return fetch(`${apiURL}/translates/${locale}`).then(res => res.json())
+            .then(json => {
+                i18nData = json;
+                translate();
+
+                var mutationObserver = new MutationObserver(function (mutations) {
+                    translate();
+                });
+                mutationObserver.observe(document.getElementById('ball'), {
+                    childList: true,
+                    subtree: true,
+                });
+
+            });
+    }
+
+    function translate() {
+        const elems = document.querySelectorAll('[data-translate]')
+        if (elems && elems.length) {
+            // elems.forEach(elem => {
+            //     const key = elem.getAttribute('data-translate');
+            //     elem.innerHTML = i18nData[key] || '*----NEED TO BE TRANSLATED----*   key:  ' + key;
+            //     elem.removeAttribute('data-translate');
+            // })
+            console.log("translate working")
+        }
+        if (locale === 'en') {
+            mainPage.classList.add('en');
+        }
+        refreshLocalizedClass();
+    }
+    loadTranslations()
+        .then(init);
+    function refreshLocalizedClass(element, baseCssClass) {
+        if (!element) {
+            return;
+        }
+        for (const lang of ['hr', 'en']) {
+            element.classList.remove(baseCssClass + lang);
+        }
+        element.classList.add(baseCssClass + locale);
+    }
+
+
+    function init() {
+        if (window.store) {
+            var state = window.store.getState();
+            userId = state.auth.isAuthorized && state.auth.id || '';
+            setupPage();
+        } else {
+            setupPage();
+            let c = 0;
+            var i = setInterval(function () {
+                if (c < 50) {
+                    if (!!window.g_user_id) {
+                        userId = window.g_user_id;
+                        setupPage();
+                        checkUserAuth();
+                        clearInterval(i);
+                    }
+                } else {
+                    clearInterval(i);
+                }
+            }, 200);
+        }
+
+        checkUserAuth();
+
+        participateBtns.forEach((authBtn, i) => {
+            authBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                participate();
+            });
+        });
+    }
+
+    function setupPage() {}
+    function participate() {
+        if (!userId) {
+            return;
+        }
+
+        const params = {userid: userId};
+        request('/user', {
+            method: 'POST',
+            body: JSON.stringify(params)
+        }).then(res => {
+            participateBtns.forEach(item => item.classList.add('hide'));
+            ballWrap.classList.remove('_sign');
+            setupPage();
+        });
+    }
+
+    const request = function (link, extraOptions) {
+        return fetch(apiURL + link, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            ...(extraOptions || {})
+        }).then(res => res.json())
+    }
+
+    function checkUserAuth() {
+        if (userId) {
+            for (const unauthMes of unauthMsgs) {
+                unauthMes.classList.add('hide');
+            }
+            request(`/favuser/${userId}?nocache=1`)
+                .then(res => {
+                    // res.userid = userId
+                    console.log(res)
+                    if (res.userid) {
+                        participateBtns.forEach(item => item.classList.add('hide'));
+                        ballWrap.classList.remove('_sign');
+                        guideWrap.classList.remove('_sign');
+                        gameWrap.classList.remove('_sign');
+                        document.querySelector(".banner__btn").classList.remove("hide")
+                        document.querySelector(".progress").classList.remove("_sign");
+                        if (debug) {
+                            res.pointsPerDay = 30;
+                            res.spinAllowed = true;
+                            res.spinsStreak = 3;
+                        }
+                        // refreshUserInfo(res);
+                        // displayUserSpins(res.spins);
+                    } else {
+                        participateBtns.forEach(item => item.classList.remove('hide'));
+                    }
+                })
+        } else {
+            document.querySelector(".banner__btn").classList.add("hide")
+            for (let participateBtn of participateBtns) {
+                participateBtn.classList.add('hide');
+            }
+            for (const unauthMes of unauthMsgs) {
+                unauthMes.classList.remove('hide');
+            }
+        }
+    }
 
     // Cards slider
     const cardsContainer = document.querySelector('.prize__list'),
@@ -108,150 +260,6 @@
         firstLastSlides()
         hidePopups(cards)
     };
-
-//     const cardsContainer = document.querySelector('.prize__list'),
-//         cards = document.querySelectorAll('.prize__list-item'),
-//         cardsWrap = document.querySelector('.prize__list-scroll'),
-//         moveRightButton = document.querySelector('.prize__slider-move-right'),
-//         moveLeftButton = document.querySelector('.prize__slider-move-left'),
-//         tabsContainer = document.querySelector('.prize__tabs'),
-//         isMobile = window.innerWidth < 600,
-//         totalCards = cards.length,
-//         cardWidth = cards[0].clientWidth,
-//         cardsMargin = (cardsWrap.clientWidth - cardWidth * totalCards) / (totalCards - 1),
-//         visibleSlides = isMobile ? 1 : Math.ceil(cardsContainer.clientWidth / (cardWidth + cardsMargin)),
-//         totalTabs = Math.ceil(totalCards / visibleSlides),
-//         tabWidth= visibleSlides * (cardWidth + cardsMargin)
-//
-//     let currentSlide = 1;
-//     let currentTab = 1;
-//     let cardsPosition = 0;
-//     let leftSlide;
-//     let rightSlide;
-//     console.log(totalTabs)
-//
-// // Створення табів
-//     for (let i = 1; i <= totalTabs; i++) {
-//         const tab = document.createElement('div');
-//         tab.classList.add('prize__tabs-item');
-//         tabsContainer.appendChild(tab);
-//     }
-//
-//     function leftSlideTab(){
-//         leftSlide = currentTab * visibleSlides - (visibleSlides - 1)
-//     }
-//     function rightSlideTab(){
-//         rightSlide = currentTab * visibleSlides
-//     }
-//
-//     function firstLastSlides(){
-//         if(isMobile) return
-//         leftSlideTab()
-//         rightSlideTab()
-//         cards.forEach((card , i) =>{
-//             i + 1 === leftSlide ? card.classList.add("_left") : card.classList.remove("_left")
-//             i + 1 === rightSlide ? card.classList.add("_right") : card.classList.remove("_right")
-//         })
-//     }
-//     firstLastSlides()
-//
-//     const updateActiveCard = (cards, activeIndex) => {
-//         cards.forEach((card, i) => {
-//             activeIndex - 1 === i ? card.classList.add("_active") : card.classList.remove("_active");
-//         });
-//     };
-//     updateActiveCard(cards, currentSlide);
-//
-//     const updateTabs = () => {
-//         if(isMobile){
-//             const activeTab = Math.ceil(currentSlide / visibleSlides);
-//             tabsContainer.childNodes.forEach((tab, index) => {
-//                 tab.classList.toggle('_active', index + 1 === activeTab);
-//             });
-//         }else{
-//             tabsContainer.childNodes.forEach((tab, index) => {
-//                 tab.classList.remove("_active")
-//                 console.log(currentTab, index)
-//                 index + 1 === currentTab ? tab.classList.add("_active") : null
-//             });
-//         }
-//
-//
-//     };
-//     updateTabs();
-//
-//     function setCardsPosition(position) {
-//         cardsWrap.style.transform = `translateX(-${position}px)`;
-//     };
-//
-//     const moveRight = () => {
-//         if (isMobile) {
-//             // Мобільна логіка
-//             if (currentSlide >= totalCards) {
-//                 currentSlide = 1;
-//                 cardsPosition = 0;
-//             } else {
-//                 cardsPosition += cardWidth + cardsMargin;
-//                 currentSlide++;
-//             }
-//         }
-//         else {
-//             if(currentTab === totalTabs){
-//                 cardsPosition = 0
-//                 currentTab = 1
-//             }else{
-//                 cardsPosition += tabWidth
-//                 ++currentTab
-//             }
-//         }
-//
-//         setCardsPosition(cardsPosition);
-//         updateTabs();
-//         updateActiveCard(cards, currentSlide);
-//             firstLastSlides()
-//         hidePopups(cards)
-
-//
-//     };
-//
-
-
-    // const moveLeft = () => {
-    //     if (isMobile) {
-    //         // Мобільна логіка
-    //         if (currentSlide === 1) {
-    //             currentSlide = totalCards;
-    //             cardsPosition = (totalCards - 1) * (cardWidth + cardsMargin);
-    //         }else if(currentSlide === 2){
-    //             currentSlide = 1;
-    //             cardsPosition = 0
-    //         }
-    //         else {
-    //             cardsPosition -= cardWidth + cardsMargin;
-    //             currentSlide--;
-    //         }
-    //     } else {
-    //
-    //         if(currentTab === 1){
-    //             currentTab = totalTabs
-    //             cardsPosition = (currentTab * tabWidth) - tabWidth
-    //         }else if(currentTab === 2){
-    //             cardsPosition = 0
-    //             currentTab = 1
-    //         }
-    //         else {
-    //             cardsPosition -= tabWidth
-    //             --currentTab
-    //
-    //         }
-    //
-    //     }
-    //     setCardsPosition(cardsPosition);
-    //     updateTabs();
-    //     firstLastSlides()
-    //     updateActiveCard(cards, currentSlide);
-    //     hidePopups(cards)
-    // };
 
     // popups logic
 
