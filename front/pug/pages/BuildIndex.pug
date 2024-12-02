@@ -1,4 +1,6 @@
-.fav-page#ball
+button.dark-btn dark
+button.en-btn en
+.fav-page#ball.en
     .banner
         .banner__light
             picture
@@ -8,12 +10,18 @@
                 source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/banner/light-desc.png")
                 img(src="img/banner/light-desc.png" alt="Favbet")
         .banner__title
-            picture
+            picture.uk
                 source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/banner/title-mob.png")
                 source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/banner/title-mob.png")
                 source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/banner/title-desc.png")
                 source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/banner/title-desc.png")
                 img(src="img/banner/title-desc.png" alt="Favbet")
+            picture.en
+                source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/banner/en/title-mob.png")
+                source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/banner/en/title-mob.png")
+                source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/banner/en/title-desc.png")
+                source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/banner/en/title-desc.png")
+                img(src="img/banner/en/title-desc.png" alt="Favbet")
         .banner__pers.sky
             picture.banner__pers-img
                 source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/banner/pers-mob.png")
@@ -22,12 +30,18 @@
                 source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/banner/pers-desc.png")
                 img(src="img/banner/pers-desc.png" alt="Favbet")
             .banner__ball
-                picture
+                picture.uk
                     source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/banner/ball-tab.png")
                     source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/banner/ball-tab.png")
                     source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/banner/ball-desc.png")
                     source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/banner/ball-desc.png")
                     img(src="img/banner/ball-desc.png" alt="Favbet")
+                picture.en
+                    source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/banner/en/ball-tab.png")
+                    source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/banner/en/ball-tab.png")
+                    source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/banner/en/ball-desc.png")
+                    source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/banner/en/ball-desc.png")
+                    img(src="img/banner/en/ball-desc.png" alt="Favbet")
             .banner__gift
                 picture
                     source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/banner/gift-mob.png")
@@ -37,23 +51,29 @@
                     img(src="img/banner/gift-desc.png" alt="Favbet")
 
 
-        a(href="#").banner__btn.btn #[span(data-translate="mainBtn") Взяти участь ]
-        a(href="/login/" data-translate="signBtn").banner__btn.btn.unauth-msg авторизуйся
-        a(href="/login/" data-translate="partBtn").banner__btn.btn.btn-join реєстрація
+        a(href="#").banner__btn.btn  #[span.flare-container #[span.flare]] #[span(data-translate="mainBtn") Взяти участь  ]
+        a(href="/login/").banner__btn.btn.unauth-msg #[span.flare-container #[span.flare]]  #[span(data-translate="signBtn") авторизуйся]
+        a(href="/login/").banner__btn.btn.btn-join #[span.flare-container #[span.flare]] [span(data-translate="partBtn") реєстрація]
         .banner__date(data-translate="bannerDate") Період проведення акції - з 11.12.2024 до 25.12.2024.
         .banner__bottom(data-translate="bannerBottom").
             *Загальний призовий фонд Акції «Розтруси Сема на Різдво» складає 5 000 000 ₴
-             електронних грошових замінників, 22 025  фріспінів та інших визначених
+             електронних грошових замінників, 22 025  фріспінів та інших визначених
               Організатором фізичних призів. Період дії Акції з 11.12.2024 по 25.12.2024 року.
                Деталі акції на сайті favbet.ua
     .guide._sign
         .guide__title
-            picture
+            picture.uk
                 source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/guide/title-mob.png")
                 source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/guide/title-mob.png")
                 source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/guide/title-desc.png")
                 source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/guide/title-desc.png")
                 img(src="img/guide/title-desc.png" alt="Favbet")
+            picture.en
+                source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/guide/en/title-mob.png")
+                source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/guide/en/title-mob.png")
+                source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/guide/en/title-desc.png")
+                source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/guide/en/title-desc.png")
+                img(src="img/guide/en/title-desc.png" alt="Favbet")
         .guide__subtitle(data-translate="guideSubtitle").
             Протягом 2 тижнів бери участь в акції «Новорічне промо» від FAVBET та
             отримуй можливість виграти частину з призового фонду в 5 000 000 гривень,
@@ -69,9 +89,12 @@
                .guide__item-popup
                     .guide__item-popup-close.info-btn(data-translate="popupBtnCLose") закрити
                     .guide__item-popup-text(data-translate="guidePopup1").
-                        Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
-                        Роби ставки в акційних іграх в розділі «Казино»,
-                        став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
+                        Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
+                        Роби ставки в акційних іграх в розділі «Казино»,
+                        став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
+                        Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
+                        Роби ставки в акційних іграх в розділі «Казино»,
+                        став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
             .guide__item
                .guide__item-num
                .guide__item-info
@@ -81,9 +104,12 @@
                .guide__item-popup
                     .guide__item-popup-close.info-btn(data-translate="popupBtnCLose") закрити
                     .guide__item-popup-text(data-translate="guidePopup2").
-                        Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
-                        Роби ставки в акційних іграх в розділі «Казино»,
-                        став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
+                        Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
+                        Роби ставки в акційних іграх в розділі «Казино»,
+                        став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
+                        Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
+                        Роби ставки в акційних іграх в розділі «Казино»,
+                        став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
             .guide__item
                .guide__item-num
                .guide__item-info
@@ -93,28 +119,37 @@
                .guide__item-popup
                     .guide__item-popup-close.info-btn(data-translate="popupBtnCLose")  закрити
                     .guide__item-popup-text(data-translate="guidePopup3").
-                        Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
-                        Роби ставки в акційних іграх в розділі «Казино»,
-                        став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
-        a(href="/login/" data-translate="signBtn").guide__btn.btn.unauth-msg авторизуйся
-        a(href="/login/" data-translate="partBtn").guide__btn.btn.btn-join реєстрація
+                        Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
+                        Роби ставки в акційних іграх в розділі «Казино»,
+                        став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
+                        Натисни кнопку «Взяти участь» один раз та грай у 2-х турнірах Акції. 
+                        Роби ставки в акційних іграх в розділі «Казино»,
+                        став на спортивні події у розділах «Спорт», «LIVE» та «Кіберспорт»
+        a(href="/login/").guide__btn.btn.unauth-msg #[span.flare-container #[span.flare]]  #[span(data-translate="signBtn") авторизуйся]
+        a(href="/login/").guide__btn.btn.btn-join #[span.flare-container #[span.flare]] [span(data-translate="partBtn") реєстрація]
         .guide__wrap.btn-wrap
-            a(href="#").guide__btn.btn #[span(data-translate="casinoBtn") Грати в казино]
-            a(href="#").guide__btn.btn #[span(data-translate="sportBtn") Ставити на спорт]
-    .ball._sign._lock
+            a(href="#").guide__btn.btn #[span(data-translate="casinoBtn") #[span.flare-container #[span.flare]] грати в казино]
+            a(href="#").guide__btn.btn #[span(data-translate="sportBtn") #[span.flare-container #[span.flare]] Ставити на спорт]
+    .ball._sign
         .ball__title
-            picture
+            picture.uk
                 source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/ball/title-mob.png")
                 source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/ball/title-mob.png")
                 source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/ball/title-desc.png")
                 source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/ball/title-desc.png")
                 img(src="img/ball/title-desc.png" alt="Favbet")
+            picture.en
+                source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/ball/en/title-mob.png")
+                source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/ball/en/title-mob.png")
+                source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/ball/en/title-desc.png")
+                source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/ball/en/title-desc.png")
+                img(src="img/ball/en/title-desc.png" alt="Favbet")
         .ball__subtitle(data-translate='ballSubtitle') Щодня отримуй можливість потрусити Кулю Сема та виграти приз.
         .ball__wrap
             .ball__pers
                 picture
                     source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/ball/pers-tab.png")
-                    source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/ball/pers-desc.png")
+                    source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/ball/pers-tab.png")
                     source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/ball/pers-desc.png")
                     img(src="img/ball/pers-desc.png" alt="Favbet")
             .sphere.ball__sphere
@@ -135,7 +170,7 @@
                         .sphere__win-desc-nothing(data-translate="winNothing") Завтра пощастить
                         .sphere__win-desc-respin(data-translate="winRespin") Додатковий протрус в кулі Сема
                         .sphere__win-desc-points50(data-translate="winPoints50") Додаткові 50 ігрових <br> балів в турнірну таблицю
-                        .sphere__win-desc-fs10(data-translate="winFs10") 10 FS 3 oaks у грі Sun of Egypt 3
+                        .sphere__win-desc-fs10(data-translate="winFs10") 10 FS 3 oaks у грі Sun of Egypt 3
                         .sphere__win-desc-fs25(data-translate="winFs25") 25 FS Playson у грі Jingle <br> Coins: Hold and Win
                         .sphere__win-desc-fs50(data-translate="winFs50") 50 FS Pragmatic у грі Sweet <br> Bonanza Xmas
                         .sphere__win-desc-saveBet100(data-translate="winSaveBet100") Персональний бонус <br> «Страховка ставки» до 100 ₴
@@ -178,9 +213,15 @@
                     .progress__title-item 50/50 балів
                     .progress__title-lock(data-translate="progressTitleLock") Набери більше балів щоб трусити кулю.
                 .progress__popup-btn.info-btn(data-translate="popupBtn") Детальніше
-                .progress__popup
-                    .progress__popup-close
-                    .progress__popup-text
+                .progress__popup.hide
+                    .progress__popup-close.info-btn Закрити
+                    .progress__popup-text.
+                        Phone 16 Pro Max  —  це  найпотужніший і найбільший смартфон Apple. 
+                        Смартфон оснащений 6,9-дюймовим  LTPO Super Retina XDR OLED дисплеєм з  адаптивною частотою оновлення до  120 
+                        Гц. Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер. Смартфон підтримує стандарт 
+                        Thunderbolt 4 через  USB-C  роз’єм, що  прискорює передачу даних і зарядку. Корпус виготовлено з  титану  5-го  класу, 
+                        що  робить його легшим, але дуже міцним. iPhone 16 Pro Max також підтримує  Wi-Fi  7, забезпечуючи ще  більш швидкі з’єднання.
+                         Акумулятор став ще  більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
             .progress__bar
                 .progress__bar-body
                     .progress__bar-thumb
@@ -190,11 +231,11 @@
                     .progress__bar-point._active 30
                     .progress__bar-point 40
             .progress__shake #[span(data-translate="shakeBtn") трусити]
-        a(href="/login/" data-translate="signBtn").ball__sign.btn.unauth-msg авторизуйся
-        a(href="/login/" data-translate="partBtn").ball__sign.btn.btn-join реєстрація
+        a(href="/login/").ball__sign.btn.unauth-msg #[span.flare-container #[span.flare]]  #[span(data-translate="signBtn") авторизуйся]
+        a(href="/login/").ball__sign.btn.btn-join #[span.flare-container #[span.flare]] [span(data-translate="partBtn") реєстрація]
         .ball__btn-wrap.btn-wrap
-            a(href="#").games__btn.btn #[span(data-translate="casinoBtn") Грати в казино]
-            a(href="#").games__btn.btn #[span(data-translate="sportBtn") Ставити на спорт]
+            a(href="#").games__btn.btn #[span(data-translate="casinoBtn") #[span.flare-container #[span.flare]] грати в казино]
+            a(href="#").games__btn.btn #[span(data-translate="sportBtn") #[span.flare-container #[span.flare]] Ставити на спорт]
         .drop
             details.dropdown
                 summary(data-translate="mySpins") мої прокрути
@@ -235,21 +276,20 @@
                                 .content-date 18.03
                                 .content-prize EcoFlow RIVER 2
                         .no-spins(data-translate="noSpins") Немає прокрутів
-        //.drop
-        //    .accordion__header #[span.accordion__header-text(data-translate="accordionMySpins")]
-        //    .accordion__content
-        //        .accordion__content-item.head-drop.hide(data-translate='spinsHeadPrize') #[span.content-date]
-        //        .accordion__content-item(data-translate="spinsNoSpin").no-spins
-        //        .accordion__content-wrap
-        //            .accordion__list
     .prize
         .prize__title
-            picture
+            picture.uk
                 source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/prize/title-mob.png")
                 source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/prize/title-mob.png")
                 source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/prize/title-desc.png")
                 source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/prize/title-desc.png")
                 img(src="img/prize/title-desc.png" alt="Favbet")
+            picture.en
+                source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/prize/en/title-mob.png")
+                source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/prize/en/title-mob.png")
+                source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/prize/en/title-desc.png")
+                source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/prize/en/title-desc.png")
+                img(src="img/prize/en/title-desc.png" alt="Favbet")
         .prize__slider
             .prize__slider-move
                 .prize__slider-move-left
@@ -266,13 +306,13 @@
                         .prize__list-popup
                             .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
                             .prize__list-popup-text(data-translate="prizePopup1").
-                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
-                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
-                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
-                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
-                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
-                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -283,13 +323,13 @@
                         .prize__list-popup
                             .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
                             .prize__list-popup-text(data-translate="prizePopup2").
-                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
-                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
-                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
-                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
-                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
-                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -300,13 +340,13 @@
                         .prize__list-popup
                             .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
                             .prize__list-popup-text(data-translate="prizePopup3").
-                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
-                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
-                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
-                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
-                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
-                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -317,13 +357,13 @@
                         .prize__list-popup
                             .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
                             .prize__list-popup-text(data-translate="prizePopup4").
-                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
-                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
-                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
-                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
-                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
-                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -334,13 +374,13 @@
                         .prize__list-popup
                             .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
                             .prize__list-popup-text(data-translate="prizePopup5").
-                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
-                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
-                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
-                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
-                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
-                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -351,30 +391,30 @@
                         .prize__list-popup
                             .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
                             .prize__list-popup-text(data-translate="prizePopup6").
-                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
-                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
-                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
-                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
-                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
-                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
-                        .prize__list-item-title(data-translate="prizeFs10") 10 FS 3 oaks у грі Sun of Egypt 3
+                        .prize__list-item-title(data-translate="prizeFs10") 10 FS 3 oaks у грі Sun of Egypt 3
                         .prize__list-item-img
                             img(src="./img/ball/sphere/fs10.png" alt="favbet")
                         .prize__list-item-decor
                         .prize__list-popup
                             .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
                             .prize__list-popup-text(data-translate="prizePopup7").
-                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
-                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
-                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
-                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
-                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
-                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -385,13 +425,13 @@
                         .prize__list-popup
                             .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
                             .prize__list-popup-text(data-translate="prizePopup8").
-                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
-                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
-                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
-                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
-                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
-                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -402,13 +442,13 @@
                         .prize__list-popup
                             .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
                             .prize__list-popup-text(data-translate="prizePopup9").
-                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
-                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
-                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
-                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
-                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
-                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -419,13 +459,13 @@
                         .prize__list-popup
                             .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
                             .prize__list-popup-text(data-translate="prizePopup10").
-                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
-                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
-                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
-                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
-                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
-                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -436,13 +476,13 @@
                         .prize__list-popup
                             .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
                             .prize__list-popup-text(data-translate="prizePopup11").
-                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
-                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
-                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
-                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
-                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
-                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
                     .prize__list-item
                         .prize__list-item-snow
                         .prize__list-item-btn
@@ -453,13 +493,13 @@
                         .prize__list-popup
                             .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
                             .prize__list-popup-text(data-translate="prizePopup12").
-                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
-                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
-                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
-                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
-                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
-                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
 
                     .prize__list-item
                         .prize__list-item-snow
@@ -471,22 +511,28 @@
                         .prize__list-popup
                             .prize__list-popup-close.info-btn(data-translate="closeBtn") Закрити
                             .prize__list-popup-text(data-translate="prizePopup13").
-                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
-                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
+                                Phone 16 Pro Max — це найпотужніший і найбільший смартфон Apple. Смартфон оснащений
+                                6,9-дюймовим LTPO Super Retina XDR OLED дисплеєм з адаптивною частотою оновлення до 120 Гц.
                                  Процесор Apple A18 Pro (3 нм). iPhone 16 Pro Max оснащений вдосконаленою системою камер.
-                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
-                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
-                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
-                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
+                                  Смартфон підтримує стандарт Thunderbolt 4 через USB-C роз’єм, що прискорює передачу даних і зарядку.
+                                  Корпус виготовлено з титану 5-го класу, що робить його легшим, але дуже міцним.
+                                  iPhone 16 Pro Max також підтримує Wi-Fi 7, забезпечуючи ще більш швидкі з’єднання.
+                                 Акумулятор став ще більш витривалим, гарантуючи тривалий час автономної роботи без частої підзарядки.
 
     .table
         .table__title
-            picture
+            picture.uk
                 source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/table/title-mob.png")
                 source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/table/title-mob.png")
                 source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/table/title-desc.png")
                 source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/table/title-desc.png")
                 img(src="img/table/title-desc.png" alt="Favbet")
+            picture.en
+                source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/table/en/title-mob.png")
+                source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/table/en/title-mob.png")
+                source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/table/en/title-desc.png")
+                source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/table/en/title-desc.png")
+                img(src="img/table/en/title-desc.png" alt="Favbet")
         .table__subtitle Встигни потрапити в лідери Турнірної таблиці та змагайся за призи
         .table__wrap
             .table__btns
@@ -501,19 +547,19 @@
                 .table__head-item(data-translate="tablePrize") Приз
                 .table__head-item(data-translate="tableWager") Wager
             .table__body._active
-                .table__body-row
+                .table__body-row.gold
                     .table__body-row-item 1
                     .table__body-row-item 23334
                     .table__body-row-item 12003
                     .table__body-row-item 50 000 ЕГЗ*
                     .table__body-row-item 1x
-                .table__body-row
+                .table__body-row.silver
                     .table__body-row-item 2
                     .table__body-row-item 23334
                     .table__body-row-item 3242
                     .table__body-row-item 50 000 ЕГЗ*
                     .table__body-row-item 2x
-                .table__body-row
+                .table__body-row.bronze
                     .table__body-row-item 3
                     .table__body-row-item 23334
                     .table__body-row-item 234
@@ -562,19 +608,19 @@
                     .table__body-row-item 50 000 ЕГЗ*
                     .table__body-row-item 3x
             .table__body
-                .table__body-row
+                .table__body-row.gold
                     .table__body-row-item 1
                     .table__body-row-item 23334
                     .table__body-row-item 12003
                     .table__body-row-item 50 000 ЕГЗ*
                     .table__body-row-item 1x
-                .table__body-row
+                .table__body-row.silver
                     .table__body-row-item 2
                     .table__body-row-item 23334
                     .table__body-row-item 3242
                     .table__body-row-item 50 000 ЕГЗ*
                     .table__body-row-item 2x
-                .table__body-row
+                .table__body-row.bronze
                     .table__body-row-item 3
                     .table__body-row-item 23334
                     .table__body-row-item 234
@@ -629,7 +675,7 @@
                     .table__body-row-item 12003
                     .table__body-row-item 50 000 ЕГЗ*
                     .table__body-row-item 1x
-                .table__body-row
+                .table__body-row.you
                     .table__body-row-item.you 25
                     .table__body-row-item 23334
                     .table__body-row-item 3242
@@ -663,64 +709,91 @@
                     .table__popup-scroll
                         .table__popup-place
                             .table__popup-place-item(data-translate="tablePlace") Місце
-                            .table__popup-place-item
-                            .table__popup-place-item
-                            .table__popup-place-item
-                            .table__popup-place-item
-                            .table__popup-place-item
-                            .table__popup-place-item
-                            .table__popup-place-item
-                            .table__popup-place-item
-                            .table__popup-place-item
-                            .table__popup-place-item
-                            .table__popup-place-item
+                            .table__popup-place-item 1
+                            .table__popup-place-item 2
+                            .table__popup-place-item 3
+                            .table__popup-place-item 4
+                            .table__popup-place-item 5
+                            .table__popup-place-item 6-10
+                            .table__popup-place-item 11-30
+                            .table__popup-place-item 31-50
+                            .table__popup-place-item 51-100
+                            .table__popup-place-item 101-200
+                            .table__popup-place-item 201-300
                         .table__popup-prize
                             .table__popup-prize-item(data-translate="tablePrize") Приз
-                            .table__popup-prize-item
-                            .table__popup-prize-item
-                            .table__popup-prize-item
-                            .table__popup-prize-item
-                            .table__popup-prize-item
-                            .table__popup-prize-item
-                            .table__popup-prize-item
-                            .table__popup-prize-item
-                            .table__popup-prize-item
-                            .table__popup-prize-item
+                            .table__popup-prize-item 400 000,00
+                            .table__popup-prize-item 250 000,00
+                            .table__popup-prize-item 150 000,00
+                            .table__popup-prize-item 70 000,00
+                            .table__popup-prize-item 50 000,00
+                            .table__popup-prize-item 20 000,00
+                            .table__popup-prize-item 12 000,00
+                            .table__popup-prize-item 8 000,00
+                            .table__popup-prize-item 5 000,00
+                            .table__popup-prize-item 2 300,00
+                            .table__popup-prize-item 1 000,00
     .games._sign
+        .sky
         .games__title
-            picture
+            picture.uk
                 source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/games/title-mob.png")
                 source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/games/title-mob.png")
                 source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/games/title-desc.png")
                 source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/games/title-desc.png")
                 img(src="img/games/title-desc.png" alt="Favbet")
-
+            picture.en
+                source(media="(max-width: 600px) and (orientation: portrait)" srcset="img/games/en/title-mob.png")
+                source(media="(max-width: 950px) and (orientation: landscape) and (max-height: 450px)" srcset="img/games/en/title-mob.png")
+                source(media="(min-width: 601px) and (max-width: 1300px) and (orientation: portrait)" srcset="img/games/en/title-desc.png")
+                source(media="(min-width: 601px) and (orientation: landscape)" srcset="img/games/en/title-desc.png")
+                img(src="img/games/en/title-desc.png" alt="Favbet")
         .games__list
             .games__list-item
+                .games__list-wrap
+                    a(href="#").games__list-wrap-btn.btn #[span.flare-container #[span.flare]]  #[span(data-translate="gamesBtn") грати ]
                 img(src="./img/games/game1.png" alt="favbet")
             .games__list-item
-                img(src="./img/games/game1.png" alt="favbet")
+                .games__list-wrap
+                    a(href="#").games__list-wrap-btn.btn #[span.flare-container #[span.flare]]  #[span(data-translate="gamesBtn") грати ]
+                img(src="./img/games/game2.png" alt="favbet")
             .games__list-item
-                img(src="./img/games/game1.png" alt="favbet")
+                .games__list-wrap
+                    a(href="#").games__list-wrap-btn.btn #[span.flare-container #[span.flare]]  #[span(data-translate="gamesBtn") грати ]
+                img(src="./img/games/game3.png" alt="favbet")
             .games__list-item
-                img(src="./img/games/game1.png" alt="favbet")
+                .games__list-wrap
+                    a(href="#").games__list-wrap-btn.btn #[span.flare-container #[span.flare]]  #[span(data-translate="gamesBtn") грати ]
+                img(src="./img/games/game4.png" alt="favbet")
             .games__list-item
-                img(src="./img/games/game1.png" alt="favbet")
+                .games__list-wrap
+                    a(href="#").games__list-wrap-btn.btn #[span.flare-container #[span.flare]]  #[span(data-translate="gamesBtn") грати ]
+                img(src="./img/games/game5.png" alt="favbet")
             .games__list-item
-                img(src="./img/games/game1.png" alt="favbet")
+                .games__list-wrap
+                    a(href="#").games__list-wrap-btn.btn #[span.flare-container #[span.flare]]  #[span(data-translate="gamesBtn") грати ]
+                img(src="./img/games/game6.png" alt="favbet")
             .games__list-item
-                img(src="./img/games/game1.png" alt="favbet")
+                .games__list-wrap
+                    a(href="#").games__list-wrap-btn.btn #[span.flare-container #[span.flare]]  #[span(data-translate="gamesBtn") грати ]
+                img(src="./img/games/game7.png" alt="favbet")
             .games__list-item
-                img(src="./img/games/game1.png" alt="favbet")
+                .games__list-wrap
+                    a(href="#").games__list-wrap-btn.btn #[span.flare-container #[span.flare]]  #[span(data-translate="gamesBtn") грати ]
+                img(src="./img/games/game8.png" alt="favbet")
             .games__list-item
-                img(src="./img/games/game1.png" alt="favbet")
+                .games__list-wrap
+                    a(href="#").games__list-wrap-btn.btn #[span.flare-container #[span.flare]]  #[span(data-translate="gamesBtn") грати ]
+                img(src="./img/games/game9.png" alt="favbet")
             .games__list-item
-                img(src="./img/games/game1.png" alt="favbet")
-        a(href="/login/" data-translate="signBtn").games__btn.btn.unauth-msg авторизуйся
-        a(href="/login/" data-translate="partBtn").games__btn.btn.btn-join реєстрація
+                .games__list-wrap
+                    a(href="#").games__list-wrap-btn.btn #[span.flare-container #[span.flare]]  #[span(data-translate="gamesBtn") грати ]
+                img(src="./img/games/game10.png" alt="favbet")
+        a(href="/login/").games__btn.btn.unauth-msg #[span.flare-container #[span.flare]] #[span(data-translate="signBtn") авторизуйся]
+        a(href="/login/" ).games__btn.btn.btn-join #[span.flare-container #[span.flare]] #[span(data-translate="partBtn") [span(data-translate="partBtn") реєстрація]]
         .games__wrap.btn-wrap
-            a(href="#").games__btn.btn #[span(data-translate="casinoBtn") Грати в казино]
-            a(href="#").games__btn.btn #[span(data-translate="sportBtn") Ставити на спорт]
+            a(href="#").games__btn.btn #[span.flare-container #[span.flare]] #[span(data-translate="casinoBtn")  Грати в казино]
+            a(href="#").games__btn.btn #[span.flare-container #[span.flare]] #[span(data-translate="sportBtn") Ставити на спорт]
     .drop
         details.dropdown
             summary(data-translate="rulesTitle") Як набирати бали в турнірій таблиці

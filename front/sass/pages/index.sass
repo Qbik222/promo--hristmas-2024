@@ -7,13 +7,25 @@ $green: #05C48A
 $green-light: #00FFB2
 $green-dark: #006B4B
 $black: #000000
+$dark-theme: #12131C
 $grey: #E3E3E3
-$title-box-shadow: 0px 0px 20px 61px rgba(11, 100, 224, 0.1) inset, 0px 0px 70px 51px rgba(11, 100, 224, 0.1)
+//$title-box-shadow: 0px 0px 20px 61px rgba(11, 100, 224, 0.1) inset, 0px 0px 70px 51px rgba(11, 100, 224, 0.1)
 
 $font-suisse-intl-reg: SuisseIntl-Regular, sans-serif
 $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
-$font-legal: DINPro-CondLight, sans-serif
-$font-riffic-bold: Riffic-Bold, sans-serif
+//$font-legal: DINPro-CondLight, sans-serif
+//$font-riffic-bold: Riffic-Bold, sans-serif
+
+.dark-btn, .en-btn
+  position: fixed
+  z-index: 20
+  left: 0
+  top: 0
+  width: 50px
+  height: 20px
+
+.en-btn
+  top: 25px
 
 body.light
   background: $dark-blue-bg
@@ -42,6 +54,28 @@ body
   border-radius: 48px
   box-shadow: 0px 3px 0px 0px #003525, 0px 0px 40px 0px #02DD65
   position: relative
+  .flare
+    position: absolute
+    top: 0
+    height: 100%
+    transform: skewX(-45deg)
+    width: 45px
+    left: -100%
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.4))
+    animation: flareAnimation 3s infinite linear
+    &::before, &::after
+      content: none
+    &-container
+      position: absolute
+      top: 0
+      left: 0
+      height: 100%
+      width: 94%
+      overflow: hidden
+      border-radius: 40px
+      background: transparent
+      &::before, &::after
+        content: none
   span
     font-family: inherit
     color: inherit
@@ -73,9 +107,18 @@ body
   display: flex
   align-items: center
   gap: 10px
+  flex-wrap: wrap
+  justify-content: center
   .btn
     border-top: none
+    min-width: 332px
     &:nth-child(2), &:nth-child(1)
+      .flare
+        &::before, &::after
+          content: none
+        &-container
+          &::before, &::after
+            content: none
       span
         display: inline-flex
         align-items: center
@@ -174,6 +217,11 @@ body
     transform: translate(-50%, 50%)
     background: url("../img/banner/banner-bottom-desc.png") repeat 0 0/cover
     z-index: 0
+    @media screen and (max-width: 600px)
+      background: url("../img/banner/banner-bottom-mob.png") repeat 0 0/cover
+      width: 630px
+      height: 225px
+      transform: translate(-50%, 0%)
   &__light, &__title, &__pers, &__gift, &__ball
     transform: translate(-50%, 0)
     position: absolute
@@ -225,7 +273,8 @@ body
     max-width: 860px
     font-family: $font-suisse-intl-reg
     margin-top: 16px
-    z-index: 1
+    z-index: 3
+    padding: 0 10px
 .guide
   display: flex
   flex-direction: column
@@ -233,6 +282,12 @@ body
   padding: 35px 0 0 0
   z-index: 1
   position: relative
+  &._sign
+    .guide
+      &__list
+        margin-bottom: 50px
+        @media screen and (max-width: 350px)
+          margin-bottom: 15px
   &:before, &::after
     content: ""
     display: block
@@ -241,20 +296,23 @@ body
   &::before
     top: 0
     left: 0
-    width: 174px
-    height: 200px
+    width: 200px
+    height: 175px
     transform: translate(-100%, 25%)
+    animation: floatFromTop 2s ease-in-out infinite
   &::after
     right: 0
     bottom: 0
     width: 210px
     height: 200px
     transform: translate(90%, 25%)
+    animation: floatFromBottom 2s ease-in-out infinite
   &__wrap
     margin-top: 40px
     display: flex
     align-items: center
     gap: 15px
+    z-index: 2
   &__title
     max-width: 660px
     //background: rgba(#0B64E0, .05)
@@ -271,12 +329,17 @@ body
       height: 92px
       left: -90px
       bottom: 0
+      animation: floatFromBottom 1.8s .5s ease-in-out infinite
+
     &::after
       background: url("../img/guide/star-decor2.png") no-repeat 0 0/contain
       width: 47px
       height: 47px
       right: 0
-      top: 70px
+      top: 0
+      transform: translate(0, 70px)
+      animation: floatFromTop 1.8s .2s ease-in-out infinite
+
 
 
   &__subtitle
@@ -286,6 +349,8 @@ body
     font-family: $font-suisse-intl-reg
     text-align: center
     max-width: 830px
+    padding: 0 10px
+    z-index: 2
   &__list
     display: flex
     align-items: center
@@ -299,7 +364,7 @@ body
     flex-direction: column
     width: 265px
     position: relative
-    z-index: 2
+    //z-index: 2
     &::before
       content: ""
       display: block
@@ -339,7 +404,7 @@ body
       justify-content: flex-start
       align-items: center
       position: relative
-      padding: 16px 10px
+      padding: 12px 10px
       height: 116px
       background: rgba($white, .1)
       border-top: 1px solid rgba($white, .2)
@@ -362,6 +427,8 @@ body
         line-height: 18px
         font-family: $font-suisse-intl-reg
         text-align: center
+        margin-top: 6px
+        text-wrap: balance
       &-btn
         position: absolute
         bottom: 0
@@ -380,12 +447,27 @@ body
       transform: translate(-50%, 0)
       z-index: 3
       backdrop-filter: blur(5px)
+      align-items: center
+      padding: 20px 16px 10px 16px
       &-text
         color: $white
         font-size: 12px
         line-height: 20px
+        max-width: 320px
         font-family: $font-suisse-intl-reg
-        padding: 16px
+        padding-right: 10px
+        max-height: 100%
+        overflow-y: auto
+        overflow-x: hidden
+        scrollbar-width: auto
+        &::-webkit-scrollbar
+          background: rgba($white, .3)
+          width: 3px
+          border-radius: 50px
+        &::-webkit-scrollbar-thumb
+          position: relative
+          border-radius: 50px
+          background: $green
       &-close
         position: absolute
         top: 0
@@ -393,7 +475,7 @@ body
         transform: translate(0, -50%)
     &._popup
       .guide__item-popup
-        display: block
+        display: flex
 
 .ball
   display: flex
@@ -405,8 +487,10 @@ body
   background-size: 1365px 765px
   @media screen and (max-width: 1300px)
     background: url("../img/ball/bg-tab.png") no-repeat 50% 0/cover
+    background-size: 1365px 765px
   @media screen and (max-width: 600px) and (orientation: portrait)
-    background: url("../img/ball/bg-mob.png") no-repeat 50% 0/cover
+    background: url("../img/ball/bg-mob.png") no-repeat 50% 40px/cover
+    background-size: 932px 575px
   @media screen and (max-width: 950px) and (orientation: landscape) and (max-height: 450px)
     background: url("../img/ball/bg-mob.png") no-repeat 50% 0/cover
   &__sphere
@@ -418,6 +502,10 @@ body
     width: 100%
     padding: 0 85px
     max-width: 1370px
+    min-width: 1370px
+    left: 50%
+    transform: translate(-50%, 0)
+    align-self: flex-start
     display: flex
     align-items: center
   &__pers
@@ -450,6 +538,7 @@ body
       border-top: 1px solid rgba($white, .3)
       border-right: 1px solid rgba($white, .3)
       border-left: 1px solid rgba($white, .3)
+      font-size: 14px
       span
         font-family: inherit
         font-size: inherit
@@ -493,6 +582,9 @@ body
           background: url("../img/ball/progress/title-lock.png") no-repeat 0 0/cover
           background-size: 100% 100%
           animation: verticalFloat 1.4s linear infinite
+          @media screen and (max-width: 600px)
+            background: url("../img/ball/progress/title-lock-mob.png") no-repeat 0 0/cover
+            background-size: 100% 100%
       &__bar
         background: none
     .sphere
@@ -506,7 +598,7 @@ body
       &::before
         top: 225px
         left: 170px
-      &__box
+      &__box, &__light
         display: none
         background: none
       &__ground
@@ -520,8 +612,10 @@ body
           display: none
 
 .sphere
-  width: 480px
-  height: 410px
+  max-width: 480px
+  min-width: 480px
+  min-height: 410px
+  max-height: 410px
   &::before
     content: ""
     display: block
@@ -764,6 +858,21 @@ body
   display: flex
   position: relative
   gap: 10px
+  &._done
+    .progress__bar
+      &::before
+        content: ""
+        display: block
+        width: 24px
+        height: 24px
+        position: absolute
+        top: 50%
+        transform: translate(0, -50%)
+        right: 0
+        z-index: 2
+        background: url("../img/ball/progress/icon.png") no-repeat 0 0/contain
+        @media screen and (max-width: 600px)
+          right: -10px
   &__bar
     display: flex
     width: 402px
@@ -771,6 +880,8 @@ body
     background: url("../img/ball/progress/bar-border.png") no-repeat 0 0/contain
     border-radius: 26px
     position: relative
+    @media screen and (max-width: 600px)
+      background: url("../img/ball/progress/bar-border-mob.png") no-repeat 0 0/contain
     &-point
       color: $white
       background: $black
@@ -857,6 +968,40 @@ body
       &:nth-child(2)
         font-size: 16px
   &__popup
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 200px
+    height: 200px
+    background: rgba(0, 0, 61, 0.50)
+    backdrop-filter: blur(4px)
+    border: 1px solid rgba($white, 0.5)
+    border-radius: 16px
+    z-index: 3
+    padding: 25px 15px 15px 15px
+    &-close
+      position: absolute
+      top: 0
+      right: 0
+      transform: translate(0, -50%)
+    &-text
+      overflow-y: auto
+      width: 100%
+      height: 160px
+      color: $white
+      font-family: $font-suisse-intl-reg
+      font-size: 12px
+      line-height: 20px
+      scrollbar-width: auto
+      &::-webkit-scrollbar
+        background: rgba($white, .3)
+        width: 3px
+        border-radius: 50px
+      &::-webkit-scrollbar-thumb
+        position: relative
+        border-radius: 50px
+        background: $green
     &-btn
       position: absolute
       bottom: 0
@@ -896,8 +1041,13 @@ body
       user-select: none
       box-shadow: 0px 3px 0px 0px #363636
       background: linear-gradient(180deg, #8D8D8D 0%, #8A8A8A 20.5%, #838383 48%, #818181 70.5%, #7E7E7E 100%)
+      &:hover
+        border: 1px solid #5A5A5A
+        box-shadow: 0px 3px 0px 0px #363636
+        background: linear-gradient(180deg, #8D8D8D 0%, #8A8A8A 20.5%, #838383 48%, #818181 70.5%, #7E7E7E 100%)
       span
         opacity: .2
+
     &::before, &::after
       content: ""
       display: block
@@ -956,12 +1106,23 @@ body
       z-index: 3
       border: 1px solid rgba($white, 0.5)
       border-radius: 16px
-      padding: 16px
+      padding: 25px 16px 16px 16px
       &-text
         color: $white
         font-family: $font-suisse-intl-reg
         font-size: 12px
         line-height: 20px
+        overflow-y: auto
+        scrollbar-width: auto
+        max-height: 270px
+        &::-webkit-scrollbar
+          background: rgba($white, .3)
+          width: 3px
+          border-radius: 50px
+        &::-webkit-scrollbar-thumb
+          position: relative
+          border-radius: 50px
+          background: $green
       &-close
         position: absolute
         top: 0
@@ -977,6 +1138,9 @@ body
       position: relative
       padding-top: 30px
       z-index: 1
+      display: flex
+      flex-direction: column
+      align-items: center
       &._left
         .prize__list-popup
           left: 0
@@ -1056,9 +1220,11 @@ body
         margin-bottom: -10px
         z-index: 2
         position: relative
+        padding: 0 10px
       &-img
         z-index: 2
         position: relative
+        margin-top: auto
       &-btn
         position: absolute
         right: -6px
@@ -1116,16 +1282,48 @@ body
       &._active
         background: $magenta
 
-
-
-
-
 .table
   display: flex
   flex-direction: column
   align-items: center
+  position: relative
+  &::before
+    content: ""
+    display: block
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 890px
+    height: 800px
+    background: url("../img/table/confeti.png") no-repeat 0 0/contain
+    @media screen and (max-width: 600px)
+      background: url("../img/table/mob-decor.png") no-repeat 0 0/contain
+      width: 624px
+      height: 560px
+
   &__title
     max-width: 580px
+    &::before, &::after
+      content: ""
+      display: block
+      position: absolute
+    &::before
+      left: 0
+      top: 0
+      width: 200px
+      height: 175px
+      background: url("../img/guide/gift-decor.png") no-repeat 0 0/contain
+      transform: translate(-100%, 50%)
+      animation: floatFromTop 2s ease-in-out infinite
+    &::after
+      background: url("../img/guide/star-decor2.png") no-repeat 0 0/contain
+      width: 47px
+      height: 47px
+      right: 0
+      top: 0
+      transform: translate(150px, 70px)
+      animation: floatFromTop 1.6s .7s ease-in-out infinite
   &__subtitle
     max-width: 900px
     color: $white
@@ -1134,11 +1332,33 @@ body
     line-height: 24px
     font-family: $font-suisse-intl-reg
   &__wrap
+    margin-top: 15px
     width: 540px
     background: rgba($white, .1)
     backdrop-filter: blur(4px)
     border-radius: 16px
     padding: 20px 26px
+    border: 1px solid rgba($white, .5)
+    &::before, &::after
+      content: ""
+      display: block
+      position: absolute
+    &::before
+      background:  url("../img/guide/star-decor.png") no-repeat 0 0/contain
+      width: 86px
+      height: 92px
+      left: 0
+      bottom: 0
+      transform: translate(-100%, 80%)
+      animation: floatFromBottom 1.6s ease-in-out infinite
+    &::after
+      width: 235px
+      height: 230px
+      right: 0
+      bottom: 0
+      background: url("../img/table/box.png") no-repeat 0 0/contain
+      transform: translate(80%, 50%)
+      animation: floatFromBottom 1.9s .2s ease-in-out infinite
   &__btns
     display: flex
     align-items: center
@@ -1162,9 +1382,20 @@ body
       &._active
         pointer-events: none
         background: linear-gradient(180deg, #FF3AC2 0%, #FF34AF 20.5%, #FF267E 48%, #FF2271 70.5%, #FF1036 100%)
+        &:hover
+          color: $white
   &__head
     display: flex
     margin: 10px 0 5px 0
+    &::before
+      content: ""
+      display: block
+      position: absolute
+      top: -11px
+      left: 0
+      width: 110px
+      height: 38px
+      background: url("../img/table/table-decor.png") no-repeat 0 0/contain
     &-item
       width: 96px
       text-align: center
@@ -1196,6 +1427,54 @@ body
       border-radius: 12px
       height: 32px
       align-items: center
+      &.gold, &.silver, &.bronze
+        .table__body-row-item
+          &:nth-child(1)
+            position: relative
+            &::before
+              content: ""
+              display: block
+              position: absolute
+              left: 10px
+              top: 50%
+              transform: translate(0, -50%)
+              width: 25px
+              height: 25px
+              @media screen and (max-width: 600px)
+                left: 3px
+      &.gold
+        .table__body-row-item
+          &:nth-child(1)
+            &::before
+              background: url("../img/table/gold.png") no-repeat 0 0/contain
+      &.silver
+        .table__body-row-item
+          &:nth-child(1)
+            &::before
+              background: url("../img/table/silver.png") no-repeat 0 0/contain
+      &.bronze
+        .table__body-row-item
+          &:nth-child(1)
+            &::before
+              background: url("../img/table/bronze.png") no-repeat 0 0/contain
+      &.you
+        border: 1px solid $magenta
+        .table__body-row-item
+          &:nth-child(1)
+            position: relative
+            &::before
+              content: "Ти"
+              font-family: inherit
+              font-size: inherit
+              position: absolute
+              right: 0
+              top: 50%
+              transform: translate(50%, -50%)
+              border-radius: 8px
+              color: $white
+              background: $magenta
+              padding: 2px 5px
+
       &-item
         width: 96px
         text-align: center
@@ -1274,9 +1553,18 @@ body
       color: $white
     &-body
       overflow-y: auto
-      height: 375px
+      height: 370px
       width: 100%
       margin-top: 16px
+      scrollbar-width: auto
+      &::-webkit-scrollbar
+        background: rgba($white, .3)
+        width: 3px
+        border-radius: 50px
+      &::-webkit-scrollbar-thumb
+        position: relative
+        border-radius: 50px
+        background: $green
     &-scroll
       display: flex
     &-place, &-prize
@@ -1285,6 +1573,7 @@ body
       align-items: center
       justify-content: flex-start
       flex-direction: column
+      gap: 10px
       &-item
         color: $white
         font-size: 16px
@@ -1293,12 +1582,10 @@ body
         text-align: center
         &:nth-child(1)
           opacity: .3
-
-
 .drop
-  max-width: 540px
+  max-width: 560px
   width: 100%
-  padding: 50px 0 0 0
+  padding: 50px 10px 0 10px
   z-index: 3
   .dropdown
     outline: none!important
@@ -1312,10 +1599,10 @@ body
     > summary
       list-style: none
     summary
-      padding: 17px 16px
+      padding: 13px 16px
       font-family: $font-suisse-intl-reg
       font-size: 16px
-      line-height: 16px
+      line-height: 26px
       width: 100%
       outline: none!important
       border: 2px solid rgba($white, .1)
@@ -1337,11 +1624,12 @@ body
         height: 24px
         position: absolute
         right: 25px
-        top: 24%
+        top: 50%
+        transform: translate(0, -50%)
     &[open]
       summary
         &:after
-          transform: rotate(180deg)
+          transform: rotate(180deg) translate(0, 50%)
     .drop-txt
       margin-top: 5px
       overflow-wrap: break-word
@@ -1371,8 +1659,8 @@ body
             color: $white
             text-align: center
             font-family: $font-suisse-intl-reg
-            font-size: 17px
-            line-height: 27px
+            font-size: 16px
+            line-height: 26px
           .spins-row
             display: flex
             flex-direction: column
@@ -1391,8 +1679,8 @@ body
             .content-date, .content-prize
               color: $white
               font-family: $font-suisse-intl-reg
-              font-size: 17px
-              line-height: 27px
+              font-size: 16px
+              line-height: 26px
 
       tr,td,th
         font-family: $font-suisse-intl-reg
@@ -1444,6 +1732,14 @@ body
   padding-top: 20px
   z-index: 1
   position: relative
+  width: 100%
+  height: 100%
+  .sky
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 1100px
   &::before
     content: ""
     display: block
@@ -1455,7 +1751,6 @@ body
     top: 50%
     background: url("../img/games/bg-desc.png") no-repeat 50% 0/contain
     transform: translate(-50%, -50%)
-
   &__title
     max-width: 461px
     z-index: 1
@@ -1464,17 +1759,42 @@ body
     flex-wrap: wrap
     display: flex
     justify-content: center
-    align-items: center
-    gap: 45px 25px
+    align-items: flex-start
+    gap: 15px 25px
     margin-top: 20px
     z-index: 1
     &-item
       max-width: 180px
+      position: relative
+    &-wrap
+      position: absolute
+      top: 21px
+      left: 49%
+      transform: translate(-50%, 0)
+      background: linear-gradient(0deg, rgba(0, 0, 61, 0.40) 0%, rgba(0, 0, 61, 0.40) 100%)
+      width: 160px
+      height: 160px
+      display: flex
+      align-items: center
+      justify-content: center
+      border-radius: 20px
+      z-index: 1
+      opacity: 0
+      transition: .5s ease-in-out
+      &:hover
+        opacity: 1
+        cursor: pointer
+      &-btn
+        padding: 17px 24px 15px
+        font-size: 12px
+        &::before, &::after
+          content: none
   &__wrap
     margin-top: 20px
     display: flex
     align-items: center
     gap: 15px
+
 @keyframes progressAnim
   0%
     background-position: 0 0
@@ -1535,11 +1855,33 @@ body
   50%
     opacity: .6
 
-@keyframes boxFloat
+@keyframes floatFromBottom
   0%, 100%
-    transform: translate(0, -2px)
+    bottom: -5px
   50%
-    transform: translate(0, 2px)
+    bottom: 5px
+
+@keyframes floatFromTop
+  0%, 100%
+    top: -5px
+  50%
+    top: 5px
+
+@keyframes flareAnimation
+  0%
+    left: -100%
+    opacity: 0
+  60%
+    opacity: 1
+  100%
+    left: 100%
+    opacity: 0
+
+//@keyframes boxFloat
+//  0%, 100%
+//    transform: translate(0, -2px)
+//  50%
+//    transform: translate(0, 2px)
 
 ._shake
   animation: horizontal-shaking .6s linear infinite
@@ -1562,3 +1904,75 @@ body
 ._sign
   .btn-wrap
     display: none
+
+
+
+/// uk stykes
+.fav-page
+  .banner
+    &__title, &__ball
+      picture.en
+        display: none
+      picture.uk
+        display: block
+  .guide, .ball, .prize, .table, .games
+    &__title
+      picture.en
+        display: none
+      picture.uk
+        display: block
+
+/// en styles
+.fav-page.en
+  .banner
+    &__title, &__ball
+      picture.en
+        display: block
+      picture.uk
+        display: none
+    &__title
+      max-width: 510px
+      top: 10px
+      @media screen and (max-width: 350px)
+        top: 25px
+  .guide, .ball, .prize, .table, .games
+    &__title
+      picture.en
+        display: block
+      picture.uk
+        display: none
+  .ball
+    &__title
+      @media screen and (max-width: 600px)
+        max-width: 265px
+  .table
+    &__body
+      &-row
+        &.you
+          .table__body-row-item:first-child
+            &::before
+              content: "You"
+              padding: 2px 3px
+              transform: translate(30%, -50%)
+
+
+/// DARK
+body.dark
+  background: $dark-theme
+  .fav-page
+    .banner
+      &::after
+        background: url("../img/banner/banner-bottom-desc-dark.png") repeat 0 0/cover
+        @media screen and (max-width: 600px)
+          background: url("../img/banner/banner-bottom-mob-dark.png") repeat 0 0/cover
+    .ball
+      background: url("../img/ball/bg-desc-dark.png") no-repeat 50% 0/cover
+      background-size: 1365px 765px
+      @media screen and (max-width: 1300px)
+        background: url("../img/ball/bg-tab-dark.png") no-repeat 50% 0/cover
+        background-size: 1365px 765px
+      @media screen and (max-width: 600px) and (orientation: portrait)
+        background: url("../img/ball/bg-mob-dark.png") no-repeat 50% 40px/cover
+        background-size: 932px 575px
+      @media screen and (max-width: 950px) and (orientation: landscape) and (max-height: 450px)
+        background: url("../img/ball/bg-mob-dark.png") no-repeat 50% 0/cover

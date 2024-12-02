@@ -333,6 +333,9 @@
     const tablePopup = document.querySelector(".table__popup")
     const tablePopupClose = document.querySelector(".table__popup-close")
     const tablePopupOpen = document.querySelector(".table__info")
+    const ballPopup = document.querySelector(".progress__popup")
+    const ballPopupClose = document.querySelector(".progress__popup-close")
+    const ballPopupOpen = document.querySelector(".progress__popup-btn")
 
     setPopups(cards, prizeOpenBtns);
     setPopups(guidePopupsWrap, guideOpenBtns);
@@ -357,6 +360,14 @@
     tablePopupClose.addEventListener("click", () =>{
         tablePopup.classList.add("hide")
         document.body.style.overflow = "auto"
+    });
+
+    ballPopupOpen.addEventListener("click", () =>{
+        ballPopup.classList.remove("hide")
+    });
+
+    ballPopupClose.addEventListener("click", () =>{
+        ballPopup.classList.add("hide")
     });
 
 window.addEventListener("DOMContentLoaded", () =>{
@@ -716,57 +727,57 @@ window.addEventListener("DOMContentLoaded", () =>{
 
     initShake(ball, btnShake, ballBox)
 
+// table toggle
+
+    const toggleItems = document.querySelectorAll('.table__toggle-item'),
+          tables = document.querySelectorAll('.table__body')
+
+    toggleItems.forEach((toggleItem, index) => {
+        toggleItem.addEventListener('click', () => {
+            toggleItems.forEach(item => item.classList.remove('_active'));
+            tables.forEach(table => table.classList.remove('_active'));
+            toggleItem.classList.add('_active');
+            tables[index].classList.add('_active');
+        });
+    });
+
     const handleResize = () =>{
         let touchStartX = 0;
         let touchEndX = 0;
-        let touchStartTime = 0; // Час початку дотику
 
-        const handleTouchStart = (event) => {
-            touchStartX = event.touches[0].clientX;
-            touchStartTime = Date.now(); // Записуємо час початку дотику
-        };
+        cardsContainer.addEventListener('touchstart', (event) => {
+            touchStartX = event.changedTouches[0].screenX;
+        }, false);
+        cardsContainer.addEventListener('touchend', (event) => {
+            touchEndX = event.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
 
-        const handleTouchMove = (event) => {
-            touchEndX = event.touches[0].clientX;
-        };
-
-        const handleTouchEnd = () => {
-            const swipeDistance = touchStartX - touchEndX;
-            const swipeTime = Date.now() - touchStartTime; // Тривалість свайпу
-
-            // Фільтрація кліків та некоректних свайпів
-            if (Math.abs(swipeDistance) < 50 || swipeTime > 500 && swipeTime > 50) {
-                // Якщо свайп занадто короткий або надто повільний, не вважаємо його справжнім
-                touchStartX = 0;
-                touchEndX = 0;
-                return;
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) {
+                moveRight()
             }
-
-            // Перевіряємо напрямок свайпу
-            if (swipeDistance > 50) {
-                // Свайп ліворуч
-                moveRight();
-            } else if (swipeDistance < -50) {
-                // Свайп праворуч
-                moveLeft();
+            if (touchEndX > touchStartX + swipeThreshold) {
+                moveLeft()
             }
-
-            // Скидаємо значення
-            touchStartX = 0;
-            touchEndX = 0;
-        };
-
-
+        }
         moveRightButton.addEventListener('click', moveRight);
         moveLeftButton.addEventListener('click', moveLeft);
-        cardsContainer.addEventListener('touchstart', handleTouchStart);
-        cardsContainer.addEventListener('touchmove', handleTouchMove);
-        cardsContainer.addEventListener('touchend', handleTouchEnd);
         window.addEventListener("orientationchange", () =>{
             location.reload()
         })
     }
 
     handleResize()
+
+
+    // for test
+    document.querySelector(".dark-btn").addEventListener("click", () =>{
+        document.body.classList.toggle("dark")
+    })
+    document.querySelector(".en-btn").addEventListener("click", () =>{
+        document.querySelector(".fav-page").classList.toggle("en")
+    })
 
 })();

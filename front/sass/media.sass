@@ -1,30 +1,244 @@
-@media screen and (max-width: 600px)
+@media screen and (max-width: 1200px)
+  .ball
+    &__wrap
+      min-width: 1240px
   .prize
-    &__tabs
+    &__list
+      width: 715px
+
+@media screen and (max-width: 1050px)
+  .banner
+    height: 680px
+    &__date
+      display: none
+  .ball
+    &__subtitle
+      display: none
+    &__wrap
+      min-width: 1000px
+      max-width: 1000px
+      padding: 40px 85px
+    &__pers
+      max-width: 360px
+    &__list
+      max-width: 210px
+      margin: 0 0 20px 225px
+    &__sphere
+      top: -30px
+      left: 280px
+  .guide
+    &__subtitle
+      display: none
+
+@media screen and (max-width: 950px)
+  .guide
+    &__list
+      gap: 30px
+    &__item
+      max-width: 216px
+      &-num
+        height: 125px
+      &:nth-child(1)
+        .guide__item-num
+          width: 48px
+      &:nth-child(2)
+        .guide__item-num
+          width: 72px
+      &:nth-child(3)
+        .guide__item-num
+          width: 74px
+  .prize
+    &__slider
+      padding-bottom: 60px
+      &-move
+        top: auto
+        bottom: 40px
+        transform: translate(-50%, 0)
+        width: 90%
+        &-right
+          transform: none
+        &-left
+          transform: scale(-1, 1)
+
+@media screen and (max-width: 870px)
+  .guide
+    &::before
+      transform: translate(-70%, 5%)
+    &::after
+      transform: translate(55%, 25%)
+    &__title
+      &::before
+        left: -40px
+        transform: translate(0, 30px)
+      &::after
+        transform: translate(0, 40px)
+    &__item
+      &-popup
+        max-width: 280px
+      &:nth-child(1)
+        .guide__item-popup
+          left: 0
+          transform: none
+      &:nth-child(3)
+        .guide__item-popup
+          left: auto
+          right: 0
+          transform: none
+
+
+@media screen and (max-width: 770px)
+  .progress
+    flex-wrap: wrap
+    max-width: 700px
+    align-items: center
+    justify-content: center
+    &__left
+      height: 70px
+    &__shake
+      margin-top: 20px
+
+@media screen and (max-width: 750px)
+  .ball
+    &__list
+      margin: 0 0 20px 190px
+
+@media screen and (max-width: 720px)
+  .guide
+    &__list
+      transform: scale(.9)
+    &__subtitle
+      max-width: 95vw
+
+@media screen and (max-width: 700px)
+  .ball
+    &__list
+      margin: 20px 0 -50px 0
+      max-width: 300px
+      align-items: center
+      justify-content: center
+    &__pers
+      display: none
+    &__wrap
+      min-width: 700px
+      max-width: 700px
+      padding: 0 85px 50px 85px
+      //height: 500px
+      justify-content: center
+      flex-direction: column-reverse
+    &__sphere
+      top: 0
+      left: 0
       position: relative
-      left: -25px
-      top: auto
-      bottom: -25px
-      //transform: translate(195px, 0)
-      width: 200px
+
+@media screen and (max-width: 600px)
+  .banner
+    height: 635px
+    &__title
+      max-width: 345px
+      min-width: 345px
+    &__pers
+      max-width: 300px
+      min-width: 300px
+      top: 120px
+      left: 53%
+    &__ball
+      max-width: 280px
+      min-width: 280px
+      top: 150px
+    &__gift
+      max-width: 480px
+      min-width: 480px
+      left: 50%
+      top: 160px
+  .guide
+    &::before
+      width: 100px
+      height: 100px
+      transform: translate(-40px, 540px)
+    &::after
+      width: 134px
+      height: 114px
+      transform: translate(45%, -285px)
+      z-index: -1
+    &__title
+      max-width: 365px
+      width: 100%
+      &::before
+        transform: translate(45px, -600px)
+        width: 30px
+        height: 30px
+      &::after
+        transform: translate(15px, 125px)
+    &__list
+      transform: scale(1)
+      flex-direction: column
+      align-items: flex-start
+      justify-content: center
+    &__item
+      flex-direction: row
+      align-items: center
+      max-width: 325px
+      min-width: 325px
+      &:nth-child(1)
+        .guide__item-popup
+          left: auto
+          right: 0
+      &-popup
+        left: auto
+        right: 0
+        transform: none
+      &::before
+        z-index: 0
+        height: 240px
+        left: 20px
+        top: -60px
+        width: 240px
+      &-snow
+        position: absolute
+        left: 0
+        top: 0
+        height: 100%
+        width: 70px
+      &-info
+        max-width: 260px
+        margin-left: auto
+        min-height: 100px
+        text-align: left
+        align-items: flex-start
+        padding: 16px 24px
+        &-title
+          text-align: left
+        &-subtitle
+          text-align: left
+        &-btn
+          left: 24px
+          transform: translate(0, 70%)
+      &-num
+        height: 90px
+  .prize
     &__slider
       align-self: flex-start
       left: 50%
       transform: translate(-80px, 0)
-      padding-bottom: 50px
+      padding-bottom: 40px
       &-move
         width: 100vw
         left: -50vw
         top: auto
         bottom: 0
-        transform: translate(86px, 0)
+        transform: translate(80px, 0)
         &-left
           transform: scale(-1, 1) translate(-50%, 0)
         &-right
           transform: translate(-50%, 0)
-
     &__list
       overflow: visible
+      height: 210px
+      &-popup
+        max-width: 240px
+        max-height: 214px
+        &-text
+          max-height: 165px
       &-scroll
         height: 180px
       &-item
@@ -32,6 +246,247 @@
         width: 140px
         height: 170px
         border-radius: 11px
+        &-img
+          max-width: 120px
+        &-title
+          font-size: 12px
+          line-height: 14px
+          padding: 0 10px
         &._active
           pointer-events: initial
+  .ball
+    &__wrap
+      padding: 0 85px 75px 85px
+    &._lock
+      .progress
+        &__title
+          &-lock
+            width: 86px
+            min-height: 58px
+            font-size: 10px
+            padding: 6px 5px 20px 5px
+      .sphere
+        &::before
+          top: 195px
+          left: 160px
+        &__ground
+          width: 245px
+          height: 144px
+          bottom: 17px
+    .progress
+      max-width: 500px
+      &__popup
+        top: auto
+        left: 70px
+        transform: translate(0, 50%)
+        bottom: 40px
+        &-btn
+          transform: none
+          left: 120px
+          bottom: 40px
+      &__left
+        height: auto
+      &__title
+        padding: 5px 10px
+        &-item
+          &:nth-child(1)
+            font-size: 10px
+          &:nth-child(2)
+            font-size: 12px
+      &__bar
+        width: 240px
+        height: 32px
+        &-point
+          font-size: 9px
+          line-height: 16px
+          padding: 3px 5px 2px
+        &-wrap
+          max-width: 180px
+          gap: 30px
+        &-body
+          width: 235px
+          height: 25px
+          &::after
+            width: 208px
+            height: 14px
+    &__sphere
+      left: -15px
+    .sphere
+      max-width: 397px
+      min-width: 397px
+      min-height: 337px
+      max-height: 337px
+      &::before
+        width: 112px
+        height: 86px
+        top: 155px
+        left: 160px
+      &::after
+        content: ""
+        display: block
+        width: 575px
+        height: 575px
+        background: url("../img/ball/sphere/circle-bg.png") no-repeat 0 0/contain
+        position: absolute
+        top: 55%
+        left: 50%
+        opacity: .4
+        transform: translate(-50%, -50%) rotate(0deg)
+        z-index: 0
+        animation: rotate360center 100s linear infinite
+      &__body
+        width: 271px
+        height: 241px
+        top: 75px
+        left: 81px
+      &__leg
+        width: 195px
+        height: 41px
+        bottom: -3px
+        left: 120px
+      &__light
+        top: 10px
+        left: 17px
+      &__ground
+        width: 238px
+        height: 95px
+        bottom: 19px
+      &__box
+        width: 190px
+        height: 190px
+        bottom: 45px
+        left: 120px
+      &__win
+        opacity: 0
+        transition: opacity .7s ease-in-out
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        z-index: 5
+        &-img
+          max-width: 145px
+          top: 155px
+          left: 54%
+        &-title
+          max-width: 150px
+          top: 87px
+          left: 54%
+        &-desc
+          max-width: 185px
+          padding: 1px 10px 2px
+          line-height: 12px
+          font-size: 9px
+          top: 130px
+          left: 54%
+  .table
+    padding-top: 20px
+    &::before
+      opacity: .5
+    &__title
+      max-width: 365px
+      &::before, &::after
+        content: none
+    &__subtitle
+      display: none
+    &__wrap
+      max-width: 345px
+      min-width: 345px
+      padding: 12px 8px
+      margin-top: 15px
+      &::before, &::after
+        content: none
+    &__btns
+      flex-direction: column
+      justify-content: center
+      gap: 10px
+    &__head
+      &-item
+        font-size: 12px
+        &:first-child
+          justify-content: flex-start
+          padding-left: 10px
+    &__body
+      &-row
+        &-item
+          font-size: 12px
+          padding: 0 0 0 10px
+  .drop
+    max-width: 90%
+    .dropdown
+      summary
+        font-size: 13px
+        line-height: 20px
+        padding: 10px 50px 10px 16px
+        &::after
+          width: 20px
+          height: 20px
+          right: 15px
+  .games
+    &__list
+      gap: 0px 15px
+      &-item
+        max-width: 105px
+      &-wrap
+        width: 90px
+        height: 90px
+        top: 14px
+        border-radius: 10px
+        //opacity: 1
+        &-btn
+          transform: scale(.7)
 
+
+@media screen and (max-width: 350px)
+  .btn-wrap
+    .btn
+      min-width: 280px
+      max-width: 280px
+      padding: 25px 34px 23px 34px
+  .banner
+    &__title
+      min-width: 290px
+      max-width: 290px
+  .guide
+    &__list
+      transform: scale(.9)
+      margin-top: 0
+  .ball
+    &__progress
+      transform: scale(.9)
+      min-width: 350px
+  .table
+    &__title
+      max-width: 300px
+    &__wrap
+      transform: scale(.87)
+      margin: -20px 0 -70px 0
+    &__popup
+      &-wrap
+        min-width: 340px
+        transform: scale(.9)
+
+@media screen and (max-width: 305px)
+  .guide
+    &__list
+      transform: scale(.85)
+  .ball
+    &__progress
+      transform: scale(.85)
+  .table
+    &__popup
+      &-wrap
+        transform: scale(.85)
+
+@media screen and (max-width: 950px) and (max-height: 450px) and (orientation: landscape)
+  .banner
+    height: 425px
+    &__title
+      top: 10px
+      max-width: 300px
+      min-width: 300px
+    &__pers
+      top: 95px
+      transform-origin: left top
+      transform: scale(.5) translate(-50%, 0)
