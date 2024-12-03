@@ -12,7 +12,8 @@
     const ukLeng = document.querySelector('#ukLeng');
     const enLeng = document.querySelector('#enLeng');
 
-    let locale = 'uk';
+    let locale = 'uk',
+        week = 1;
 
     if (ukLeng) locale = 'uk';
     if (enLeng) locale = 'en';
@@ -23,6 +24,13 @@
     // let userId;
     let userId = 101234861;
     // let userId = 9999;
+
+    if(week === 1){
+        document.querySelector('._week1').style.display = "flex"
+    }
+    if(week === 2){
+        document.querySelector('._week2').style.display = "flex"
+    }
 
     function loadTranslations() {
         return fetch(`${apiURL}/translates/${locale}`).then(res => res.json())
@@ -728,6 +736,43 @@ window.addEventListener("DOMContentLoaded", () =>{
             tables[index].classList.add('_active');
         });
     });
+
+
+
+    const btns = document.querySelectorAll(".btn"),
+          os = detectOS()
+
+    if (os === "macOS" || os === "iOS"){
+        btns.forEach(btn =>{
+            btn.classList.add("_ios")
+        })
+    }
+
+
+    function detectOS() {
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        const platform = navigator.platform || "unknown";
+        let os;
+
+        if (/android/i.test(userAgent) && /linux arm/i.test(platform)) {
+            os = "Android";
+        }
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            os = "iOS";
+        }
+        if (/Macintosh|MacIntel|MacPPC|Mac68K/.test(platform)) {
+            os = "macOS";
+        }
+        if (/Win32|Win64|Windows|WOW64/.test(platform)) {
+            os = "Windows";
+        }
+        if (/Linux/.test(platform) && !/android/i.test(userAgent)) {
+            os = "Linux";
+        }
+        return os
+    }
+
+    console.log("Операційна система:", os);
 
     const handleResize = () =>{
         let touchStartX = 0;
