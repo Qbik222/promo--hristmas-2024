@@ -29,6 +29,21 @@
   .guide
     &__subtitle
       display: none
+  .games
+    &__list
+      gap: 0px 15px
+      max-width: 700px
+      transform: scale(1.2)
+      margin: 20px 0
+      &-item
+        max-width: 105px
+      &-wrap
+        width: 90px
+        height: 90px
+        top: 14px
+        border-radius: 10px
+        &-btn
+          transform: scale(.7)
 
 @media screen and (max-width: 950px)
   .guide
@@ -85,7 +100,6 @@
           right: 0
           transform: none
 
-
 @media screen and (max-width: 770px)
   .progress
     flex-wrap: wrap
@@ -108,8 +122,16 @@
       transform: scale(.9)
     &__subtitle
       max-width: 95vw
+  .games
+    &__list
+      transform: scale(1)
 
 @media screen and (max-width: 700px)
+  .btn-wrap
+    max-width: 600px
+  .guide
+    &__list
+      transform: scale(.8)
   .ball
     &__list
       margin: 20px 0 -50px 0
@@ -122,13 +144,18 @@
       min-width: 700px
       max-width: 700px
       padding: 0 85px 50px 85px
-      //height: 500px
       justify-content: center
       flex-direction: column-reverse
     &__sphere
       top: 0
       left: 0
       position: relative
+  .prize
+    &__list
+      width: 705px
+    &__slider
+      transform: scale(.8)
+      margin: -40px 0
 
 @media screen and (max-width: 600px)
   .banner
@@ -218,15 +245,16 @@
   .prize
     &__slider
       align-self: flex-start
-      left: 50%
-      transform: translate(-80px, 0)
+      left: 0
+      transform: scale(1)
+      margin: 0
       padding-bottom: 40px
       &-move
         width: 100vw
-        left: -50vw
+        left: 0
         top: auto
         bottom: 0
-        transform: translate(80px, 0)
+        transform: none
         &-left
           transform: scale(-1, 1) translate(-50%, 0)
         &-right
@@ -242,7 +270,6 @@
       &-scroll
         height: 180px
       &-item
-        pointer-events: none
         width: 140px
         height: 170px
         border-radius: 11px
@@ -254,7 +281,19 @@
           padding: 0 10px
         &._active
           pointer-events: initial
+          .prize__list-popup
+            transform: translate(0, -50%)
+            left: 0
+        &._active:last-child
+          .prize__list-popup
+            transform: translate(0, -50%)
+            left: auto
+            right: 0
+
   .ball
+    &__progress
+      bottom: 20px
+      margin-bottom: 0
     &__wrap
       padding: 0 85px 75px 85px
     &._lock
@@ -382,6 +421,8 @@
           left: 54%
   .table
     padding-top: 20px
+    .drop
+      max-width: 100%
     &::before
       opacity: .5
     &__title
@@ -423,20 +464,6 @@
           width: 20px
           height: 20px
           right: 15px
-  .games
-    &__list
-      gap: 0px 15px
-      &-item
-        max-width: 105px
-      &-wrap
-        width: 90px
-        height: 90px
-        top: 14px
-        border-radius: 10px
-        //opacity: 1
-        &-btn
-          transform: scale(.7)
-
 
 @media screen and (max-width: 350px)
   .btn-wrap

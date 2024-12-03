@@ -1,4 +1,3 @@
-$blue: #000055
 $dark-blue-bg: #000022
 $dark-blue: #00003d
 $white: #ffffff
@@ -9,12 +8,9 @@ $green-dark: #006B4B
 $black: #000000
 $dark-theme: #12131C
 $grey: #E3E3E3
-//$title-box-shadow: 0px 0px 20px 61px rgba(11, 100, 224, 0.1) inset, 0px 0px 70px 51px rgba(11, 100, 224, 0.1)
 
 $font-suisse-intl-reg: SuisseIntl-Regular, sans-serif
 $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
-//$font-legal: DINPro-CondLight, sans-serif
-//$font-riffic-bold: Riffic-Bold, sans-serif
 
 .dark-btn, .en-btn
   position: fixed
@@ -102,7 +98,6 @@ body
     background: linear-gradient(180deg, #73FFD4 0%, #38FDC1 100%)
     cursor: pointer
 
-
 .btn-wrap
   display: flex
   align-items: center
@@ -136,7 +131,6 @@ body
         background: url("../img/sport-btn-icon.png") no-repeat 0 0/contain
         width: 16px
         height: 16px
-
 
 .info-btn
   color: $white
@@ -185,7 +179,6 @@ body
     left: 0
     background: url("../img/games/bg-bottom-desc.png") no-repeat 0 0/contain
 
-
 .banner
   width: 100%
   height: 715px
@@ -197,7 +190,7 @@ body
   &::before
     content: ""
     display: block
-    width: 200%
+    width: 4000px
     height: 405px
     background: url("../img/banner/infinite-bg.png") repeat 0 0/cover
     background-size: auto 100%
@@ -315,10 +308,8 @@ body
     z-index: 2
   &__title
     max-width: 660px
-    //background: rgba(#0B64E0, .05)
     border-radius: 50%
     box-shadow: 0px 0px 20px 61px rgba(11, 100, 224, 0.1) inset, 0px 0px 70px 51px rgba(11, 100, 224, 0.1)
-    //&::before
     &:before, &::after
       content: ""
       display: block
@@ -330,7 +321,6 @@ body
       left: -90px
       bottom: 0
       animation: floatFromBottom 1.8s .5s ease-in-out infinite
-
     &::after
       background: url("../img/guide/star-decor2.png") no-repeat 0 0/contain
       width: 47px
@@ -339,9 +329,6 @@ body
       top: 0
       transform: translate(0, 70px)
       animation: floatFromTop 1.8s .2s ease-in-out infinite
-
-
-
   &__subtitle
     color: $white
     font-size: 16px
@@ -364,7 +351,6 @@ body
     flex-direction: column
     width: 265px
     position: relative
-    //z-index: 2
     &::before
       content: ""
       display: block
@@ -493,6 +479,8 @@ body
     background-size: 932px 575px
   @media screen and (max-width: 950px) and (orientation: landscape) and (max-height: 450px)
     background: url("../img/ball/bg-mob.png") no-repeat 50% 0/cover
+  .drop
+    padding-top: 20px
   &__sphere
     position: absolute
     top: -20px
@@ -508,6 +496,7 @@ body
     align-self: flex-start
     display: flex
     align-items: center
+    margin-bottom: -50px
   &__pers
     max-width: 490px
   &__title
@@ -544,13 +533,13 @@ body
         font-size: inherit
         color: $magenta
   &__progress
-    position: relative
-    bottom: 50px
+    margin-bottom: 15px
   .btn-wrap
     display: none
   &._lock
     .btn-wrap
       display: flex
+      margin-top: 15px
   &._lock._sign
     .btn-wrap
       display: none
@@ -685,7 +674,6 @@ body
     bottom: 70px
     left: 125px
     z-index: 4
-
   &__win
     opacity: 0
     transition: opacity .7s ease-in-out
@@ -730,7 +718,6 @@ body
       left: 50%
       transform: translate(-50%, 0)
       z-index: 5
-
   &._iphone, &._tv, &._jbl, &._megogo, &._respin, &._nothing, &._points50, &._fs10, &._fs25, &._fs50, &._saveBet100, &._saveBet150, &._saveBet200
     .sphere
       &__win
@@ -891,7 +878,6 @@ body
       padding:  5px 6px 4px 6px
       &._active
         background: $magenta
-
     &-wrap
       display: flex
       align-items: center
@@ -901,7 +887,6 @@ body
       transform: translate(-50%, 40%)
       z-index: 2
       gap: 45px
-      //opacity: 0
     &-body
       width: 386px
       height: 41px
@@ -994,6 +979,7 @@ body
       font-size: 12px
       line-height: 20px
       scrollbar-width: auto
+      padding-right: 4px
       &::-webkit-scrollbar
         background: rgba($white, .3)
         width: 3px
@@ -1047,7 +1033,6 @@ body
         background: linear-gradient(180deg, #8D8D8D 0%, #8A8A8A 20.5%, #838383 48%, #818181 70.5%, #7E7E7E 100%)
       span
         opacity: .2
-
     &::before, &::after
       content: ""
       display: block
@@ -1080,7 +1065,6 @@ body
     box-shadow: 0px 0px 20px 41px rgba(11, 100, 224, 0.05) inset, 0px 0px 50px 70px rgba(11, 100, 224, 0.05)
   &__list
     width: 950px
-    //width: 720px
     overflow: hidden
     padding: 10px
     height: 350px
@@ -1099,8 +1083,8 @@ body
       top: 50%
       left: 50%
       transform: translate(-50%, -50%)
-      background: rgba(0, 0, 61, 0.50)
-      backdrop-filter: blur(4px)
+      background: rgba(0, 0, 61, .7)
+      backdrop-filter: blur(6px)
       width: 340px
       height: 312px
       z-index: 3
@@ -1115,6 +1099,7 @@ body
         overflow-y: auto
         scrollbar-width: auto
         max-height: 270px
+        padding-right: 4px
         &::-webkit-scrollbar
           background: rgba($white, .3)
           width: 3px
@@ -1237,7 +1222,6 @@ body
         &:hover
           cursor: pointer
           background: url("../img/info-icon-hover.png") no-repeat 0 0/contain
-
   &__slider
     position: relative
     &-move
@@ -1259,7 +1243,6 @@ body
         &:hover
           cursor: pointer
           background: url("../img/prize/slider-btn-hover.png") no-repeat 0 0/contain
-
       &-right
         right: 0
         transform: translate(200%, 0)
@@ -1301,7 +1284,6 @@ body
       background: url("../img/table/mob-decor.png") no-repeat 0 0/contain
       width: 624px
       height: 560px
-
   &__title
     max-width: 580px
     &::before, &::after
@@ -1474,7 +1456,6 @@ body
               color: $white
               background: $magenta
               padding: 2px 5px
-
       &-item
         width: 96px
         text-align: center
@@ -1599,7 +1580,7 @@ body
     > summary
       list-style: none
     summary
-      padding: 13px 16px
+      padding: 14px 16px 12px
       font-family: $font-suisse-intl-reg
       font-size: 16px
       line-height: 26px
@@ -1681,7 +1662,6 @@ body
               font-family: $font-suisse-intl-reg
               font-size: 16px
               line-height: 26px
-
       tr,td,th
         font-family: $font-suisse-intl-reg
         color: $grey
@@ -1905,8 +1885,6 @@ body
   .btn-wrap
     display: none
 
-
-
 /// uk stykes
 .fav-page
   .banner
@@ -1954,7 +1932,6 @@ body
               content: "You"
               padding: 2px 3px
               transform: translate(30%, -50%)
-
 
 /// DARK
 body.dark

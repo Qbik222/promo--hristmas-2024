@@ -24,7 +24,6 @@
     let userId = 101234861;
     // let userId = 9999;
 
-
     function loadTranslations() {
         return fetch(`${apiURL}/translates/${locale}`).then(res => res.json())
             .then(json => {
@@ -71,7 +70,6 @@
 
 
     function init() {
-        console.log(window.g_user_id)
         if (window.store) {
             var state = window.store.getState();
             userId = state.auth.isAuthorized && state.auth.id || '';
@@ -137,8 +135,6 @@
             }
             request(`/favuser/${userId}?nocache=1`)
                 .then(res => {
-                    // res.userid = userId
-                    console.log(res)
                     if (res.userid) {
                         participateBtns.forEach(item => item.classList.add('hide'));
                         ballWrap.classList.remove('_sign');
@@ -178,10 +174,8 @@
     }
 
     function displayUserSpins(spins) {
-        console.log(spins)
         const spinItem = document.querySelector('.spins-row');
         const noSpinItem = document.querySelector('.no-spins');
-
         if (!spins || spins.length === 0) {
             spinItem.classList.add('hide');
             noSpinItem.classList.remove('hide');
@@ -228,10 +222,10 @@
           tabWidth= visibleSlides * (cardWidth + cardsMargin)
 
 
-    let currentSlide = 1;
-    let cardsPosition = 0;
-    let leftSlide;
-    let rightSlide;
+    let currentSlide = 1,
+        cardsPosition = 0,
+        leftSlide,
+        rightSlide;
 
     const updateActiveCard = (cards, activeIndex) => {
         cards.forEach((card, i) =>{
@@ -270,9 +264,15 @@
             rightSlide++
             leftSlide++
         }else if(currentSlide === totalCards) {
+            console.log(currentSlide)
             currentSlide = 1;
             cardsPosition = 0;
-        }else {
+        }else if(currentSlide === totalCards - ( visibleSlides + 1)){
+            currentSlide = totalCards
+            cardsPosition = cardsWrap.clientWidth - (window.innerWidth - (cardsMargin / 2))
+            console.log(cardsPosition)
+        }
+        else {
             const maxPosition = (totalCards - visibleSlides) * (cardWidth + cardsMargin);
             if (cardsPosition + cardWidth + cardsMargin > maxPosition) {
                 cardsPosition = maxPosition;
@@ -296,7 +296,7 @@
             currentSlide = 1
         }else if(currentSlide === 1 && isMobile === true){
             currentSlide = totalCards
-            cardsPosition = totalCards  * (cardWidth + cardsMargin) - (cardWidth + cardsMargin)
+            cardsPosition = cardsWrap.clientWidth - (window.innerWidth - (cardsMargin / 2))
         }else {
             cardsPosition -= cardWidth + cardsMargin;
             currentSlide--
@@ -325,17 +325,17 @@
         })
     }
 // popups
-    const prizeOpenBtns = document.querySelectorAll(".prize__list-item-btn")
-    const prizeCloseBtns = document.querySelectorAll(".prize__list-popup-close")
-    const guidePopupsWrap = document.querySelectorAll(".guide__item")
-    const guideOpenBtns = document.querySelectorAll(".guide__item-info-btn")
-    const guideCloseBtns = document.querySelectorAll(".guide__item-popup-close")
-    const tablePopup = document.querySelector(".table__popup")
-    const tablePopupClose = document.querySelector(".table__popup-close")
-    const tablePopupOpen = document.querySelector(".table__info")
-    const ballPopup = document.querySelector(".progress__popup")
-    const ballPopupClose = document.querySelector(".progress__popup-close")
-    const ballPopupOpen = document.querySelector(".progress__popup-btn")
+    const prizeOpenBtns = document.querySelectorAll(".prize__list-item-btn"),
+          prizeCloseBtns = document.querySelectorAll(".prize__list-popup-close"),
+          guidePopupsWrap = document.querySelectorAll(".guide__item"),
+          guideOpenBtns = document.querySelectorAll(".guide__item-info-btn"),
+          guideCloseBtns = document.querySelectorAll(".guide__item-popup-close"),
+          tablePopup = document.querySelector(".table__popup"),
+          tablePopupClose = document.querySelector(".table__popup-close"),
+          tablePopupOpen = document.querySelector(".table__info"),
+          ballPopup = document.querySelector(".progress__popup"),
+          ballPopupClose = document.querySelector(".progress__popup-close"),
+          ballPopupOpen = document.querySelector(".progress__popup-btn")
 
     setPopups(cards, prizeOpenBtns);
     setPopups(guidePopupsWrap, guideOpenBtns);
@@ -461,7 +461,6 @@ window.addEventListener("DOMContentLoaded", () =>{
             this.o = 1;
         };
 
-        // shim layer with setTimeout fallback
         window.requestAnimFrame = (function () {
             return window.requestAnimationFrame ||
                 window.webkitRequestAnimationFrame ||
@@ -471,13 +470,10 @@ window.addEventListener("DOMContentLoaded", () =>{
                 };
         })();
 
-        // Apply Snowstorm to all elements with the class 'sky'
         var skies = document.querySelectorAll('.sky');
         skies.forEach(function (sky) {
             new Snowstorm(sky);
         });
-
-
 
         // ball shake snow
         const canvas = document.querySelector('.snowCanvas');
@@ -489,7 +485,7 @@ window.addEventListener("DOMContentLoaded", () =>{
 
         let snowflakes = [];
         const maxSnowflakes = 100;
-        const maxSpeed = 7; // Максимальна швидкість сніжинки
+        const maxSpeed = 7;
         let stormCounter = 1
 
 
@@ -508,10 +504,9 @@ window.addEventListener("DOMContentLoaded", () =>{
 
             update(ballX, ballY, ballRadius, ballShaking) {
                 if (this.movingToBottom) {
-                    const targetSpeed = 0.1; // Маленька швидкість, до якої прагнемо
+                    const targetSpeed = 0.1;
                     const speedDecayFactor = 0.05; // Коефіцієнт для плавного сповільнення
 
-                    // Плавно наближаємо швидкість до targetSpeed
                     this.speedX = this.speedX - (this.speedX - targetSpeed) * speedDecayFactor;
                     this.speedY = this.speedY - (this.speedY - targetSpeed) * speedDecayFactor;
 
@@ -533,14 +528,13 @@ window.addEventListener("DOMContentLoaded", () =>{
 
                 // Додавання швидкості через "трусіння" кулі
                 if (ballShaking) {
-                    this.acceleration += 0.05; // Нарощування швидкості
+                    this.acceleration += 0.05;
                 } else {
-                    this.acceleration *= 0.95; // Поступове зменшення
+                    this.acceleration *= 0.95;
                 }
                 this.speedX += this.acceleration * (Math.random() - 0.5);
                 this.speedY += this.acceleration * (Math.random() - 0.5);
 
-                // Перевірка на межі canvas
                 if (this.y > canvas.height) {
                     this.y = 0;
                     this.x = Math.random() * canvas.width;
@@ -593,8 +587,7 @@ window.addEventListener("DOMContentLoaded", () =>{
             }
         }
 
-// Спавнимо нові сніжинки при зміні стану кулі
-        let lastBallShakingState = false; // Змінна для відстеження стану кулі
+        let lastBallShakingState = false;
 
         for (let i = 0; i < maxSnowflakes; i++) {
             snowflakes.push(new Snowflake());
@@ -615,12 +608,9 @@ window.addEventListener("DOMContentLoaded", () =>{
                 ballY = ball.offsetTop + matrix.m42 + ballRadius;
             }
 
-            // Якщо стан кулі змінився на "рух", перезапускаємо сніжинки
             if (ballShaking && !lastBallShakingState) {
-                // Очищаємо масив сніжинок
                 snowflakes = [];
                 snowflakesRemoved = 0;
-                // Спавнимо нові сніжинки
                 for (let i = 0; i < maxSnowflakes; i++) {
                     snowflakes.push(new Snowflake());
                 }
@@ -642,8 +632,7 @@ window.addEventListener("DOMContentLoaded", () =>{
     })();
 })
 
-// snowfall animation
-
+// snowfall animatio
 
     let i = 1;
     function sendShakeRequest() {
@@ -665,10 +654,9 @@ window.addEventListener("DOMContentLoaded", () =>{
         });
     }
 
-
-    const btnShake = document.querySelector(".progress__shake")
-    const ball = document.querySelector(".sphere")
-    const ballBox = document.querySelector(".sphere__box")
+    const btnShake = document.querySelector(".progress__shake"),
+          ball = document.querySelector(".sphere"),
+          ballBox = document.querySelector(".sphere__box")
 
     async function animateShake(ball, box, btn, prize) {
         const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
