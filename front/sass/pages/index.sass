@@ -191,10 +191,6 @@ body
   align-items: center
   justify-content: flex-end
   flex-direction: column
-  canvas
-    min-height: 500px
-    @media screen and (max-width: 600px)
-      min-height: 400px
   &::before
     content: ""
     display: block
@@ -249,6 +245,9 @@ body
     min-width: 350px
     z-index: 3
     left: 51%
+    min-height: 500px
+    @media screen and (max-width: 600px)
+      min-height: 400px
     &-img
       position: relative
       z-index: 1
