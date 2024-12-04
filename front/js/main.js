@@ -275,7 +275,7 @@
             console.log(currentSlide)
             currentSlide = 1;
             cardsPosition = 0;
-        }else if(currentSlide === totalCards - ( visibleSlides + 1)){
+        }else if(currentSlide === totalCards - ( visibleSlides + 1) && isMobile === true){
             currentSlide = totalCards
             cardsPosition = cardsWrap.clientWidth - (window.innerWidth - (cardsMargin / 2))
             console.log(cardsPosition)
@@ -293,7 +293,9 @@
         setCardsPosition(cardsPosition);
         updateActiveCard(cards, currentSlide)
         firstLastSlides()
-        hidePopups(cards)
+        hidePopupsOnBtn(prizePopupItem)
+        // centerPopup(".prize__list-popup")
+
     };
     const moveLeft = () => {
         if(currentSlide === 1 && isMobile === false){
@@ -312,8 +314,12 @@
         setCardsPosition(cardsPosition);
         updateActiveCard(cards, currentSlide)
         firstLastSlides()
-        hidePopups(cards)
+        hidePopupsOnBtn(prizePopupItem)
+        // centerPopup(".prize__list-popup")
     };
+
+    // centerPopup(".prize__list-popup")
+
 
     // popups logic
 
@@ -327,11 +333,16 @@
         });
     }
 
-    function hidePopups(popups){
+    function   hidePopupsOnBtn(popups){
         popups.forEach(popup =>{
            popup.classList.remove("_popup")
         })
     }
+
+
+
+
+    
 // popups
     const prizeOpenBtns = document.querySelectorAll(".prize__list-item-btn"),
           prizeCloseBtns = document.querySelectorAll(".prize__list-popup-close"),
@@ -343,20 +354,47 @@
           tablePopupOpen = document.querySelector(".table__info"),
           ballPopup = document.querySelector(".progress__popup"),
           ballPopupClose = document.querySelector(".progress__popup-close"),
-          ballPopupOpen = document.querySelector(".progress__popup-btn")
+          ballPopupOpen = document.querySelector(".progress__popup-btn"),
+          prizePopupItem = document.querySelectorAll(".prize__container-item")
 
-    setPopups(cards, prizeOpenBtns);
+
+    document.addEventListener("click", (e) =>{
+
+        //  prizePopupItem.forEach(card =>{
+        //         if(e.target !== card){
+        //             prizeOpenBtns.forEach(btn =>{
+        //                 if(e.target !== btn && e.target !== card){
+        //                     console.log(e.target )
+        //                     // card.classList.remove("_popup")
+        //                 }
+        //             })
+        //         }
+        // })
+        guidePopupsWrap.forEach(popup =>{
+            if(!popup.contains(e.target)){
+                popup.classList.remove("_popup")
+            }
+        })
+
+        if(!ballPopup.contains(e.target) && e.target !== ballPopupOpen){
+                ballPopup.classList.add("hide")
+        }
+
+    })
+
+
+    setPopups(prizePopupItem, prizeOpenBtns);
     setPopups(guidePopupsWrap, guideOpenBtns);
 
     guideCloseBtns.forEach(btn =>{
         btn.addEventListener('click', () =>{
-            hidePopups(guidePopupsWrap)
+              hidePopupsOnBtn(guidePopupsWrap)
         });
     });
 
     prizeCloseBtns.forEach(btn =>{
         btn.addEventListener('click', () =>{
-            hidePopups(cards)
+              hidePopupsOnBtn(prizePopupItem)
         });
     });
 
@@ -371,11 +409,11 @@
     });
 
     ballPopupOpen.addEventListener("click", () =>{
-        ballPopup.classList.remove("hide")
+            ballPopup.classList.remove("hide")
     });
 
     ballPopupClose.addEventListener("click", () =>{
-        ballPopup.classList.add("hide")
+            ballPopup.classList.add("hide")
     });
 
 window.addEventListener("DOMContentLoaded", () =>{

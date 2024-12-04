@@ -258,6 +258,24 @@ body
     min-width: 510px
     left: 45%
     z-index: 0
+    picture
+      position: relative
+      z-index: 1
+    &::before
+      content: ""
+      display: block
+      width: 600px
+      height: 360px
+      position: absolute
+      top: 43%
+      left: 50%
+      transform: translate(-50%, -50%)
+      z-index: 0
+      background: url("../img/banner/gift-light.png") no-repeat 0 0/contain
+      @media screen and (max-width: 600px)
+        background: url("../img/banner/gift-light-mob.png") no-repeat 0 0/contain
+        width: 515px
+        height: 311px
   &__btn
     z-index: 3
   &__date
@@ -432,7 +450,7 @@ body
       display: none
       width: 340px
       height: 135px
-      background: rgba($dark-blue, .5)
+      background: $dark-blue
       border: 1px solid rgba($white, .5)
       border-radius: 16px
       position: absolute
@@ -467,6 +485,8 @@ body
         top: 0
         right: 0
         transform: translate(0, -50%)
+        &::before
+          background: url("../img/info-icon-close.png") no-repeat 0 0/contain
     &._popup
       .guide__item-popup
         display: flex
@@ -853,6 +873,7 @@ body
   display: flex
   position: relative
   gap: 10px
+  z-index: 4
   &._done
     .progress__bar
       &::before
@@ -962,12 +983,12 @@ body
         font-size: 16px
   &__popup
     position: absolute
-    top: 50%
+    top: 0
     left: 50%
     transform: translate(-50%, -50%)
     width: 200px
     height: 200px
-    background: rgba(0, 0, 61, 0.50)
+    background: rgba(0, 0, 61, 1)
     backdrop-filter: blur(4px)
     border: 1px solid rgba($white, 0.5)
     border-radius: 16px
@@ -978,6 +999,8 @@ body
       top: 0
       right: 0
       transform: translate(0, -50%)
+      &::before
+        background: url("../img/info-icon-close.png") no-repeat 0 0/contain
     &-text
       overflow-y: auto
       width: 100%
@@ -1067,6 +1090,7 @@ body
   flex-direction: column
   width: 100%
   padding-top: 30px
+  position: relative
   &__title
     max-width: 600px
     border-radius: 50%
@@ -1091,7 +1115,7 @@ body
       top: 50%
       left: 50%
       transform: translate(-50%, -50%)
-      background: rgba(0, 0, 61, .7)
+      background: rgba(0, 0, 61, 1)
       backdrop-filter: blur(6px)
       width: 340px
       height: 312px
@@ -1121,6 +1145,9 @@ body
         top: 0
         right: 0
         transform: translate(0, -50%)
+        &::before
+          background: url("../img/info-icon-close.png") no-repeat 0 0/contain
+
     &-item
       width: 195px
       height: 241px
@@ -1272,6 +1299,27 @@ body
         cursor: pointer
       &._active
         background: $magenta
+  &__container
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    z-index: 4
+    pointer-events: none
+    &-item
+      position: absolute
+      width: 100%
+      height: 100%
+      top: 50px
+      left: 0
+      &._popup
+        .prize
+          &__list-popup
+            display: flex
+      .prize
+        &__list-popup
+          pointer-events: initial
 
 .table
   display: flex
@@ -1533,6 +1581,8 @@ body
       top: 0
       right: 0
       transform: translate(0, -50%)
+      &::before
+        background: url("../img/info-icon-close.png") no-repeat 0 0/contain
     &-title
       font-family: $font-suisse-intl-bold
       font-size: 16px
@@ -1556,8 +1606,8 @@ body
         background: $green
     &-scroll
       display: flex
-    &-place, &-prize
-      width: 50%
+    &-place, &-prize, &-wager
+      width: 33%
       display: flex
       align-items: center
       justify-content: flex-start
@@ -1779,6 +1829,8 @@ body
         font-size: 12px
         &::before, &::after
           content: none
+        &._ios
+          padding: 17px 24px 15px
   &__wrap
     margin-top: 20px
     display: flex
@@ -1952,6 +2004,11 @@ body.dark
         background: url("../img/banner/banner-bottom-desc-dark.png") repeat 0 0/cover
         @media screen and (max-width: 600px)
           background: url("../img/banner/banner-bottom-mob-dark.png") repeat 0 0/cover
+      &__gift
+        &::before
+          background: url("../img/banner/gift-light-dark.png") no-repeat 0 0/contain
+          @media screen and (max-width: 600px)
+            background: url("../img/banner/gift-light-mob-dark.png") no-repeat 0 0/contain
     .ball
       background: url("../img/ball/bg-desc-dark.png") no-repeat 50% 0/cover
       background-size: 1365px 765px
