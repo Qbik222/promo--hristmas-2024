@@ -743,23 +743,46 @@ window.addEventListener("DOMContentLoaded", () =>{
           ball = document.querySelector(".sphere"),
           ballBox = document.querySelector(".sphere__box")
 
-    async function animateShake(ball, box, btn, prize) {
+    async function animateShake(ball, box, btn, prize, prizeNum) {
+
+
         const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
-        btn.classList.add("_disabled");
-        ball.classList.add("_shake");
-        box.classList.add("_shake-reverse");
+        if(prizeNum){
+            console.log(prizeNum)
+            btn.classList.add("_disabled");
+            ball.classList.add("_shake");
+            box.classList.add("_shake-reverse");
 
-        // await delay(2000);
+            await delay(2000)
 
-        ball.classList.remove("_shake");
-        ball.classList.add("_before-hide");
-        box.classList.remove("_shake-reverse");
-        box.classList.add("_box-opacity");
+            ball.classList.remove("_shake");
+            ball.classList.add("_before-hide");
+            box.classList.remove("_shake-reverse");
+            box.classList.add("_box-opacity");
 
-        // await delay(200);
+            await delay(200);
 
-        ball.classList.add(`${prize}`);
+            ball.classList.add(`${prize}`);
+        }
+        else{
+            btn.classList.add("_disabled");
+            ball.classList.add("_shake");
+            box.classList.add("_shake-reverse");
+
+            // await delay(2000)
+
+            ball.classList.remove("_shake");
+            ball.classList.add("_before-hide");
+            box.classList.remove("_shake-reverse");
+            box.classList.add("_box-opacity");
+
+            if(prizeNum === 0) await delay(200);
+
+            ball.classList.add(`${prize}`);
+        }
+
+
     }
 
     // Кожен клас відповідає виграному призу:
@@ -783,6 +806,7 @@ window.addEventListener("DOMContentLoaded", () =>{
     ];
 
     sessionStorage.setItem("prizeNum", 0)
+
 
     let prizeState = winClasses[sessionStorage.getItem("prizeNum")]
 
@@ -821,7 +845,7 @@ window.addEventListener("DOMContentLoaded", () =>{
     setPrizeNum(btnPrize12, 11)
     setPrizeNum(btnPrize13, 12)
 
-    function initShake(ball, btn, box) {
+    function initShake(ball, btn, box, prizeNum) {
         btn.addEventListener("click", () =>{
             sendShakeRequest().then(res => {
                 console.log(res);
@@ -833,25 +857,25 @@ window.addEventListener("DOMContentLoaded", () =>{
                 // const prize = res.number;
                 const prize = prizeState;
                 const streakBonus = res.streakBonus || debug;
-                animateShake(ball, box, btn, prize).catch(err => console.error("anim error:", err));
+                animateShake(ball, box, btn, prize, prizeNum).catch(err => console.error("anim error:", err));
             });
         })
     }
 
-    initShake(ball, btnShake, ballBox)
+    initShake(ball, btnShake, ballBox, sessionStorage.getItem("prizeNum"))
     initShake(ball, btnPrize1, ballBox)
-    initShake(ball, btnPrize2, ballBox)
-    initShake(ball, btnPrize3, ballBox)
-    initShake(ball, btnPrize4, ballBox)
-    initShake(ball, btnPrize5, ballBox)
-    initShake(ball, btnPrize6, ballBox)
-    initShake(ball, btnPrize7, ballBox)
-    initShake(ball, btnPrize8, ballBox)
-    initShake(ball, btnPrize9, ballBox)
-    initShake(ball, btnPrize10, ballBox)
-    initShake(ball, btnPrize11, ballBox)
-    initShake(ball, btnPrize12, ballBox)
-    initShake(ball, btnPrize13, ballBox)
+    initShake(ball, btnPrize2, ballBox )
+    initShake(ball, btnPrize3, ballBox )
+    initShake(ball, btnPrize4, ballBox )
+    initShake(ball, btnPrize5, ballBox )
+    initShake(ball, btnPrize6, ballBox )
+    initShake(ball, btnPrize7, ballBox )
+    initShake(ball, btnPrize8, ballBox )
+    initShake(ball, btnPrize9, ballBox )
+    initShake(ball, btnPrize10, ballBox )
+    initShake(ball, btnPrize11, ballBox )
+    initShake(ball, btnPrize12, ballBox )
+    initShake(ball, btnPrize13, ballBox )
 
 
 // table toggle
