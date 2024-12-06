@@ -1,5 +1,5 @@
 (function () {
-    const apiURL = 'https://fav-prom.com/api_csgo'
+    const apiURL = 'https://fav-prom.com/api_wheel_2025'
 
     const
         unauthMsgs = document.querySelectorAll('.unauth-msg'),
@@ -12,8 +12,36 @@
     const ukLeng = document.querySelector('#ukLeng');
     const enLeng = document.querySelector('#enLeng');
 
-    let locale = 'uk',
+    let locale = sessionStorage.getItem('locale') || 'en',
         week = 1;
+
+    console.log(week)
+
+    function setState(newLocale) {
+        locale = newLocale;
+        sessionStorage.setItem('locale', locale);
+    }
+    function toggleState() {
+        const newLocale = locale === 'en' ? 'uk' : 'en';
+        setState(newLocale);
+        window.location.reload()
+    }
+    document.querySelector('.en-btn').addEventListener('click', () => {
+        toggleState();
+    });
+    document.querySelector('.week-btn').addEventListener('click', () => {
+        console.log(week)
+        if(week === 1){
+            document.querySelector('._week1').style.display = "flex"
+            document.querySelector('._week2').style.display = "none"
+            return week = 2
+        }
+        if(week === 2){
+            document.querySelector('._week2').style.display = "flex"
+            document.querySelector('._week1').style.display = "none"
+            week = 1
+        }
+    });
 
     if (ukLeng) locale = 'uk';
     if (enLeng) locale = 'en';
@@ -21,9 +49,17 @@
 
     let i18nData = {};
     const debug = true;
-    // let userId;
-    let userId = 101234861;
-    // let userId = 9999;
+    let userId;
+    userId = Number(sessionStorage.getItem("userId"));
+
+    console.log(typeof userId)
+
+    document.querySelector(".lock-btn").addEventListener("click", () =>{
+        userId ? sessionStorage.removeItem("userId") : sessionStorage.setItem("userId", '101234861')
+        window.location.reload()
+    })
+
+    // userId = 9999;
 
     if(week === 1){
         document.querySelector('._week1').style.display = "flex"
@@ -52,12 +88,12 @@
     function translate() {
         const elems = document.querySelectorAll('[data-translate]')
         if (elems && elems.length) {
-            // elems.forEach(elem => {
-            //     const key = elem.getAttribute('data-translate');
-            //     elem.innerHTML = i18nData[key] || '*----NEED TO BE TRANSLATED----*   key:  ' + key;
-            //     elem.removeAttribute('data-translate');
-            // })
-            console.log("translate working")
+            elems.forEach(elem => {
+                const key = elem.getAttribute('data-translate');
+                elem.innerHTML = i18nData[key] || '*----NEED TO BE TRANSLATED----*   key:  ' + key;
+                elem.removeAttribute('data-translate');
+            })
+            // console.log("translate working")
         }
         if (locale === 'en') {
             mainPage.classList.add('en');
@@ -137,12 +173,15 @@
     }
 
     function checkUserAuth() {
+        console.log(userId)
         if (userId) {
+
             for (const unauthMes of unauthMsgs) {
                 unauthMes.classList.add('hide');
             }
             request(`/favuser/${userId}?nocache=1`)
                 .then(res => {
+                    console.log(res)
                     if (res.userid) {
                         participateBtns.forEach(item => item.classList.add('hide'));
                         ballWrap.classList.remove('_sign');
@@ -342,7 +381,7 @@
 
 
 
-    
+
 // popups
     const prizeOpenBtns = document.querySelectorAll(".prize__list-item-btn"),
           prizeCloseBtns = document.querySelectorAll(".prize__list-popup-close"),
@@ -711,14 +750,14 @@ window.addEventListener("DOMContentLoaded", () =>{
         ball.classList.add("_shake");
         box.classList.add("_shake-reverse");
 
-        await delay(2000);
+        // await delay(2000);
 
         ball.classList.remove("_shake");
         ball.classList.add("_before-hide");
         box.classList.remove("_shake-reverse");
         box.classList.add("_box-opacity");
 
-        await delay(200);
+        // await delay(200);
 
         ball.classList.add(`${prize}`);
     }
@@ -739,9 +778,49 @@ window.addEventListener("DOMContentLoaded", () =>{
     // "_saveBet200" - виграно страховку на 200 ставок
     // функція initShake прокидує класи відповідні призам на блок .sphere для відображення призу
     const winClasses = [
-        "_iphone", "_tv", "_jbl", "_megogo", "_respin", "_nothing",
-        "_points50", "_fs10", "_fs25", "_fs50", "_saveBet100", "_saveBet150", "_saveBet200"
+        "_iphone", "_tv", "_jbl", "_megogo", "_respin", "_nothing", "_fs10", "_fs25",
+        "_fs50", "_saveBet100", "_saveBet150", "_saveBet200", "_points50"
     ];
+
+    sessionStorage.setItem("prizeNum", 0)
+
+    let prizeState = winClasses[sessionStorage.getItem("prizeNum")]
+
+    const btnPrize1 = document.querySelector('.prize1');
+    const btnPrize2 = document.querySelector('.prize2');
+    const btnPrize3 = document.querySelector('.prize3');
+    const btnPrize4 = document.querySelector('.prize4');
+    const btnPrize5 = document.querySelector('.prize5');
+    const btnPrize6 = document.querySelector('.prize6');
+    const btnPrize7 = document.querySelector('.prize7');
+    const btnPrize8 = document.querySelector('.prize8');
+    const btnPrize9 = document.querySelector('.prize9');
+    const btnPrize10 = document.querySelector('.prize10');
+    const btnPrize11 = document.querySelector('.prize11');
+    const btnPrize12 = document.querySelector('.prize12');
+    const btnPrize13 = document.querySelector('.prize13');
+
+    function setPrizeNum(btn, num){
+        btn.addEventListener("click", (e) =>{
+            sessionStorage.setItem("prizeNum", num)
+            prizeState = winClasses[sessionStorage.getItem("prizeNum")]
+        })
+    }
+
+    setPrizeNum(btnPrize1, 0)
+    setPrizeNum(btnPrize2, 1)
+    setPrizeNum(btnPrize3, 2)
+    setPrizeNum(btnPrize4, 3)
+    setPrizeNum(btnPrize5, 4)
+    setPrizeNum(btnPrize6, 5)
+    setPrizeNum(btnPrize7, 6)
+    setPrizeNum(btnPrize8, 7)
+    setPrizeNum(btnPrize9, 8)
+    setPrizeNum(btnPrize10,9)
+    setPrizeNum(btnPrize11, 10)
+    setPrizeNum(btnPrize12, 11)
+    setPrizeNum(btnPrize13, 12)
+
     function initShake(ball, btn, box) {
         btn.addEventListener("click", () =>{
             sendShakeRequest().then(res => {
@@ -752,7 +831,7 @@ window.addEventListener("DOMContentLoaded", () =>{
                     return;
                 }
                 // const prize = res.number;
-                const prize = winClasses[12];
+                const prize = prizeState;
                 const streakBonus = res.streakBonus || debug;
                 animateShake(ball, box, btn, prize).catch(err => console.error("anim error:", err));
             });
@@ -760,6 +839,20 @@ window.addEventListener("DOMContentLoaded", () =>{
     }
 
     initShake(ball, btnShake, ballBox)
+    initShake(ball, btnPrize1, ballBox)
+    initShake(ball, btnPrize2, ballBox)
+    initShake(ball, btnPrize3, ballBox)
+    initShake(ball, btnPrize4, ballBox)
+    initShake(ball, btnPrize5, ballBox)
+    initShake(ball, btnPrize6, ballBox)
+    initShake(ball, btnPrize7, ballBox)
+    initShake(ball, btnPrize8, ballBox)
+    initShake(ball, btnPrize9, ballBox)
+    initShake(ball, btnPrize10, ballBox)
+    initShake(ball, btnPrize11, ballBox)
+    initShake(ball, btnPrize12, ballBox)
+    initShake(ball, btnPrize13, ballBox)
+
 
 // table toggle
 
@@ -849,6 +942,10 @@ window.addEventListener("DOMContentLoaded", () =>{
     })
     document.querySelector(".en-btn").addEventListener("click", () =>{
         document.querySelector(".fav-page").classList.toggle("en")
+    })
+
+    document.querySelector(".testMenu").addEventListener("click", ()=>{
+        document.querySelector(".prizes-btns").classList.toggle("hide")
     })
 
 })();

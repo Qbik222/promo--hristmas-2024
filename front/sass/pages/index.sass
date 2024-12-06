@@ -12,16 +12,20 @@ $grey: #E3E3E3
 $font-suisse-intl-reg: SuisseIntl-Regular, sans-serif
 $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
 
-.dark-btn, .en-btn
+.prizes-btns, .testMenu
   position: fixed
   z-index: 20
   left: 0
-  top: 0
-  width: 50px
-  height: 20px
-
-.en-btn
   top: 25px
+  width: 50px
+  height: 25px
+  display: flex
+  flex-direction: column
+  gap: 2px
+
+
+.testMenu
+  top: 0
 
 body.light
   background: $dark-blue-bg
@@ -1930,9 +1934,11 @@ body
 
 ._shake
   animation: horizontal-shaking .6s linear infinite
+  //animation: horizontal-shaking .01s linear infinite
 
 ._shake-reverse
   animation: horizontal-shaking-reverse .6s linear infinite
+  //animation: horizontal-shaking-reverse .01s linear infinite
 
 ._box-opacity
   animation: opacity 1s ease
