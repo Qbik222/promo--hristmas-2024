@@ -769,12 +769,13 @@ window.addEventListener("DOMContentLoaded", () =>{
     ];
 
 
-    function removePrize(ball, box, prize){
+    function removePrize(ball, box, btn){
         ball.classList.remove("_before-hide");
         winClasses.forEach(item =>{
             ball.classList.remove(`${item}`)
         })
         box.classList.remove("_box-opacity")
+        btn.classList.remove("_disabled")
 
     }
 
@@ -783,7 +784,7 @@ window.addEventListener("DOMContentLoaded", () =>{
 
         const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
-        removePrize(ball, box, prize)
+        removePrize(ball, box, иет)
 
         if(prizeNum){
             console.log(prizeNum)
