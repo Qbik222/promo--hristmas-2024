@@ -743,10 +743,47 @@ window.addEventListener("DOMContentLoaded", () =>{
           ball = document.querySelector(".sphere"),
           ballBox = document.querySelector(".sphere__box")
 
+    let currentPrize;
+    let pastPrize;
+
+
+
+    // Кожен клас відповідає виграному призу:
+    // "_iphone" - виграно iPhone
+    // "_tv" - виграно телевізор
+    // "_jbl" - виграно JBL-колонку
+    // "_megogo" - виграно підписку Megogo
+    // "_respin" - додаткове обертання
+    // "_nothing" - нічого не виграно
+    // "_points50" - виграно 50 бонусних балів
+    // "_fs10" - виграно 10 фріспінів
+    // "_fs25" - виграно 25 фріспінів
+    // "_fs50" - виграно 50 фріспінів
+    // "_saveBet100" - виграно страховку на 100 ставок
+    // "_saveBet150" - виграно страховку на 150 ставок
+    // "_saveBet200" - виграно страховку на 200 ставок
+    // функція initShake прокидує класи відповідні призам на блок .sphere для відображення призу
+    const winClasses = [
+        "_iphone", "_tv", "_jbl", "_megogo", "_respin", "_nothing", "_fs10", "_fs25",
+        "_fs50", "_saveBet100", "_saveBet150", "_saveBet200", "_points50"
+    ];
+
+
+    function removePrize(ball, box, prize){
+        ball.classList.remove("_before-hide");
+        winClasses.forEach(item =>{
+            ball.classList.remove(`${item}`)
+        })
+        box.classList.remove("_box-opacity")
+
+    }
+
     async function animateShake(ball, box, btn, prize, prizeNum) {
 
 
         const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+
+        removePrize(ball, box, prize)
 
         if(prizeNum){
             console.log(prizeNum)
@@ -781,29 +818,11 @@ window.addEventListener("DOMContentLoaded", () =>{
 
             ball.classList.add(`${prize}`);
         }
+        return pastPrize = prize;
 
 
     }
 
-    // Кожен клас відповідає виграному призу:
-    // "_iphone" - виграно iPhone
-    // "_tv" - виграно телевізор
-    // "_jbl" - виграно JBL-колонку
-    // "_megogo" - виграно підписку Megogo
-    // "_respin" - додаткове обертання
-    // "_nothing" - нічого не виграно
-    // "_points50" - виграно 50 бонусних балів
-    // "_fs10" - виграно 10 фріспінів
-    // "_fs25" - виграно 25 фріспінів
-    // "_fs50" - виграно 50 фріспінів
-    // "_saveBet100" - виграно страховку на 100 ставок
-    // "_saveBet150" - виграно страховку на 150 ставок
-    // "_saveBet200" - виграно страховку на 200 ставок
-    // функція initShake прокидує класи відповідні призам на блок .sphere для відображення призу
-    const winClasses = [
-        "_iphone", "_tv", "_jbl", "_megogo", "_respin", "_nothing", "_fs10", "_fs25",
-        "_fs50", "_saveBet100", "_saveBet150", "_saveBet200", "_points50"
-    ];
 
     sessionStorage.setItem("prizeNum", 0)
 
