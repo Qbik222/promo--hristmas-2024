@@ -784,7 +784,7 @@ window.addEventListener("DOMContentLoaded", () =>{
 
         const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
-        removePrize(ball, box, иет)
+        removePrize(ball, box, btn)
 
         if(prizeNum){
             console.log(prizeNum)
