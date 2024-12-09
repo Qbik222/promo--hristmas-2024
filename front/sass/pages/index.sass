@@ -84,14 +84,15 @@ body
     color: inherit
     font-size: inherit
   &::before, &::after
-    content: ""
     display: block
     position: absolute
   &::before
-    width: 165px
-    height: 24px
-    top: -8px
-    left: 30px
+    max-width: 165px
+    max-height: 24px
+    width: 58.4%
+    height: 32.4%
+    top: -6px
+    left: 25px
     background: url("../img/snow-btn1.png") no-repeat 0 0/contain
   &::after
     width: 58px
@@ -144,7 +145,7 @@ body
   color: $white
   font-size: 12px
   font-family: $font-suisse-intl-reg
-  background: rgba(0, 0, 0, 0.50)
+  background: rgba(0, 0, 0)
   border-radius: 16px
   border: 1px solid rgba($white, .4)
   width: fit-content
@@ -503,7 +504,7 @@ body
   background: url("../img/ball/bg-desc.png") no-repeat 50% 0/cover
   background-size: 1365px 765px
   @media screen and (max-width: 1300px)
-    background: url("../img/ball/bg-tab.png") no-repeat 50% 0/cover
+    background: url("../img/ball/bg-tab.png") no-repeat 50% 50%/cover
     background-size: 1365px 765px
   @media screen and (max-width: 600px) and (orientation: portrait)
     background: url("../img/ball/bg-mob.png") no-repeat 50% 40px/cover
@@ -1031,6 +1032,7 @@ body
       bottom: 0
       left: 50%
       transform: translate(-50%, 30%)
+      white-space: nowrap
   &__shake
     position: relative
     display: flex
@@ -1349,6 +1351,7 @@ body
       height: 560px
   &__title
     max-width: 580px
+    z-index: 2
     &::before, &::after
       content: ""
       display: block
@@ -1645,7 +1648,7 @@ body
     > summary
       list-style: none
     summary
-      padding: 14px 16px 12px
+      padding: 14px 56px 12px 16px
       font-family: $font-suisse-intl-reg
       font-size: 16px
       line-height: 26px
@@ -1973,6 +1976,8 @@ body
 
 /// en styles
 .fav-page.en
+  .info-btn
+    font-size: 11px
   .banner
     &__title, &__ball
       picture.en
@@ -2022,7 +2027,7 @@ body.dark
       background: url("../img/ball/bg-desc-dark.png") no-repeat 50% 0/cover
       background-size: 1365px 765px
       @media screen and (max-width: 1300px)
-        background: url("../img/ball/bg-tab-dark.png") no-repeat 50% 0/cover
+        background: url("../img/ball/bg-tab-dark.png") no-repeat 50% 50%/cover
         background-size: 1365px 765px
       @media screen and (max-width: 600px) and (orientation: portrait)
         background: url("../img/ball/bg-mob-dark.png") no-repeat 50% 40px/cover

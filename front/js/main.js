@@ -175,7 +175,6 @@
     function checkUserAuth() {
         console.log(userId)
         if (userId) {
-
             for (const unauthMes of unauthMsgs) {
                 unauthMes.classList.add('hide');
             }
@@ -193,9 +192,10 @@
                             res.pointsPerDay = 30;
                             res.spinAllowed = true;
                             res.spinsStreak = 3;
-                            // res.spins = [""];
+                            res.spins = [];
                         }
                         // refreshUserInfo(res);
+                        // console.log(res.spins)
                         displayUserSpins(res.spins);
                     } else {
                         document.querySelector(".banner__btn").classList.add("hide")
@@ -223,17 +223,20 @@
     function displayUserSpins(spins) {
         const spinItem = document.querySelector('.spins-row');
         const noSpinItem = document.querySelector('.no-spins');
+
         if (!spins || spins.length === 0) {
             spinItem.classList.add('hide');
             noSpinItem.classList.remove('hide');
+            console.log(spins)
             return;
         }
 
-        const spinsContainer = document.querySelector('.spins-row');
-        spinsContainer.innerHTML = '';
+        // const spinsContainer = document.querySelector('.spins-row');
+        spinItem.innerHTML = '';
 
         spinItem.classList.remove('hide');
         noSpinItem.classList.add('hide');
+        console.log(noSpinItem)
 
         spins.forEach(spin => {
             const spinDate = new Date(spin.date);
@@ -248,7 +251,7 @@
             <span class="content-prize">${spinName}</span>
         `;
 
-            spinsContainer.appendChild(spinElement);
+            spinItem.appendChild(spinElement);
         });
     }
 

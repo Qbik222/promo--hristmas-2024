@@ -294,7 +294,8 @@
         width: 140px
         height: 170px
         border-radius: 11px
-        position: static
+        //position: static
+        position: relative
         &-img
           max-width: 120px
         &-title
@@ -336,6 +337,15 @@
           width: 245px
           height: 144px
           bottom: 17px
+    &._sign
+      .sphere
+        &::before
+          top: 205px
+          left: 160px
+        &__ground
+          width: 250px
+          height: 146px
+          bottom: 19px
     .progress
       max-width: 500px
       &__popup
@@ -447,6 +457,7 @@
           font-size: 9px
           top: 130px
           left: 54%
+
   .table
     padding-top: 20px
     .drop
@@ -547,3 +558,7 @@
       top: 95px
       transform-origin: left top
       transform: scale(.5) translate(-50%, 0)
+  .table
+    &__popup
+      &-wrap
+        transform: scale(.65)
