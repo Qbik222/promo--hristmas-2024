@@ -4,69 +4,75 @@
     const
         unauthMsgs = document.querySelectorAll('.unauth-msg'),
         participateBtns = document.querySelectorAll('.btn-join'),
+        redirectBtns = document.querySelectorAll('.took-part'),
+        topResultsTable = document.getElementById('top-users'),
+        weeksSelector = document.querySelectorAll('.table__toggle-item'),
+        weeksContainer = document.querySelector('.table__toggle'),
         mainPage = document.querySelector('.fav-page'),
-        ballWrap = document.querySelector(".ball"),
-        guideWrap = document.querySelector(".guide"),
-        gameWrap = document.querySelector(".games");
+        ballWrap = document.querySelector('.ball'),
+        guideWrap = document.querySelector('.guide'),
+        gameWrap = document.querySelector('.games');
 
     const ukLeng = document.querySelector('#ukLeng');
     const enLeng = document.querySelector('#enLeng');
 
-    let locale = sessionStorage.getItem('locale') || 'en',
-        week = 1;
 
-    console.log(week)
+    let locale = 'uk';
 
-    function setState(newLocale) {
-        locale = newLocale;
-        sessionStorage.setItem('locale', locale);
-    }
-    function toggleState() {
-        const newLocale = locale === 'en' ? 'uk' : 'en';
-        setState(newLocale);
-        window.location.reload()
-    }
-    document.querySelector('.en-btn').addEventListener('click', () => {
-        toggleState();
-    });
-    document.querySelector('.week-btn').addEventListener('click', () => {
-        console.log(week)
-        if(week === 1){
-            document.querySelector('._week1').style.display = "flex"
-            document.querySelector('._week2').style.display = "none"
-            return week = 2
-        }
-        if(week === 2){
-            document.querySelector('._week2').style.display = "flex"
-            document.querySelector('._week1').style.display = "none"
-            week = 1
-        }
-    });
+    // console.log(week)
+    //
+    // function setState(newLocale) {
+    //     locale = newLocale;
+    //     sessionStorage.setItem('locale', locale);
+    // }
+    // function toggleState() {
+    //     const newLocale = locale === 'en' ? 'uk' : 'en';
+    //     setState(newLocale);
+    //     window.location.reload()
+    // }
+    // document.querySelector('.en-btn').addEventListener('click', () => {
+    //     toggleState();
+    // });
+
+    // document.querySelector('.week-btn').addEventListener('click', () => {
+    //     console.log(week)
+    //     if(week === 1){
+    //         document.querySelector('._week1').style.display = "flex"
+    //         document.querySelector('._week2').style.display = "none"
+    //         return week = 2
+    //     }
+    //     if(week === 2){
+    //         document.querySelector('._week2').style.display = "flex"
+    //         document.querySelector('._week1').style.display = "none"
+    //         week = 1
+    //     }
+    // });
 
     if (ukLeng) locale = 'uk';
     if (enLeng) locale = 'en';
 
 
     let i18nData = {};
-    const debug = true;
+    const debug = false;
+    let selectedWeekTabId = 0;
     let userId;
-    userId = Number(sessionStorage.getItem("userId"));
+    userId = 7777771;
 
-    console.log(typeof userId)
+    // userId = Number(sessionStorage.getItem("userId"));
+    //
+    // console.log(typeof userId)
+    //
+    // document.querySelector(".lock-btn").addEventListener("click", () =>{
+    //     userId ? sessionStorage.removeItem("userId") : sessionStorage.setItem("userId", '101234861')
+    //     window.location.reload()
+    // })
 
-    document.querySelector(".lock-btn").addEventListener("click", () =>{
-        userId ? sessionStorage.removeItem("userId") : sessionStorage.setItem("userId", '101234861')
-        window.location.reload()
-    })
-
-    // userId = 9999;
-
-    if(week === 1){
-        document.querySelector('._week1').style.display = "flex"
-    }
-    if(week === 2){
-        document.querySelector('._week2').style.display = "flex"
-    }
+    // if(week === 1){
+    //     document.querySelector('._week1').style.display = "flex"
+    // }
+    // if(week === 2){
+    //     document.querySelector('._week2').style.display = "flex"
+    // }
 
     function loadTranslations() {
         return fetch(`${apiURL}/translates/${locale}`).then(res => res.json())
@@ -77,7 +83,7 @@
                 var mutationObserver = new MutationObserver(function (mutations) {
                     translate();
                 });
-                mutationObserver.observe(document.getElementById('ball'), {
+                mutationObserver.observe(document.getElementById('sam'), {
                     childList: true,
                     subtree: true,
                 });
@@ -93,40 +99,63 @@
                 elem.innerHTML = i18nData[key] || '*----NEED TO BE TRANSLATED----*   key:  ' + key;
                 elem.removeAttribute('data-translate');
             })
-            // console.log("translate working")
         }
         if (locale === 'en') {
             mainPage.classList.add('en');
         }
         refreshLocalizedClass();
     }
-    loadTranslations()
-        .then(init);
+
     function refreshLocalizedClass(element, baseCssClass) {
         if (!element) {
             return;
         }
-        for (const lang of ['hr', 'en']) {
+        for (const lang of ['uk', 'en']) {
             element.classList.remove(baseCssClass + lang);
         }
         element.classList.add(baseCssClass + locale);
     }
 
 
+    //new
+    function getUsers(week) {
+        const url = resolveUsersUrl(week);
+        return request(url)
+            .then(users => users.map(userOrId => typeof userOrId === 'number' ? {userid: userOrId} : userOrId));
+    }
+
+    function resolveUsersUrl(week) {
+        return week ? `/week-users/${week}` : '/users';
+    }
+
+    const InitPage = () => {
+        weeksSelector.forEach((w, i) => w.addEventListener('click', e => {
+            if (i === selectedWeekTabId) {
+                return;
+            }
+            weeksSelector.forEach(s => s.classList.remove('_active'));
+            w.classList.add('_active');
+            selectedWeekTabId = i;
+            refreshUsers(selectedWeekTabId + 1);
+        }));
+
+        refreshUsers();
+    }
+
     function init() {
+        refreshWeekTabs();
         if (window.store) {
             var state = window.store.getState();
             userId = state.auth.isAuthorized && state.auth.id || '';
-            setupPage();
+            checkUserAuth().then(setupPage);
         } else {
-            setupPage();
+            checkUserAuth().then(setupPage);
             let c = 0;
             var i = setInterval(function () {
                 if (c < 50) {
                     if (!!window.g_user_id) {
                         userId = window.g_user_id;
-                        setupPage();
-                        checkUserAuth();
+                        checkUserAuth().then(setupPage);
                         clearInterval(i);
                     }
                 } else {
@@ -134,8 +163,6 @@
                 }
             }, 200);
         }
-
-        checkUserAuth();
 
         participateBtns.forEach((authBtn, i) => {
             authBtn.addEventListener('click', (e) => {
@@ -145,7 +172,10 @@
         });
     }
 
-    function setupPage() {}
+    function setupPage() {
+        InitPage();
+    }
+
     function participate() {
         if (!userId) {
             return;
@@ -157,9 +187,161 @@
             body: JSON.stringify(params)
         }).then(res => {
             participateBtns.forEach(item => item.classList.add('hide'));
+            redirectBtns.forEach(item => item.classList.remove('hide'));
             ballWrap.classList.remove('_sign');
             setupPage();
         });
+    }
+
+    function refreshUsers(week) {
+        getUsers(week).then(users => {
+            renderUsers(users);
+            translate();
+        });
+    }
+
+    const renderUsers = (users) => {
+        topResultsTable.classList.remove('hide');
+        // resultsTableOther.classList.remove('hide');
+
+        if (users && users.length) {
+            let topUsers = users.slice(0, 10);
+            const currentUser = userId && users.find(user => user.userid === userId);
+            const currentUserIndex = currentUser && users.indexOf(currentUser);
+            if (currentUserIndex > 10) {
+                topUsers.push(currentUser);
+            }
+            populateUsersTable(topUsers, userId, topResultsTable, users);
+
+            //     const currentUserQuestIndex = currentUser && questUsers.indexOf(currentUser);
+
+            //     let otherUsers;
+            //     if (!currentUserIndex || currentUserIndex < 10) {
+            //         otherUsers = users.slice(10, 13);
+            //     } else {
+            //         otherUsers = users.slice(Math.max(currentUserIndex - 1, 10), currentUserIndex + 2);
+            //     }
+
+            //     let otherQuestUsers;
+            //     if (!currentUserQuestIndex || currentUserQuestIndex < 10) {
+            //         otherQuestUsers = questUsers.slice(10, 13);
+            //     } else {
+            //         otherQuestUsers = questUsers.slice(Math.max(currentUserQuestIndex - 1, 10), currentUserQuestIndex + 2);
+            //     }
+
+            //     if (otherUsers && otherUsers.length) {
+            //         populateUsersTable(otherUsers, userId, resultsTableOther, users);
+            //         populateUsersTable(otherQuestUsers, userId, questTableOther, questUsers, true);
+            //     }
+        }
+    }
+
+    function updateWager(rank) {
+        let prizeText = '-';
+        if (rank >= 11 && rank <= 50) {
+            prizeText = 'x1';
+        } else if (rank >= 51 && rank <= 150) {
+            prizeText = 'x2';
+        } else if (rank >= 151 && rank <= 300) {
+            prizeText = 'x3';
+        } else if (rank >= 301 && rank <= 400) {
+            prizeText = 'x4';
+        } else if (rank >= 401 && rank <= 550) {
+            prizeText = 'x5';
+        } else if (rank >= 551 && rank <= 750) {
+            prizeText = '-';
+        }
+        return prizeText;
+    }
+
+    function populateUsersTable(users, currentUserId, table, allUsers) {
+        table.innerHTML = '';
+        if (users && users.length) {
+            users.forEach((user, index) => {
+                const checkCurrentUser = currentUserId && currentUserId === user.userid;
+                const additionalUserRow = document.createElement('div');
+                if (checkCurrentUser) {
+                    additionalUserRow.classList.add('you');
+                }
+
+                const place = allUsers.indexOf(user) + 1;
+
+                let placeClass;
+                if (table.id === 'top-users' || table.id === 'questsTable') {
+                    if (index === 0) {
+                        placeClass = 'gold';
+                    } else if (index === 1) {
+                        placeClass = 'silver';
+                    } else if (index === 2) {
+                        placeClass = 'bronze';
+                    }
+                }
+
+                const prizeKey = getPrizeTranslationKey(place);
+                const prizeValue = updateWager(place);
+                additionalUserRow.classList.add('table__body-row');
+                if (placeClass) {
+                    additionalUserRow.classList.add(placeClass);
+                }
+                additionalUserRow.innerHTML = `
+                <div class="table__body-row-item">${place}</div>
+                <div class="table__body-row-item">${checkCurrentUser ? user.userid : maskUserId(user.userid)}</div>
+                <div class="table__body-row-item">${user.points && !isNaN(user.points) ? user.points : 0}</div>
+                <div class="table__body-row-item">${prizeKey ? translateKey(prizeKey) : ' - '}</div>
+                <div class="table__body-row-item">${prizeValue}</div>
+            `;
+                table.append(additionalUserRow);
+            });
+        }
+    }
+
+    function getPrizeTranslationKey(place) {
+        if (place <= 10) {
+            return `prize_${place}`;
+        } else if (place <= 20) {
+            return `prize_11-20`;
+        } else if (place <= 30) {
+            return `prize_21-30`;
+        } else if (place <= 40) {
+            return `prize_31-40`;
+        } else if (place <= 50) {
+            return `prize_41-50`;
+        } else if (place <= 70) {
+            return `prize_51-70`;
+        } else if (place <= 100) {
+            return `prize_71-100`;
+        } else if (place <= 150) {
+            return `prize_101-150`;
+        } else if (place <= 200) {
+            return `prize_151-200`;
+        } else if (place <= 250) {
+            return `prize_201-250`;
+        } else if (place <= 300) {
+            return `prize_251-300`;
+        } else if (place <= 350) {
+            return `prize_301-350`;
+        } else if (place <= 400) {
+            return `prize_351-400`;
+        } else if (place <= 450) {
+            return `prize_401-450`;
+        } else if (place <= 500) {
+            return `prize_451-500`;
+        } else if (place <= 550) {
+            return `prize_501-550`;
+        } else if (place <= 600) {
+            return `prize_551-600`;
+        } else if (place <= 650) {
+            return `prize_601-650`;
+        } else if (place <= 700) {
+            return `prize_651-700`;
+        } else if (place <= 750) {
+            return `prize_701-750`;
+        }
+    }
+
+
+    function maskUserId(userId) {
+        return "**" + userId.toString().slice(2);
     }
 
     const request = function (link, extraOptions) {
@@ -173,20 +355,20 @@
     }
 
     function checkUserAuth() {
-        console.log(userId)
+        // console.log(userId)
         if (userId) {
             for (const unauthMes of unauthMsgs) {
                 unauthMes.classList.add('hide');
             }
-            request(`/favuser/${userId}?nocache=1`)
+            return request(`/favuser/${userId}?nocache=1`)
                 .then(res => {
                     console.log(res)
                     if (res.userid) {
                         participateBtns.forEach(item => item.classList.add('hide'));
+                        redirectBtns.forEach(item => item.classList.remove('hide'));
                         ballWrap.classList.remove('_sign');
                         guideWrap.classList.remove('_sign');
                         gameWrap.classList.remove('_sign');
-                        document.querySelector(".banner__btn").classList.remove("hide")
                         document.querySelector(".progress").classList.remove("_sign");
                         if (debug) {
                             res.pointsPerDay = 30;
@@ -194,30 +376,87 @@
                             res.spinsStreak = 3;
                             res.spins = [];
                         }
-                        // refreshUserInfo(res);
+                        refreshWheel(res);
+                        refreshDailyPointsSection(res);
                         // console.log(res.spins)
                         displayUserSpins(res.spins);
                     } else {
-                        document.querySelector(".banner__btn").classList.add("hide")
                         participateBtns.forEach(item => item.classList.remove('hide'));
                     }
                 })
         } else {
-            document.querySelector(".banner__btn").classList.add("hide")
             for (let participateBtn of participateBtns) {
                 participateBtn.classList.add('hide');
             }
             for (const unauthMes of unauthMsgs) {
                 unauthMes.classList.remove('hide');
             }
+            return Promise.resolve(false);
         }
     }
+
+    loadTranslations()
+        .then(init);
+
+    function refreshWeekTabs() {
+        selectedWeekTabId = calculateRecentPromoWeeks() - 1;
+        if (!selectedWeekTabId || selectedWeekTabId === 0) { // promo not started yet
+            weeksContainer.classList.add('hide');
+            return;
+        }
+
+        for (let i = 0; i < 4; i++) {
+            const weekSelector = weeksSelector[i];
+            if (selectedWeekTabId < i) {
+                weekSelector.classList.add('hide');
+            }
+        }
+
+        weeksSelector.forEach((w, i) => {
+            w.classList.remove('active');
+            if (i === selectedWeekTabId) {
+                w.classList.add('active');
+            }
+        });
+    }
+
+    function calculateRecentPromoWeeks() {
+        const date = Date.now();
+        if (date < new Date("2024-12-17T22:00:00Z")) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
 
     function translateKey(key) {
         if (!key) {
             return;
         }
         return i18nData[key] || '*----NEED TO BE TRANSLATED----*   key:  ' + key;
+    }
+
+    function refreshWheel(userInfo) {
+        if (userInfo.spinAllowed) {
+            return;
+        }
+        if (userInfo.pointsPerDay >= 50) {
+            ballWrap.classList.add('_lock');
+        } else {
+            ballWrap.classList.add('_lock');
+        }
+    }
+
+    function refreshDailyPointsSection(userInfo) {
+        const points = Math.min(userInfo.pointsPerDay || 0, 50);
+        // const progressStatus = document.querySelector('.progressStatus');
+        // progressStatus.innerHTML = `${points}/50`;
+        const currentSpan = document.querySelector('.current');
+        currentSpan.innerHTML = `${points}`;
+        const progressLine = document.querySelector('.progress__bar-thumb');
+        const progress = points / 50.0 * 100;
+        progressLine.style.width = `${progress}%`;
     }
 
     function displayUserSpins(spins) {
@@ -227,7 +466,6 @@
         if (!spins || spins.length === 0) {
             spinItem.classList.add('hide');
             noSpinItem.classList.remove('hide');
-            console.log(spins)
             return;
         }
 
@@ -240,7 +478,7 @@
 
         spins.forEach(spin => {
             const spinDate = new Date(spin.date);
-            const formattedDate = spinDate.toLocaleDateString('hr-HR');
+            const formattedDate = spinDate.toLocaleDateString('uk-UA');
             const spinName = translateKey(spin.name) || '';
 
             const spinElement = document.createElement('div');
@@ -255,21 +493,23 @@
         });
     }
 
+    setTimeout(() => mainPage.classList.add('overflow'), 1000);
+
 
     // Cards slider
     const cardsContainer = document.querySelector('.prize__list'),
-          cards = document.querySelectorAll('.prize__list-item'),
-          cardsWrap = document.querySelector('.prize__list-scroll'),
-          moveRightButton = document.querySelector('.prize__slider-move-right'),
-          moveLeftButton = document.querySelector('.prize__slider-move-left'),
-          tabsContainer = document.querySelector('.prize__tabs'),
-          isMobile = window.innerWidth < 600,
-          totalCards = cards.length,
-          cardWidth = cards[0].clientWidth,
-          cardsMargin = (cardsWrap.clientWidth - cardWidth * totalCards) / (totalCards - 1),
-          visibleSlides = isMobile ? 1 : Math.ceil(cardsContainer.clientWidth / (cardWidth + cardsMargin)),
-          totalTabs = Math.ceil(totalCards / visibleSlides),
-          tabWidth= visibleSlides * (cardWidth + cardsMargin)
+        cards = document.querySelectorAll('.prize__list-item'),
+        cardsWrap = document.querySelector('.prize__list-scroll'),
+        moveRightButton = document.querySelector('.prize__slider-move-right'),
+        moveLeftButton = document.querySelector('.prize__slider-move-left'),
+        tabsContainer = document.querySelector('.prize__tabs'),
+        isMobile = window.innerWidth < 600,
+        totalCards = cards.length,
+        cardWidth = cards[0].clientWidth,
+        cardsMargin = (cardsWrap.clientWidth - cardWidth * totalCards) / (totalCards - 1),
+        visibleSlides = isMobile ? 1 : Math.ceil(cardsContainer.clientWidth / (cardWidth + cardsMargin)),
+        totalTabs = Math.ceil(totalCards / visibleSlides),
+        tabWidth= visibleSlides * (cardWidth + cardsMargin)
 
 
     let currentSlide = 1,
@@ -377,27 +617,23 @@
 
     function   hidePopupsOnBtn(popups){
         popups.forEach(popup =>{
-           popup.classList.remove("_popup")
+            popup.classList.remove("_popup")
         })
     }
 
-
-
-
-
 // popups
     const prizeOpenBtns = document.querySelectorAll(".prize__list-item-btn"),
-          prizeCloseBtns = document.querySelectorAll(".prize__list-popup-close"),
-          guidePopupsWrap = document.querySelectorAll(".guide__item"),
-          guideOpenBtns = document.querySelectorAll(".guide__item-info-btn"),
-          guideCloseBtns = document.querySelectorAll(".guide__item-popup-close"),
-          tablePopup = document.querySelector(".table__popup"),
-          tablePopupClose = document.querySelector(".table__popup-close"),
-          tablePopupOpen = document.querySelector(".table__info"),
-          ballPopup = document.querySelector(".progress__popup"),
-          ballPopupClose = document.querySelector(".progress__popup-close"),
-          ballPopupOpen = document.querySelector(".progress__popup-btn"),
-          prizePopupItem = document.querySelectorAll(".prize__container-item")
+        prizeCloseBtns = document.querySelectorAll(".prize__list-popup-close"),
+        guidePopupsWrap = document.querySelectorAll(".guide__item"),
+        guideOpenBtns = document.querySelectorAll(".guide__item-info-btn"),
+        guideCloseBtns = document.querySelectorAll(".guide__item-popup-close"),
+        tablePopup = document.querySelector(".table__popup"),
+        tablePopupClose = document.querySelector(".table__popup-close"),
+        tablePopupOpen = document.querySelector(".table__info"),
+        ballPopup = document.querySelector(".progress__popup"),
+        ballPopupClose = document.querySelector(".progress__popup-close"),
+        ballPopupOpen = document.querySelector(".progress__popup-btn"),
+        prizePopupItem = document.querySelectorAll(".prize__container-item")
 
 
     document.addEventListener("click", (e) =>{
@@ -419,7 +655,7 @@
         })
 
         if(!ballPopup.contains(e.target) && e.target !== ballPopupOpen){
-                ballPopup.classList.add("hide")
+            ballPopup.classList.add("hide")
         }
 
     })
@@ -430,18 +666,18 @@
 
     guideCloseBtns.forEach(btn =>{
         btn.addEventListener('click', () =>{
-              hidePopupsOnBtn(guidePopupsWrap)
+            hidePopupsOnBtn(guidePopupsWrap)
         });
     });
 
     prizeCloseBtns.forEach(btn =>{
         btn.addEventListener('click', () =>{
-              hidePopupsOnBtn(prizePopupItem)
+            hidePopupsOnBtn(prizePopupItem)
         });
     });
 
     tablePopupOpen.addEventListener("click", () =>{
-       tablePopup.classList.remove("hide")
+        tablePopup.classList.remove("hide")
         document.body.style.overflow = "hidden"
     });
 
@@ -451,277 +687,276 @@
     });
 
     ballPopupOpen.addEventListener("click", () =>{
-            ballPopup.classList.remove("hide")
+        ballPopup.classList.remove("hide")
     });
 
     ballPopupClose.addEventListener("click", () =>{
-            ballPopup.classList.add("hide")
+        ballPopup.classList.add("hide")
     });
 
-window.addEventListener("DOMContentLoaded", () =>{
-    (function () {
-        var COUNT = 400;
+    window.addEventListener("DOMContentLoaded", () =>{
+        (function () {
+            var COUNT = 400;
 
-        function Snowstorm(element) {
-            this.masthead = element;
-            this.canvas = document.createElement('canvas');
-            this.ctx = this.canvas.getContext('2d');
-            this.width = this.masthead.clientWidth;
-            this.height = this.masthead.clientHeight;
-            this.active = false;
-            this.snowflakes = [];
+            function Snowstorm(element) {
+                this.masthead = element;
+                this.canvas = document.createElement('canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.width = this.masthead.clientWidth;
+                this.height = this.masthead.clientHeight;
+                this.active = false;
+                this.snowflakes = [];
 
-            this.init();
-        }
-
-        Snowstorm.prototype.init = function () {
-            this.canvas.style.position = 'absolute';
-            this.canvas.style.left = this.canvas.style.top = '0';
-            this.masthead.appendChild(this.canvas);
-
-            this.onResize();
-            window.addEventListener('resize', this.onResize.bind(this), false);
-
-            for (var i = 0; i < COUNT; i++) {
-                var snowflake = new this.Snowflake(this);
-                snowflake.reset();
-                this.snowflakes.push(snowflake);
+                this.init();
             }
 
-            if (this.active) {
-                requestAnimFrame(this.update.bind(this));
-            }
-        };
+            Snowstorm.prototype.init = function () {
+                this.canvas.style.position = 'absolute';
+                this.canvas.style.left = this.canvas.style.top = '0';
+                this.masthead.appendChild(this.canvas);
 
-        Snowstorm.prototype.onResize = function () {
-            this.width = this.masthead.clientWidth;
-            this.height = this.masthead.clientHeight;
-            this.canvas.width = this.width;
-            this.canvas.height = this.height;
-            this.ctx.fillStyle = '#FFF';
+                this.onResize();
+                window.addEventListener('resize', this.onResize.bind(this), false);
 
-            var wasActive = this.active;
-            this.active = this.width > 80;
-            this.width > 280 ? COUNT = 150 : null
-
-            if (!wasActive && this.active) {
-                requestAnimFrame(this.update.bind(this));
-            }
-        };
-
-        Snowstorm.prototype.update = function () {
-            this.ctx.clearRect(0, 0, this.width, this.height);
-
-            if (!this.active) {
-                return;
-            }
-
-            for (var i = 0; i < COUNT; i++) {
-                var snowflake = this.snowflakes[i];
-                snowflake.y += snowflake.vy;
-                snowflake.x += snowflake.vx;
-
-                this.ctx.globalAlpha = snowflake.o;
-                this.ctx.beginPath();
-                this.ctx.arc(snowflake.x, snowflake.y, snowflake.r, 0, Math.PI * 2, false);
-                this.ctx.closePath();
-                this.ctx.fill();
-
-                if (snowflake.y > this.height) {
+                for (var i = 0; i < COUNT; i++) {
+                    var snowflake = new this.Snowflake(this);
                     snowflake.reset();
+                    this.snowflakes.push(snowflake);
                 }
-            }
 
-            requestAnimFrame(this.update.bind(this));
-        };
+                if (this.active) {
+                    requestAnimFrame(this.update.bind(this));
+                }
+            };
 
-        Snowstorm.prototype.Snowflake = function (snowstorm) {
-            this.snowstorm = snowstorm;
-            this.reset();
-        };
+            Snowstorm.prototype.onResize = function () {
+                this.width = this.masthead.clientWidth;
+                this.height = this.masthead.clientHeight;
+                this.canvas.width = this.width;
+                this.canvas.height = this.height;
+                this.ctx.fillStyle = '#FFF';
 
-        Snowstorm.prototype.Snowflake.prototype.reset = function () {
-            this.x = Math.random() * this.snowstorm.width;
-            this.y = Math.random() * -this.snowstorm.height;
-            this.vy = 0.3 + Math.random() * 0.00001;
-            this.vx = 0.6 - Math.random();
-            this.r = 1 + Math.random() * 2;
-            this.o = 1;
-        };
+                var wasActive = this.active;
+                this.active = this.width > 80;
+                this.width > 280 ? COUNT = 150 : null
 
-        window.requestAnimFrame = (function () {
-            return window.requestAnimationFrame ||
-                window.webkitRequestAnimationFrame ||
-                window.mozRequestAnimationFrame ||
-                function (callback) {
-                    window.setTimeout(callback, 1000 / 60);
-                };
-        })();
+                if (!wasActive && this.active) {
+                    requestAnimFrame(this.update.bind(this));
+                }
+            };
 
-        var skies = document.querySelectorAll('.sky');
-        skies.forEach(function (sky) {
-            new Snowstorm(sky);
-        });
+            Snowstorm.prototype.update = function () {
+                this.ctx.clearRect(0, 0, this.width, this.height);
 
-        // ball shake snow
-        const canvas = document.querySelector('.snowCanvas');
-        const ctx = canvas.getContext('2d');
-        const ball = document.querySelector('.sphere');
-
-        canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = canvas.parentElement.clientHeight;
-
-        let snowflakes = [];
-        const maxSnowflakes = 100;
-        const maxSpeed = 7;
-        let stormCounter = 1
-
-
-        let snowflakesRemoved = 0;
-
-        class Snowflake {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.radius = Math.random() * 3 + 1;
-                this.speedX = (Math.random() - 0.5) * 10;
-                this.speedY = Math.random() * 1.5 + 1;
-                this.acceleration = 0;
-                this.movingToBottom = false;
-            }
-
-            update(ballX, ballY, ballRadius, ballShaking) {
-                if (this.movingToBottom) {
-                    const targetSpeed = 0.1;
-                    const speedDecayFactor = 0.05; // Коефіцієнт для плавного сповільнення
-
-                    this.speedX = this.speedX - (this.speedX - targetSpeed) * speedDecayFactor;
-                    this.speedY = this.speedY - (this.speedY - targetSpeed) * speedDecayFactor;
-
-                    // Оновлення позиції сніжинки
-                    this.y += this.speedY;
-
-                    if (this.y > canvas.height) {
-                        this.remove();
-                    }
+                if (!this.active) {
                     return;
                 }
 
-                this.x += this.speedX;
-                this.y += this.speedY;
+                for (var i = 0; i < COUNT; i++) {
+                    var snowflake = this.snowflakes[i];
+                    snowflake.y += snowflake.vy;
+                    snowflake.x += snowflake.vx;
 
-                // Обмеження швидкості
-                this.speedX = Math.max(-maxSpeed, Math.min(maxSpeed, this.speedX));
-                this.speedY = Math.max(-maxSpeed, Math.min(maxSpeed, this.speedY));
+                    this.ctx.globalAlpha = snowflake.o;
+                    this.ctx.beginPath();
+                    this.ctx.arc(snowflake.x, snowflake.y, snowflake.r, 0, Math.PI * 2, false);
+                    this.ctx.closePath();
+                    this.ctx.fill();
 
-                // Додавання швидкості через "трусіння" кулі
-                if (ballShaking) {
-                    this.acceleration += 0.05;
-                } else {
-                    this.acceleration *= 0.95;
-                }
-                this.speedX += this.acceleration * (Math.random() - 0.5);
-                this.speedY += this.acceleration * (Math.random() - 0.5);
-
-                if (this.y > canvas.height) {
-                    this.y = 0;
-                    this.x = Math.random() * canvas.width;
-                }
-                if (this.x > canvas.width) {
-                    this.x = 0;
-                } else if (this.x < 0) {
-                    this.x = canvas.width;
+                    if (snowflake.y > this.height) {
+                        snowflake.reset();
+                    }
                 }
 
-                // Відстань до центру кулі
-                const dx = this.x - ballX;
-                const dy = this.y - ballY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
+                requestAnimFrame(this.update.bind(this));
+            };
 
-                // Відскок від кулі
-                if (distance < ballRadius + this.radius) {
-                    const angle = Math.atan2(dy, dx); // Кут зіткнення
-                    const overlap = ballRadius + this.radius - distance;
+            Snowstorm.prototype.Snowflake = function (snowstorm) {
+                this.snowstorm = snowstorm;
+                this.reset();
+            };
 
-                    // Переміщення сніжинки
-                    this.x += Math.cos(angle) * overlap;
-                    this.y += Math.sin(angle) * overlap;
+            Snowstorm.prototype.Snowflake.prototype.reset = function () {
+                this.x = Math.random() * this.snowstorm.width;
+                this.y = Math.random() * -this.snowstorm.height;
+                this.vy = 0.3 + Math.random() * 0.00001;
+                this.vx = 0.6 - Math.random();
+                this.r = 1 + Math.random() * 2;
+                this.o = 1;
+            };
 
-                    // Реверс швидкості
-                    this.speedX *= -0.7;
-                    this.speedY *= -0.7;
-                }
-            }
+            window.requestAnimFrame = (function () {
+                return window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    function (callback) {
+                        window.setTimeout(callback, 1000 / 60);
+                    };
+            })();
 
-            moveToBottom() {
-                this.movingToBottom = true;
-            }
-
-            remove() {
-                snowflakes.splice(snowflakes.indexOf(this), 1);
-                snowflakesRemoved++;
-                if (stormCounter === 1) {
-                    new Snowstorm(document.querySelector(".sphere__body"));
-                    stormCounter++;
-                }
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'white';
-                ctx.fill();
-                ctx.closePath();
-            }
-        }
-
-        let lastBallShakingState = false;
-
-        for (let i = 0; i < maxSnowflakes; i++) {
-            snowflakes.push(new Snowflake());
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            const ballTransform = window.getComputedStyle(ball).transform;
-            let ballX = canvas.width / 2;
-            let ballY = canvas.height / 2;
-            const ballRadius = ball.offsetWidth / 2;
-            const ballShaking = ballTransform !== 'none';
-
-            if (ballTransform !== 'none') {
-                const matrix = new DOMMatrix(ballTransform);
-                ballX = ball.offsetLeft + matrix.m41 + ballRadius;
-                ballY = ball.offsetTop + matrix.m42 + ballRadius;
-            }
-
-            if (ballShaking && !lastBallShakingState) {
-                snowflakes = [];
-                snowflakesRemoved = 0;
-                for (let i = 0; i < maxSnowflakes; i++) {
-                    snowflakes.push(new Snowflake());
-                }
-            }
-
-            lastBallShakingState = ballShaking;
-
-            snowflakes.forEach(snowflake => {
-                if (!ballShaking) snowflake.moveToBottom();
-                snowflake.update(ballX, ballY, ballRadius, ballShaking);
-                snowflake.draw();
+            var skies = document.querySelectorAll('.sky');
+            skies.forEach(function (sky) {
+                new Snowstorm(sky);
             });
 
-            requestAnimationFrame(animate);
-        }
+            // ball shake snow
+            const canvas = document.querySelector('.snowCanvas');
+            const ctx = canvas.getContext('2d');
+            const ball = document.querySelector('.sphere');
 
-        animate();
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
 
-    })();
-})
+            let snowflakes = [];
+            const maxSnowflakes = 100;
+            const maxSpeed = 7;
+            let stormCounter = 1
 
-// snowfall animatio
 
+            let snowflakesRemoved = 0;
+
+            class Snowflake {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.radius = Math.random() * 3 + 1;
+                    this.speedX = (Math.random() - 0.5) * 10;
+                    this.speedY = Math.random() * 1.5 + 1;
+                    this.acceleration = 0;
+                    this.movingToBottom = false;
+                }
+
+                update(ballX, ballY, ballRadius, ballShaking) {
+                    if (this.movingToBottom) {
+                        const targetSpeed = 0.1;
+                        const speedDecayFactor = 0.05; // Коефіцієнт для плавного сповільнення
+
+                        this.speedX = this.speedX - (this.speedX - targetSpeed) * speedDecayFactor;
+                        this.speedY = this.speedY - (this.speedY - targetSpeed) * speedDecayFactor;
+
+                        // Оновлення позиції сніжинки
+                        this.y += this.speedY;
+
+                        if (this.y > canvas.height) {
+                            this.remove();
+                        }
+                        return;
+                    }
+
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    // Обмеження швидкості
+                    this.speedX = Math.max(-maxSpeed, Math.min(maxSpeed, this.speedX));
+                    this.speedY = Math.max(-maxSpeed, Math.min(maxSpeed, this.speedY));
+
+                    // Додавання швидкості через "трусіння" кулі
+                    if (ballShaking) {
+                        this.acceleration += 0.05;
+                    } else {
+                        this.acceleration *= 0.95;
+                    }
+                    this.speedX += this.acceleration * (Math.random() - 0.5);
+                    this.speedY += this.acceleration * (Math.random() - 0.5);
+
+                    if (this.y > canvas.height) {
+                        this.y = 0;
+                        this.x = Math.random() * canvas.width;
+                    }
+                    if (this.x > canvas.width) {
+                        this.x = 0;
+                    } else if (this.x < 0) {
+                        this.x = canvas.width;
+                    }
+
+                    // Відстань до центру кулі
+                    const dx = this.x - ballX;
+                    const dy = this.y - ballY;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // Відскок від кулі
+                    if (distance < ballRadius + this.radius) {
+                        const angle = Math.atan2(dy, dx); // Кут зіткнення
+                        const overlap = ballRadius + this.radius - distance;
+
+                        // Переміщення сніжинки
+                        this.x += Math.cos(angle) * overlap;
+                        this.y += Math.sin(angle) * overlap;
+
+                        // Реверс швидкості
+                        this.speedX *= -0.7;
+                        this.speedY *= -0.7;
+                    }
+                }
+
+                moveToBottom() {
+                    this.movingToBottom = true;
+                }
+
+                remove() {
+                    snowflakes.splice(snowflakes.indexOf(this), 1);
+                    snowflakesRemoved++;
+                    if (stormCounter === 1) {
+                        new Snowstorm(document.querySelector(".sphere__body"));
+                        stormCounter++;
+                    }
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = 'white';
+                    ctx.fill();
+                    ctx.closePath();
+                }
+            }
+
+            let lastBallShakingState = false;
+
+            for (let i = 0; i < maxSnowflakes; i++) {
+                snowflakes.push(new Snowflake());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                const ballTransform = window.getComputedStyle(ball).transform;
+                let ballX = canvas.width / 2;
+                let ballY = canvas.height / 2;
+                const ballRadius = ball.offsetWidth / 2;
+                const ballShaking = ballTransform !== 'none';
+
+                if (ballTransform !== 'none') {
+                    const matrix = new DOMMatrix(ballTransform);
+                    ballX = ball.offsetLeft + matrix.m41 + ballRadius;
+                    ballY = ball.offsetTop + matrix.m42 + ballRadius;
+                }
+
+                if (ballShaking && !lastBallShakingState) {
+                    snowflakes = [];
+                    snowflakesRemoved = 0;
+                    for (let i = 0; i < maxSnowflakes; i++) {
+                        snowflakes.push(new Snowflake());
+                    }
+                }
+
+                lastBallShakingState = ballShaking;
+
+                snowflakes.forEach(snowflake => {
+                    if (!ballShaking) snowflake.moveToBottom();
+                    snowflake.update(ballX, ballY, ballRadius, ballShaking);
+                    snowflake.draw();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+        })();
+    })
+
+// snowfall animation
     let i = 1;
     function sendShakeRequest() {
         if (!userId) {
@@ -731,7 +966,7 @@ window.addEventListener("DOMContentLoaded", () =>{
         if (debug) {
             return Promise.resolve({
                 // number: i++,
-                type: 'test'
+                number: 'jbl'
             });
         }
 
@@ -743,8 +978,8 @@ window.addEventListener("DOMContentLoaded", () =>{
     }
 
     const btnShake = document.querySelector(".progress__shake"),
-          ball = document.querySelector(".sphere"),
-          ballBox = document.querySelector(".sphere__box")
+        ball = document.querySelector(".sphere"),
+        ballBox = document.querySelector(".sphere__box")
 
     let currentPrize;
     let pastPrize;
@@ -827,47 +1062,6 @@ window.addEventListener("DOMContentLoaded", () =>{
 
     }
 
-
-    sessionStorage.setItem("prizeNum", 0)
-
-
-    let prizeState = winClasses[sessionStorage.getItem("prizeNum")]
-
-    const btnPrize1 = document.querySelector('.prize1');
-    const btnPrize2 = document.querySelector('.prize2');
-    const btnPrize3 = document.querySelector('.prize3');
-    const btnPrize4 = document.querySelector('.prize4');
-    const btnPrize5 = document.querySelector('.prize5');
-    const btnPrize6 = document.querySelector('.prize6');
-    const btnPrize7 = document.querySelector('.prize7');
-    const btnPrize8 = document.querySelector('.prize8');
-    const btnPrize9 = document.querySelector('.prize9');
-    const btnPrize10 = document.querySelector('.prize10');
-    const btnPrize11 = document.querySelector('.prize11');
-    const btnPrize12 = document.querySelector('.prize12');
-    const btnPrize13 = document.querySelector('.prize13');
-
-    function setPrizeNum(btn, num){
-        btn.addEventListener("click", (e) =>{
-            sessionStorage.setItem("prizeNum", num)
-            prizeState = winClasses[sessionStorage.getItem("prizeNum")]
-        })
-    }
-
-    setPrizeNum(btnPrize1, 0)
-    setPrizeNum(btnPrize2, 1)
-    setPrizeNum(btnPrize3, 2)
-    setPrizeNum(btnPrize4, 3)
-    setPrizeNum(btnPrize5, 4)
-    setPrizeNum(btnPrize6, 5)
-    setPrizeNum(btnPrize7, 6)
-    setPrizeNum(btnPrize8, 7)
-    setPrizeNum(btnPrize9, 8)
-    setPrizeNum(btnPrize10,9)
-    setPrizeNum(btnPrize11, 10)
-    setPrizeNum(btnPrize12, 11)
-    setPrizeNum(btnPrize13, 12)
-
     function initShake(ball, btn, box, prizeNum) {
         btn.addEventListener("click", () =>{
             sendShakeRequest().then(res => {
@@ -877,48 +1071,20 @@ window.addEventListener("DOMContentLoaded", () =>{
                     btnShake.classList.remove('_disabled')
                     return;
                 }
-                // const prize = res.number;
-                const prize = prizeState;
+                const prize = `_${res.number}`;
+                const prizeNum = winClasses.indexOf(prize);
+                console.log('Prize:', prize);
+                console.log('Prize Num:', prizeNum)
                 const streakBonus = res.streakBonus || debug;
                 animateShake(ball, box, btn, prize, prizeNum).catch(err => console.error("anim error:", err));
             });
         })
     }
 
-    initShake(ball, btnShake, ballBox, sessionStorage.getItem("prizeNum"))
-    initShake(ball, btnPrize1, ballBox)
-    initShake(ball, btnPrize2, ballBox )
-    initShake(ball, btnPrize3, ballBox )
-    initShake(ball, btnPrize4, ballBox )
-    initShake(ball, btnPrize5, ballBox )
-    initShake(ball, btnPrize6, ballBox )
-    initShake(ball, btnPrize7, ballBox )
-    initShake(ball, btnPrize8, ballBox )
-    initShake(ball, btnPrize9, ballBox )
-    initShake(ball, btnPrize10, ballBox )
-    initShake(ball, btnPrize11, ballBox )
-    initShake(ball, btnPrize12, ballBox )
-    initShake(ball, btnPrize13, ballBox )
-
-
-// table toggle
-
-    const toggleItems = document.querySelectorAll('.table__toggle-item'),
-          tables = document.querySelectorAll('.table__body')
-
-    toggleItems.forEach((toggleItem, index) => {
-        toggleItem.addEventListener('click', () => {
-            toggleItems.forEach(item => item.classList.remove('_active'));
-            tables.forEach(table => table.classList.remove('_active'));
-            toggleItem.classList.add('_active');
-            tables[index].classList.add('_active');
-        });
-    });
-
-
+    initShake(ball, btnShake, ballBox)
 
     const btns = document.querySelectorAll(".btn"),
-          os = detectOS()
+        os = detectOS()
 
     if (os === "macOS" || os === "iOS"){
         btns.forEach(btn =>{
@@ -984,15 +1150,15 @@ window.addEventListener("DOMContentLoaded", () =>{
 
 
     // for test
-    document.querySelector(".dark-btn").addEventListener("click", () =>{
-        document.body.classList.toggle("dark")
-    })
-    document.querySelector(".en-btn").addEventListener("click", () =>{
-        document.querySelector(".fav-page").classList.toggle("en")
-    })
-
-    document.querySelector(".testMenu").addEventListener("click", ()=>{
-        document.querySelector(".prizes-btns").classList.toggle("hide")
-    })
+    // document.querySelector(".dark-btn").addEventListener("click", () =>{
+    //     document.body.classList.toggle("dark")
+    // })
+    // document.querySelector(".en-btn").addEventListener("click", () =>{
+    //     document.querySelector(".fav-page").classList.toggle("en")
+    // })
+    //
+    // document.querySelector(".testMenu").addEventListener("click", ()=>{
+    //     document.querySelector(".prizes-btns").classList.toggle("hide")
+    // })
 
 })();
