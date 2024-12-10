@@ -87,6 +87,7 @@ $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
     color: inherit
     font-size: inherit
   &::before, &::after
+    content: ""
     display: block
     position: absolute
   &::before
@@ -94,7 +95,7 @@ $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
     max-height: 24px
     width: 58.4%
     height: 32.4%
-    top: -6px
+    top: -8px
     left: 25px
     background: url("https://fav-prom.com/html/wheel-2025/img/snow-btn1.png") no-repeat 0 0/contain
   &::after
@@ -734,6 +735,10 @@ $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
       left: 50%
       transform: translate(-50%, 0)
       z-index: 5
+      .uk
+        display: block
+      .en
+        display: none
     &-desc
       max-width: 230px
       background: rgba($black, .5)
@@ -1128,7 +1133,7 @@ $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
       background: rgba(0, 0, 61, 1)
       backdrop-filter: blur(6px)
       width: 340px
-      height: 312px
+      height: auto
       z-index: 3
       border: 1px solid rgba($white, 0.5)
       border-radius: 16px
@@ -1381,6 +1386,7 @@ $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
     line-height: 24px
     font-family: $font-suisse-intl-reg
   &__wrap
+    position: relative
     margin-top: 15px
     width: 540px
     background: rgba($white, .1)
@@ -1516,13 +1522,15 @@ $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
               font-family: inherit
               font-size: inherit
               position: absolute
-              right: 0
+              right: 10px
               top: 50%
               transform: translate(50%, -50%)
               border-radius: 8px
               color: $white
               background: $magenta
               padding: 2px 5px
+              @media screen and (max-width: 600px)
+                right: 5px
       &-item
         width: 96px
         text-align: center
@@ -1993,6 +2001,13 @@ $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
         display: block
       picture.uk
         display: none
+  .sphere
+    &__win
+      &-title
+        .uk
+          display: none
+        .en
+          display: block
   .ball
     &__title
       @media screen and (max-width: 600px)

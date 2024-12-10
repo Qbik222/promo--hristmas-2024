@@ -18,7 +18,7 @@
     const enLeng = document.querySelector('#enLeng');
 
 
-    let locale = 'uk';
+    let locale = 'en';
 
     // console.log(week)
     //
@@ -57,7 +57,7 @@
     const debug = false;
     let selectedWeekTabId = 0;
     let userId;
-    // userId = 7777771;
+    userId = 101234861;
 
     // userId = Number(sessionStorage.getItem("userId"));
     //
