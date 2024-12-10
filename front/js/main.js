@@ -18,7 +18,7 @@
     const enLeng = document.querySelector('#enLeng');
 
 
-    let locale = 'en';
+    let locale = 'uk';
 
     // console.log(week)
     //
@@ -57,7 +57,7 @@
     const debug = false;
     let selectedWeekTabId = 0;
     let userId;
-    userId = 101234861;
+    userId = 100300268;
 
     // userId = Number(sessionStorage.getItem("userId"));
     //
@@ -947,7 +947,7 @@
         if (debug) {
             return Promise.resolve({
                 // number: i++,
-                number: 'jbl'
+                number: 'winNothing'
             });
         }
 
