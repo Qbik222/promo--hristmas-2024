@@ -27,19 +27,19 @@ $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
 .testMenu
   top: 0
 
-body.light
-  background: $dark-blue-bg
-
 .overflow
   overflow-x: hidden !important
 
 .hide
   display: none !important
 
-body
+.light
+  .fav-page
+    background: $dark-blue-bg
+
+.fav-page
   overscroll-behavior: none
   -webkit-tap-highlight-color: transparent
-  background: $dark-blue-bg
   img
     max-width: 100%
     height: auto
@@ -569,8 +569,6 @@ body
         color: $magenta
   &__progress
     margin-bottom: 15px
-  .btn-wrap
-    display: none
   &._lock
     .btn-wrap
       display: flex
@@ -753,13 +751,13 @@ body
       left: 50%
       transform: translate(-50%, 0)
       z-index: 5
-  &._iphone, &._tv, &._jbl, &._megogo, &._respin, &._nothing, &._points50, &._fs10, &._fs25, &._fs50, &._saveBet100, &._saveBet150, &._saveBet200
+  &._winIphone, &._winTv, &._winJbl, &._winMegogo, &._winRespin, &._winNothing, &._winPoints50, &._winFs10, &._winFs25, &._winFs50, &._winSaveBet100, &._winSaveBet150, &._winSaveBet200
     .sphere
       &__win
         opacity: 1
       &__box
         display: none
-  &._iphone
+  &._winIphone
     .sphere
       &__win
         &-desc
@@ -768,7 +766,7 @@ body
         &-img
           &-iphone
             display: block
-  &._tv
+  &._winTv
     .sphere
       &__win
         &-desc
@@ -777,7 +775,7 @@ body
         &-img
           &-tv
             display: block
-  &._jbl
+  &._winJbl
     .sphere
       &__win
         &-desc
@@ -786,7 +784,7 @@ body
         &-img
           &-jbl
             display: block
-  &._megogo
+  &._winMegogo
     .sphere
       &__win
         &-desc
@@ -795,16 +793,16 @@ body
         &-img
           &-megogo
             display: block
-  &._respin
+  &._winRespin
     .sphere
       &__win
         &-desc
-          &-respin
+          &-winRespin
             display: block
         &-img
-          &-respin
+          &-winRespin
             display: block
-  &._nothing
+  &._winNothing
     .sphere
       &__win
         &-desc
@@ -813,25 +811,25 @@ body
         &-img
           &-nothing
             display: block
-  &._points50
+  &._winPoints50
     .sphere
       &__win
         &-desc
-          &-points50
+          &-winPoints50
             display: block
         &-img
-          &-points50
+          &-winPoints50
             display: block
-  &._fs10
+  &._winFs10
     .sphere
       &__win
         &-desc
-          &-fs10
+          &-winFs10
             display: block
         &-img
-          &-fs10
+          &-winFs10
             display: block
-  &._fs25
+  &._winFs25
     .sphere
       &__win
         &-desc
@@ -840,7 +838,7 @@ body
         &-img
           &-fs25
             display: block
-  &._fs50
+  &._winFs50
     .sphere
       &__win
         &-desc
@@ -849,7 +847,7 @@ body
         &-img
           &-fs50
             display: block
-  &._saveBet100
+  &._winSaveBet100
     .sphere
       &__win
         &-desc
@@ -858,7 +856,7 @@ body
         &-img
           &-saveBet100
             display: block
-  &._saveBet150
+  &._winSaveBet150
     .sphere
       &__win
         &-desc
@@ -867,7 +865,7 @@ body
         &-img
           &-saveBet150
             display: block
-  &._saveBet200
+  &._winSaveBet200
     .sphere
       &__win
         &-desc
@@ -1513,7 +1511,7 @@ body
         .table__body-row-item
           &:nth-child(1)
             position: relative
-            &::before
+            &::after
               content: "Ти"
               font-family: inherit
               font-size: inherit
@@ -1725,10 +1723,11 @@ body
               padding: 7px 20px
               border-radius: 13px
               background: rgba(0, 0, 0, 0.20)
-              &:nth-child(1)
-                background: transparent
-                opacity: .2
+              //&:nth-child(1)
+              //  background: transparent
+              //  opacity: .2
             .content-date, .content-prize
+              margin-right: 50px
               color: $white
               font-family: $font-suisse-intl-reg
               font-size: 16px
@@ -1958,10 +1957,6 @@ body
 //._boxFloat
 //  animation: boxFloat 1.4s ease-in-out infinite
 
-._sign
-  .btn-wrap
-    display: none
-
 /// uk stykes
 .fav-page
   .banner
@@ -2007,15 +2002,15 @@ body
       &-row
         &.you
           .table__body-row-item:first-child
-            &::before
+            &::after
               content: "You"
               padding: 2px 3px
               transform: translate(30%, -50%)
 
 /// DARK
-body.dark
-  background: $dark-theme
+.dark
   .fav-page
+    background: $dark-theme
     .banner
       &::after
         background: url("https://fav-prom.com/html/wheel-2025/img/welcome/banner-bottom-desc-dark.png") repeat 0 0/cover

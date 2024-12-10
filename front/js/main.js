@@ -2,12 +2,13 @@
     const apiURL = 'https://fav-prom.com/api_wheel_2025'
 
     const
+        resultsTableOther = document.querySelector('.table__user'),
         unauthMsgs = document.querySelectorAll('.unauth-msg'),
         participateBtns = document.querySelectorAll('.btn-join'),
         redirectBtns = document.querySelectorAll('.took-part'),
         topResultsTable = document.getElementById('top-users'),
         weeksSelector = document.querySelectorAll('.table__toggle-item'),
-        weeksContainer = document.querySelector('.table__toggle'),
+        // weeksContainer = document.querySelector('.table__toggle'),
         mainPage = document.querySelector('.fav-page'),
         ballWrap = document.querySelector('.ball'),
         guideWrap = document.querySelector('.guide'),
@@ -56,7 +57,7 @@
     const debug = false;
     let selectedWeekTabId = 0;
     let userId;
-    userId = 7777771;
+    // userId = 7777771;
 
     // userId = Number(sessionStorage.getItem("userId"));
     //
@@ -200,39 +201,27 @@
         });
     }
 
-    const renderUsers = (users) => {
+    function renderUsers(users) {
         topResultsTable.classList.remove('hide');
-        // resultsTableOther.classList.remove('hide');
 
         if (users && users.length) {
             let topUsers = users.slice(0, 10);
-            const currentUser = userId && users.find(user => user.userid === userId);
-            const currentUserIndex = currentUser && users.indexOf(currentUser);
-            if (currentUserIndex > 10) {
-                topUsers.push(currentUser);
-            }
             populateUsersTable(topUsers, userId, topResultsTable, users);
 
-            //     const currentUserQuestIndex = currentUser && questUsers.indexOf(currentUser);
+            const currentUser = userId && users.find(user => user.userid === userId);
+            const currentUserIndex = currentUser && users.indexOf(currentUser);
 
-            //     let otherUsers;
-            //     if (!currentUserIndex || currentUserIndex < 10) {
-            //         otherUsers = users.slice(10, 13);
-            //     } else {
-            //         otherUsers = users.slice(Math.max(currentUserIndex - 1, 10), currentUserIndex + 2);
-            //     }
+            let otherUsers;
 
-            //     let otherQuestUsers;
-            //     if (!currentUserQuestIndex || currentUserQuestIndex < 10) {
-            //         otherQuestUsers = questUsers.slice(10, 13);
-            //     } else {
-            //         otherQuestUsers = questUsers.slice(Math.max(currentUserQuestIndex - 1, 10), currentUserQuestIndex + 2);
-            //     }
+            if (!currentUserIndex || currentUserIndex < 10) {
+                otherUsers = users.slice(10, 13);
+            } else {
+                otherUsers = users.slice(Math.max(currentUserIndex - 1, 10), currentUserIndex + 2);
+            }
 
-            //     if (otherUsers && otherUsers.length) {
-            //         populateUsersTable(otherUsers, userId, resultsTableOther, users);
-            //         populateUsersTable(otherQuestUsers, userId, questTableOther, questUsers, true);
-            //     }
+            if (otherUsers && otherUsers.length) {
+                populateUsersTable(otherUsers, userId, resultsTableOther, users);
+            }
         }
     }
 
@@ -362,7 +351,6 @@
             }
             return request(`/favuser/${userId}?nocache=1`)
                 .then(res => {
-                    console.log(res)
                     if (res.userid) {
                         participateBtns.forEach(item => item.classList.add('hide'));
                         redirectBtns.forEach(item => item.classList.remove('hide'));
@@ -401,11 +389,11 @@
     function refreshWeekTabs() {
         selectedWeekTabId = calculateRecentPromoWeeks() - 1;
         if (!selectedWeekTabId || selectedWeekTabId === 0) { // promo not started yet
-            weeksContainer.classList.add('hide');
+            // weeksContainer.classList.add('hide');
             return;
         }
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 2; i++) {
             const weekSelector = weeksSelector[i];
             if (selectedWeekTabId < i) {
                 weekSelector.classList.add('hide');
@@ -438,12 +426,7 @@
     }
 
     function refreshWheel(userInfo) {
-        if (userInfo.spinAllowed) {
-            return;
-        }
-        if (userInfo.pointsPerDay >= 50) {
-            ballWrap.classList.add('_lock');
-        } else {
+        if (!userInfo.spinAllowed) {
             ballWrap.classList.add('_lock');
         }
     }
@@ -474,7 +457,7 @@
 
         spinItem.classList.remove('hide');
         noSpinItem.classList.add('hide');
-        console.log(noSpinItem)
+        // console.log(noSpinItem)
 
         spins.forEach(spin => {
             const spinDate = new Date(spin.date);
@@ -694,8 +677,7 @@
         ballPopup.classList.add("hide")
     });
 
-    window.addEventListener("DOMContentLoaded", () =>{
-        (function () {
+    (function () {
             var COUNT = 400;
 
             function Snowstorm(element) {
@@ -953,8 +935,7 @@
 
             animate();
 
-        })();
-    })
+})();
 
 // snowfall animation
     let i = 1;

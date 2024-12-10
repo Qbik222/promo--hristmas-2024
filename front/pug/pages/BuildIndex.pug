@@ -70,12 +70,6 @@
         .banner__btn.btn.btn-join.hide(role="button") #[span.flare-container #[span.flare]] #[span(data-translate="mainBtn") взяти участь]
         a(href="/sports/sport/soccer/" role="button").banner__btn.btn.took-part.hide #[span.flare-container #[span.flare]]  #[span(data-translate="partBtn") грати]
 
-        //a(href="/login/" role="button").banner__btn.btn.unauth-msg.hide #[span.flare-container #[span.flare]]  #[span(data-translate="signBtn") авторизуйся]
-        //.banner__btn.btn.btn-join.hide(role="button") #[span.flare-container #[span.flare]] #[span(data-translate="mainBtn") взяти участь]
-        //.banner__wrap.btn-wrap.took-part.hide
-        //    a(href="/casino/sam/" role="button").banner__btn.btn #[span(data-translate="casinoBtn") #[span.flare-container #[span.flare]] грати в казино]
-        //    a(href="/sports/sport/soccer/" role="button").banner__btn.btn #[span(data-translate="sportBtn") #[span.flare-container #[span.flare]] Ставити на спорт]
-
         .banner__date(data-translate="bannerDate") Період проведення акції - з 11.12.2024 до 25.12.2024.
         .banner__bottom(data-translate="bannerBottom").
             *Загальний призовий фонд Акції «Розтруси Сема на Різдво» складає 5 000 000 ₴
@@ -252,7 +246,7 @@
                     .progress__bar-point._active 10
                     .progress__bar-point._active 20
                     .progress__bar-point._active 30
-                    .progress__bar-point 40
+                    .progress__bar-point._active 40
             .progress__shake #[span(data-translate="shakeBtn") трусити]
         a(href="/login/" role="button").ball__sign.btn.unauth-msg.hide #[span.flare-container #[span.flare]]  #[span(data-translate="signBtn") авторизуйся]
         .ball__sign.btn.btn-join.hide(role="button") #[span.flare-container #[span.flare]] #[span(data-translate="mainBtn") взяти участь]
@@ -266,39 +260,15 @@
                 .drop-txt
                     .drop-txt-list.my-spins
                         .spins-row
-                            .spins-row-item
-                                .content-date(data-translate="mySpinsDate") Дата
-                                .content-prize(data-translate="mySpinsPrize") Приз
-                            .spins-row-item
-                                .content-date 18.03
-                                .content-prize EcoFlow RIVER 2
-                            .spins-row-item
-                                .content-date 18.03
-                                .content-prize EcoFlow RIVER 2
-                            .spins-row-item
-                                .content-date 18.03
-                                .content-prize EcoFlow RIVER 2
-                            .spins-row-item
-                                .content-date 18.03
-                                .content-prize EcoFlow RIVER 2
-                            .spins-row-item
-                                .content-date 18.03
-                                .content-prize EcoFlow RIVER 2
-                            .spins-row-item
-                                .content-date 18.03
-                                .content-prize EcoFlow RIVER 2
-                            .spins-row-item
-                                .content-date 18.03
-                                .content-prize EcoFlow RIVER 2
-                            .spins-row-item
-                                .content-date 18.03
-                                .content-prize EcoFlow RIVER 2
-                            .spins-row-item
-                                .content-date 18.03
-                                .content-prize EcoFlow RIVER 2
-                            .spins-row-item
-                                .content-date 18.03
-                                .content-prize EcoFlow RIVER 2
+                            //.spins-row-item
+                            //    .content-date(data-translate="mySpinsDate") Дата
+                            //    .content-prize(data-translate="mySpinsPrize") Приз
+                            //.spins-row-item
+                            //    .content-date 18.03
+                            //    .content-prize EcoFlow RIVER 2
+                            //.spins-row-item
+                            //    .content-date 18.03
+                            //    .content-prize EcoFlow RIVER 2
                         .no-spins.hide(data-translate="noSpins") Немає прокрутів
     .prize
         .prize__container
@@ -566,7 +536,7 @@
             .table__btns
                 .table__toggle
                     .table__toggle-item(data-translate="tableBtnFirst")._active 1 тиждень
-                    .table__toggle-item(data-translate="tableBtnSecond") 2 тиждень
+                    .table__toggle-item.hide(data-translate="tableBtnSecond") 2 тиждень
                 .table__info(data-translate="tableBtnPopup") Таблиця розподілу призів
             .table__head
                 .table__head-item(data-translate="tablePlace") Місце
