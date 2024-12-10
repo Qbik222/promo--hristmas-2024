@@ -453,7 +453,13 @@
         }
 
         // const spinsContainer = document.querySelector('.spins-row');
-        spinItem.innerHTML = '';
+        spinItem.innerHTML =
+        `
+       <div class="spins-row-head">
+            <div class="content-date" data-translate="mySpinsDate"></div>
+            <div class="content-prize" data-translate="mySpinsPrize"></div>
+        </div>
+        `
 
         spinItem.classList.remove('hide');
         noSpinItem.classList.add('hide');
