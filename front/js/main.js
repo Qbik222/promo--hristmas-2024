@@ -3,6 +3,7 @@
 
     const
         resultsTableOther = document.querySelector('.table__user'),
+        progressTitle = document.querySelector('.progress__title-lock'),
         unauthMsgs = document.querySelectorAll('.unauth-msg'),
         participateBtns = document.querySelectorAll('.btn-join'),
         redirectBtns = document.querySelectorAll('.took-part'),
@@ -57,7 +58,7 @@
     const debug = false;
     let selectedWeekTabId = 0;
     let userId;
-    userId = 100300268;
+    // userId = 7777777;
 
     // userId = Number(sessionStorage.getItem("userId"));
     //
@@ -190,6 +191,7 @@
             participateBtns.forEach(item => item.classList.add('hide'));
             redirectBtns.forEach(item => item.classList.remove('hide'));
             ballWrap.classList.remove('_sign');
+            refreshWheel(res);
             setupPage();
         });
     }
@@ -426,8 +428,15 @@
     }
 
     function refreshWheel(userInfo) {
-        if (!userInfo.spinAllowed) {
+        if (userInfo.spinAllowed) {
+            return;
+        }
+        if (userInfo.pointsPerDay >= 50) {
             ballWrap.classList.add('_lock');
+            progressTitle.classList.add('hide');
+        } else {
+            progressTitle.classList.remove('hide');
+            ballWrap.classList.add('_block');
         }
     }
 
@@ -454,7 +463,7 @@
 
         // const spinsContainer = document.querySelector('.spins-row');
         spinItem.innerHTML =
-        `
+            `
        <div class="spins-row-head">
             <div class="content-date" data-translate="mySpinsDate"></div>
             <div class="content-prize" data-translate="mySpinsPrize"></div>
@@ -684,264 +693,264 @@
     });
 
     (function () {
-            var COUNT = 400;
+        var COUNT = 400;
 
-            function Snowstorm(element) {
-                this.masthead = element;
-                this.canvas = document.createElement('canvas');
-                this.ctx = this.canvas.getContext('2d');
-                this.width = this.masthead.clientWidth;
-                this.height = this.masthead.clientHeight;
-                this.active = false;
-                this.snowflakes = [];
+        function Snowstorm(element) {
+            this.masthead = element;
+            this.canvas = document.createElement('canvas');
+            this.ctx = this.canvas.getContext('2d');
+            this.width = this.masthead.clientWidth;
+            this.height = this.masthead.clientHeight;
+            this.active = false;
+            this.snowflakes = [];
 
-                this.init();
+            this.init();
+        }
+
+        Snowstorm.prototype.init = function () {
+            this.canvas.style.position = 'absolute';
+            this.canvas.style.left = this.canvas.style.top = '0';
+            this.masthead.appendChild(this.canvas);
+
+            this.onResize();
+            window.addEventListener('resize', this.onResize.bind(this), false);
+
+            for (var i = 0; i < COUNT; i++) {
+                var snowflake = new this.Snowflake(this);
+                snowflake.reset();
+                this.snowflakes.push(snowflake);
             }
 
-            Snowstorm.prototype.init = function () {
-                this.canvas.style.position = 'absolute';
-                this.canvas.style.left = this.canvas.style.top = '0';
-                this.masthead.appendChild(this.canvas);
+            if (this.active) {
+                requestAnimFrame(this.update.bind(this));
+            }
+        };
 
-                this.onResize();
-                window.addEventListener('resize', this.onResize.bind(this), false);
+        Snowstorm.prototype.onResize = function () {
+            this.width = this.masthead.clientWidth;
+            this.height = this.masthead.clientHeight;
+            this.canvas.width = this.width;
+            this.canvas.height = this.height;
+            this.ctx.fillStyle = '#FFF';
 
-                for (var i = 0; i < COUNT; i++) {
-                    var snowflake = new this.Snowflake(this);
+            var wasActive = this.active;
+            this.active = this.width > 80;
+            this.width > 280 ? COUNT = 150 : null
+
+            if (!wasActive && this.active) {
+                requestAnimFrame(this.update.bind(this));
+            }
+        };
+
+        Snowstorm.prototype.update = function () {
+            this.ctx.clearRect(0, 0, this.width, this.height);
+
+            if (!this.active) {
+                return;
+            }
+
+            for (var i = 0; i < COUNT; i++) {
+                var snowflake = this.snowflakes[i];
+                snowflake.y += snowflake.vy;
+                snowflake.x += snowflake.vx;
+
+                this.ctx.globalAlpha = snowflake.o;
+                this.ctx.beginPath();
+                this.ctx.arc(snowflake.x, snowflake.y, snowflake.r, 0, Math.PI * 2, false);
+                this.ctx.closePath();
+                this.ctx.fill();
+
+                if (snowflake.y > this.height) {
                     snowflake.reset();
-                    this.snowflakes.push(snowflake);
                 }
+            }
 
-                if (this.active) {
-                    requestAnimFrame(this.update.bind(this));
-                }
-            };
+            requestAnimFrame(this.update.bind(this));
+        };
 
-            Snowstorm.prototype.onResize = function () {
-                this.width = this.masthead.clientWidth;
-                this.height = this.masthead.clientHeight;
-                this.canvas.width = this.width;
-                this.canvas.height = this.height;
-                this.ctx.fillStyle = '#FFF';
+        Snowstorm.prototype.Snowflake = function (snowstorm) {
+            this.snowstorm = snowstorm;
+            this.reset();
+        };
 
-                var wasActive = this.active;
-                this.active = this.width > 80;
-                this.width > 280 ? COUNT = 150 : null
+        Snowstorm.prototype.Snowflake.prototype.reset = function () {
+            this.x = Math.random() * this.snowstorm.width;
+            this.y = Math.random() * -this.snowstorm.height;
+            this.vy = 0.3 + Math.random() * 0.00001;
+            this.vx = 0.6 - Math.random();
+            this.r = 1 + Math.random() * 2;
+            this.o = 1;
+        };
 
-                if (!wasActive && this.active) {
-                    requestAnimFrame(this.update.bind(this));
-                }
-            };
+        window.requestAnimFrame = (function () {
+            return window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                function (callback) {
+                    window.setTimeout(callback, 1000 / 60);
+                };
+        })();
 
-            Snowstorm.prototype.update = function () {
-                this.ctx.clearRect(0, 0, this.width, this.height);
+        var skies = document.querySelectorAll('.sky');
+        skies.forEach(function (sky) {
+            new Snowstorm(sky);
+        });
 
-                if (!this.active) {
+        // ball shake snow
+        const canvas = document.querySelector('.snowCanvas');
+        const ctx = canvas.getContext('2d');
+        const ball = document.querySelector('.sphere');
+
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+
+        let snowflakes = [];
+        const maxSnowflakes = 100;
+        const maxSpeed = 7;
+        let stormCounter = 1
+
+
+        let snowflakesRemoved = 0;
+
+        class Snowflake {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 10;
+                this.speedY = Math.random() * 1.5 + 1;
+                this.acceleration = 0;
+                this.movingToBottom = false;
+            }
+
+            update(ballX, ballY, ballRadius, ballShaking) {
+                if (this.movingToBottom) {
+                    const targetSpeed = 0.1;
+                    const speedDecayFactor = 0.05; // Коефіцієнт для плавного сповільнення
+
+                    this.speedX = this.speedX - (this.speedX - targetSpeed) * speedDecayFactor;
+                    this.speedY = this.speedY - (this.speedY - targetSpeed) * speedDecayFactor;
+
+                    // Оновлення позиції сніжинки
+                    this.y += this.speedY;
+
+                    if (this.y > canvas.height) {
+                        this.remove();
+                    }
                     return;
                 }
 
-                for (var i = 0; i < COUNT; i++) {
-                    var snowflake = this.snowflakes[i];
-                    snowflake.y += snowflake.vy;
-                    snowflake.x += snowflake.vx;
+                this.x += this.speedX;
+                this.y += this.speedY;
 
-                    this.ctx.globalAlpha = snowflake.o;
-                    this.ctx.beginPath();
-                    this.ctx.arc(snowflake.x, snowflake.y, snowflake.r, 0, Math.PI * 2, false);
-                    this.ctx.closePath();
-                    this.ctx.fill();
+                // Обмеження швидкості
+                this.speedX = Math.max(-maxSpeed, Math.min(maxSpeed, this.speedX));
+                this.speedY = Math.max(-maxSpeed, Math.min(maxSpeed, this.speedY));
 
-                    if (snowflake.y > this.height) {
-                        snowflake.reset();
-                    }
+                // Додавання швидкості через "трусіння" кулі
+                if (ballShaking) {
+                    this.acceleration += 0.05;
+                } else {
+                    this.acceleration *= 0.95;
+                }
+                this.speedX += this.acceleration * (Math.random() - 0.5);
+                this.speedY += this.acceleration * (Math.random() - 0.5);
+
+                if (this.y > canvas.height) {
+                    this.y = 0;
+                    this.x = Math.random() * canvas.width;
+                }
+                if (this.x > canvas.width) {
+                    this.x = 0;
+                } else if (this.x < 0) {
+                    this.x = canvas.width;
                 }
 
-                requestAnimFrame(this.update.bind(this));
-            };
+                // Відстань до центру кулі
+                const dx = this.x - ballX;
+                const dy = this.y - ballY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
 
-            Snowstorm.prototype.Snowflake = function (snowstorm) {
-                this.snowstorm = snowstorm;
-                this.reset();
-            };
+                // Відскок від кулі
+                if (distance < ballRadius + this.radius) {
+                    const angle = Math.atan2(dy, dx); // Кут зіткнення
+                    const overlap = ballRadius + this.radius - distance;
 
-            Snowstorm.prototype.Snowflake.prototype.reset = function () {
-                this.x = Math.random() * this.snowstorm.width;
-                this.y = Math.random() * -this.snowstorm.height;
-                this.vy = 0.3 + Math.random() * 0.00001;
-                this.vx = 0.6 - Math.random();
-                this.r = 1 + Math.random() * 2;
-                this.o = 1;
-            };
+                    // Переміщення сніжинки
+                    this.x += Math.cos(angle) * overlap;
+                    this.y += Math.sin(angle) * overlap;
 
-            window.requestAnimFrame = (function () {
-                return window.requestAnimationFrame ||
-                    window.webkitRequestAnimationFrame ||
-                    window.mozRequestAnimationFrame ||
-                    function (callback) {
-                        window.setTimeout(callback, 1000 / 60);
-                    };
-            })();
+                    // Реверс швидкості
+                    this.speedX *= -0.7;
+                    this.speedY *= -0.7;
+                }
+            }
 
-            var skies = document.querySelectorAll('.sky');
-            skies.forEach(function (sky) {
-                new Snowstorm(sky);
+            moveToBottom() {
+                this.movingToBottom = true;
+            }
+
+            remove() {
+                snowflakes.splice(snowflakes.indexOf(this), 1);
+                snowflakesRemoved++;
+                if (stormCounter === 1) {
+                    new Snowstorm(document.querySelector(".sphere__body"));
+                    stormCounter++;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'white';
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+
+        let lastBallShakingState = false;
+
+        for (let i = 0; i < maxSnowflakes; i++) {
+            snowflakes.push(new Snowflake());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const ballTransform = window.getComputedStyle(ball).transform;
+            let ballX = canvas.width / 2;
+            let ballY = canvas.height / 2;
+            const ballRadius = ball.offsetWidth / 2;
+            const ballShaking = ballTransform !== 'none';
+
+            if (ballTransform !== 'none') {
+                const matrix = new DOMMatrix(ballTransform);
+                ballX = ball.offsetLeft + matrix.m41 + ballRadius;
+                ballY = ball.offsetTop + matrix.m42 + ballRadius;
+            }
+
+            if (ballShaking && !lastBallShakingState) {
+                snowflakes = [];
+                snowflakesRemoved = 0;
+                for (let i = 0; i < maxSnowflakes; i++) {
+                    snowflakes.push(new Snowflake());
+                }
+            }
+
+            lastBallShakingState = ballShaking;
+
+            snowflakes.forEach(snowflake => {
+                if (!ballShaking) snowflake.moveToBottom();
+                snowflake.update(ballX, ballY, ballRadius, ballShaking);
+                snowflake.draw();
             });
 
-            // ball shake snow
-            const canvas = document.querySelector('.snowCanvas');
-            const ctx = canvas.getContext('2d');
-            const ball = document.querySelector('.sphere');
+            requestAnimationFrame(animate);
+        }
 
-            canvas.width = canvas.parentElement.clientWidth;
-            canvas.height = canvas.parentElement.clientHeight;
+        animate();
 
-            let snowflakes = [];
-            const maxSnowflakes = 100;
-            const maxSpeed = 7;
-            let stormCounter = 1
-
-
-            let snowflakesRemoved = 0;
-
-            class Snowflake {
-                constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.radius = Math.random() * 3 + 1;
-                    this.speedX = (Math.random() - 0.5) * 10;
-                    this.speedY = Math.random() * 1.5 + 1;
-                    this.acceleration = 0;
-                    this.movingToBottom = false;
-                }
-
-                update(ballX, ballY, ballRadius, ballShaking) {
-                    if (this.movingToBottom) {
-                        const targetSpeed = 0.1;
-                        const speedDecayFactor = 0.05; // Коефіцієнт для плавного сповільнення
-
-                        this.speedX = this.speedX - (this.speedX - targetSpeed) * speedDecayFactor;
-                        this.speedY = this.speedY - (this.speedY - targetSpeed) * speedDecayFactor;
-
-                        // Оновлення позиції сніжинки
-                        this.y += this.speedY;
-
-                        if (this.y > canvas.height) {
-                            this.remove();
-                        }
-                        return;
-                    }
-
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-
-                    // Обмеження швидкості
-                    this.speedX = Math.max(-maxSpeed, Math.min(maxSpeed, this.speedX));
-                    this.speedY = Math.max(-maxSpeed, Math.min(maxSpeed, this.speedY));
-
-                    // Додавання швидкості через "трусіння" кулі
-                    if (ballShaking) {
-                        this.acceleration += 0.05;
-                    } else {
-                        this.acceleration *= 0.95;
-                    }
-                    this.speedX += this.acceleration * (Math.random() - 0.5);
-                    this.speedY += this.acceleration * (Math.random() - 0.5);
-
-                    if (this.y > canvas.height) {
-                        this.y = 0;
-                        this.x = Math.random() * canvas.width;
-                    }
-                    if (this.x > canvas.width) {
-                        this.x = 0;
-                    } else if (this.x < 0) {
-                        this.x = canvas.width;
-                    }
-
-                    // Відстань до центру кулі
-                    const dx = this.x - ballX;
-                    const dy = this.y - ballY;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    // Відскок від кулі
-                    if (distance < ballRadius + this.radius) {
-                        const angle = Math.atan2(dy, dx); // Кут зіткнення
-                        const overlap = ballRadius + this.radius - distance;
-
-                        // Переміщення сніжинки
-                        this.x += Math.cos(angle) * overlap;
-                        this.y += Math.sin(angle) * overlap;
-
-                        // Реверс швидкості
-                        this.speedX *= -0.7;
-                        this.speedY *= -0.7;
-                    }
-                }
-
-                moveToBottom() {
-                    this.movingToBottom = true;
-                }
-
-                remove() {
-                    snowflakes.splice(snowflakes.indexOf(this), 1);
-                    snowflakesRemoved++;
-                    if (stormCounter === 1) {
-                        new Snowstorm(document.querySelector(".sphere__body"));
-                        stormCounter++;
-                    }
-                }
-
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = 'white';
-                    ctx.fill();
-                    ctx.closePath();
-                }
-            }
-
-            let lastBallShakingState = false;
-
-            for (let i = 0; i < maxSnowflakes; i++) {
-                snowflakes.push(new Snowflake());
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                const ballTransform = window.getComputedStyle(ball).transform;
-                let ballX = canvas.width / 2;
-                let ballY = canvas.height / 2;
-                const ballRadius = ball.offsetWidth / 2;
-                const ballShaking = ballTransform !== 'none';
-
-                if (ballTransform !== 'none') {
-                    const matrix = new DOMMatrix(ballTransform);
-                    ballX = ball.offsetLeft + matrix.m41 + ballRadius;
-                    ballY = ball.offsetTop + matrix.m42 + ballRadius;
-                }
-
-                if (ballShaking && !lastBallShakingState) {
-                    snowflakes = [];
-                    snowflakesRemoved = 0;
-                    for (let i = 0; i < maxSnowflakes; i++) {
-                        snowflakes.push(new Snowflake());
-                    }
-                }
-
-                lastBallShakingState = ballShaking;
-
-                snowflakes.forEach(snowflake => {
-                    if (!ballShaking) snowflake.moveToBottom();
-                    snowflake.update(ballX, ballY, ballRadius, ballShaking);
-                    snowflake.draw();
-                });
-
-                requestAnimationFrame(animate);
-            }
-
-            animate();
-
-})();
+    })();
 
 // snowfall animation
     let i = 1;
@@ -953,7 +962,7 @@
         if (debug) {
             return Promise.resolve({
                 // number: i++,
-                number: 'winNothing'
+                number: 'winRespin'
             });
         }
 
@@ -989,8 +998,8 @@
     // "_saveBet200" - виграно страховку на 200 ставок
     // функція initShake прокидує класи відповідні призам на блок .sphere для відображення призу
     const winClasses = [
-        "_iphone", "_tv", "_jbl", "_megogo", "_respin", "_nothing", "_fs10", "_fs25",
-        "_fs50", "_saveBet100", "_saveBet150", "_saveBet200", "_points50"
+        "_winIphone", "_winTv", "_winJbl", "_winMegogo", "_winRespin", "_winNothing", "_winFs10", "_winFs25",
+        "_winFs50", "_winSaveBet100", "_winSaveBet150", "_winSaveBet200", "_winPoints50"
     ];
 
 
@@ -1027,6 +1036,10 @@
             await delay(200);
 
             ball.classList.add(`${prize}`);
+
+            if (prize === "_winRespin") {
+                btn.classList.remove("_disabled");
+            }
         }
         else{
             btn.classList.add("_disabled");
@@ -1049,7 +1062,7 @@
 
     }
 
-    function initShake(ball, btn, box, prizeNum) {
+    function initShake(ball, btn, box) {
         btn.addEventListener("click", () =>{
             sendShakeRequest().then(res => {
                 console.log(res);
@@ -1062,10 +1075,9 @@
                 const prizeNum = winClasses.indexOf(prize);
                 console.log('Prize:', prize);
                 console.log('Prize Num:', prizeNum)
-                const streakBonus = res.streakBonus || debug;
                 animateShake(ball, box, btn, prize, prizeNum).catch(err => console.error("anim error:", err));
-            });
-        })
+            }).then(checkUserAuth);
+        });
     }
 
     initShake(ball, btnShake, ballBox)
