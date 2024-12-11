@@ -480,6 +480,8 @@ $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
         overflow-y: auto
         overflow-x: hidden
         scrollbar-width: auto
+        p
+          font-family: inherit
         &::-webkit-scrollbar
           background: rgba($white, .3)
           width: 3px
@@ -719,6 +721,7 @@ $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
     z-index: 5
     &-desc > *
       display: none
+      font-family: inherit
     &-img > *
       display: none
     &-img
@@ -1025,6 +1028,8 @@ $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
       line-height: 20px
       scrollbar-width: auto
       padding-right: 4px
+      p
+        font-family: inherit
       &::-webkit-scrollbar
         background: rgba($white, .3)
         width: 3px
@@ -1106,6 +1111,7 @@ $font-suisse-intl-bold: SuisseIntl-Bold, sans-serif
   width: 100%
   padding-top: 30px
   position: relative
+  z-index: 3
   &__title
     max-width: 600px
     border-radius: 50%
